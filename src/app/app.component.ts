@@ -7,4 +7,9 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'pokedex';
+  numbers: number[] = Array.from({ length: 30 }, (_, i) => i + 1);
+
+  ngOnInit(): void { 
+    
+  }
 }

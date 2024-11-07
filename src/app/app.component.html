@@ -1,4 +1,7 @@
 <h1>PokeDex</h1>
-<app-card></app-card>
+<div class="container">
+    <div class="card" *ngFor="let number of numbers">
+        <app-poke-card index={{number}}></app-poke-card>
+    </div>
+</div>
 <router-outlet></router-outlet>
-

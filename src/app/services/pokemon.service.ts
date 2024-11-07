@@ -4,6 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { PokemonData } from '../models/pokemonData'
 import { TypeData } from '../models/typeData';
+import { PokemonList } from '../models/pokemonList';
 
 @Injectable({
   providedIn: 'root'
@@ -12,6 +13,7 @@ export class PokemonService {
   private baseURL:string = "" 
   private pokeData:PokemonData | any
   private typeData:TypeData | any
+  private pokeList:PokemonList | any
 
  
   constructor(
@@ -26,10 +28,15 @@ export class PokemonService {
     return this.pokeData  
   }
 
+  getPokemonList(): Observable<PokemonList> {
+    return this.http.get<PokemonList>(`${this.baseURL}pokemon?limit=1`);
+  }
+
   getType( typeName:string):Observable<TypeData>{
     this.pokeData = this.http.get<TypeData>(`${this.baseURL}type/${typeName}`)
 
     return this.pokeData  
   }
+
   
 }

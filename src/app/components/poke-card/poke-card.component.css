@@ -1,0 +1,56 @@
+.pokecard__container {
+    width: 445px;
+    height: 200px;
+    margin: 10px;
+    display: flex;
+    flex-direction: row;
+    background-color: rgb(192, 192, 192);
+    border-radius: 10px;
+}
+
+.pokecard__info {
+    display: flex;
+    flex-direction: column;
+    justify-content: left;
+    margin-left: 20px;
+}
+
+
+.pokecard__info__title>h3 {
+    color: rgb(129, 120, 120);
+}
+
+.pokecard__info__title>h2 {
+    color: rgb(56, 56, 56);
+    font-size: 27px;
+}
+
+.pokecard__image {
+    background-color: antiquewhite;
+    width: 35%;
+    margin: auto;
+    margin-left: auto;
+    margin-right: 20px;
+    height: 80%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+}
+
+.pokecard__image>img {
+    height: 150px;
+}
+
+.pokecard__types {
+    padding-top: 10px;
+    display: flex;
+    flex-direction: row;
+}
+
+.pokecard__types > span > img {
+    width: 110px;
+    border-radius: 5px;
+    margin-right: 10px;
+    
+}
