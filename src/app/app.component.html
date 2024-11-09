@@ -1,7 +1,21 @@
 <h1>PokeDex</h1>
+
+<div>
+    <label for="filtro-pokemon">Nome: </label>
+    <input type="text" (input)="searchPokemon($any($event.target).value)" placeholder="Digite o nome do Pokémon">
+    <button (click)="resetLoadPokemon()">resetar</button>
+    <!-- <input 
+    type="text" 
+    #pokemonInput 
+    placeholder="Digite o nome do Pokémon"
+>
+<button (click)="searchPokemon($any($event.target).pokemonInput.value)">Buscar</button> -->
+</div>
+
 <div class="container">
-    <div class="card" *ngFor="let number of numbers">
+    <div class="card" *ngFor="let number of displayedImages">
         <app-poke-card index={{number}}></app-poke-card>
     </div>
 </div>
+<button (click)="loadMoreImages()" *ngIf="hasMoreImages">Carregar mais</button>
 <router-outlet></router-outlet>

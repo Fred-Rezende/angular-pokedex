@@ -1,45 +1,73 @@
 .pokecard__container {
-    width: 445px;
+    width: 400px;
     height: 200px;
-    margin: 10px;
+    margin: 7px;
     display: flex;
     flex-direction: row;
-    background-color: rgb(192, 192, 192);
+    /* background-color: rgb(192, 192, 192); */
     border-radius: 10px;
+    box-shadow: 4px 4px 4px rgb(112, 112, 112);
+    border: 2px solid black;
+    background-image: radial-gradient(farthest-corner at 100px 200px,
+            rgb(241, 241, 241) 50%,
+            rgb(241, 0, 0) 60%);
 }
 
 .pokecard__info {
     display: flex;
     flex-direction: column;
-    justify-content: left;
-    margin-left: 20px;
+    justify-content: flex-start;
+
+    margin-left: 15px;
+    margin-bottom: 20px;
+
 }
 
 
 .pokecard__info__title>h3 {
-    color: rgb(129, 120, 120);
+    color: rgb(245, 243, 241);
+    margin-bottom: 45px;
 }
 
 .pokecard__info__title>h2 {
     color: rgb(56, 56, 56);
-    font-size: 27px;
+    font-size: 22px;
+    margin-bottom: 30px;
 }
 
 .pokecard__image {
-    background-color: antiquewhite;
-    width: 35%;
+    /* background-color: antiquewhite; */
+    background-color: white;
+    width: 180px;
+    height: 180px;
     margin: auto;
     margin-left: auto;
-    margin-right: 20px;
-    height: 80%;
+    margin-right: 15px;
+
     display: flex;
     justify-content: center;
     align-items: center;
-    border-radius: 10px;
+    border-radius: 50%;
+    border: 2px solid black;
+
+    padding: 20px;
+    /* Cria a "margem" entre as bordas interna e externa */
+    box-sizing: border-box;
+
 }
 
-.pokecard__image>img {
-    height: 150px;
+.pokecard__image__inner {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    border: 1px solid #555;
+    /* Borda interna */
+    background-color: #eee;
+    /* Cor de fundo interna */
+}
+
+.pokecard__image__inner>img {
+    height: 140px;
 }
 
 .pokecard__types {
@@ -48,9 +76,10 @@
     flex-direction: row;
 }
 
-.pokecard__types > span > img {
-    width: 110px;
+.pokecard__types>span>img {
+    width: 80px;
     border-radius: 5px;
     margin-right: 10px;
-    
+
+
 }

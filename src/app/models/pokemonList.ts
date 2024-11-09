@@ -1,4 +1,4 @@
 export interface PokemonList {
-    count: number;
-    results: Array<{ name: string; url: string }>;
-  }
+  count: number;
+  results: Array<{ name: string; url: string }>;
+}

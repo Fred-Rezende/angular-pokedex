@@ -19,7 +19,7 @@ export class PokeCardComponent {
   ) {
     this.pokemon = {
       id: 0,
-      name: '',
+      species:{ name: ''},
       sprites: {
         front_default: '',
         other: {
@@ -49,7 +49,7 @@ export class PokeCardComponent {
 
           this.pokemon = {
             id: res.id,
-            name: res.name,
+            species: res.species,
             sprites: res.sprites,
             types: res.types
           }
