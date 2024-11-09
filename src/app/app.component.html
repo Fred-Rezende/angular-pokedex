@@ -2,7 +2,7 @@
 
 <div>
     <label for="filtro-pokemon">Nome: </label>
-    <input type="text" (input)="searchPokemon($any($event.target).value)" placeholder="Digite o nome do Pokémon">
+    <input [(ngModel)]="searchTerm" (input)="searchPokemon()" placeholder="Pesquisar Pokémon">
     <button (click)="resetLoadPokemon()">resetar</button>
     <!-- <input 
     type="text" 

@@ -1,5 +1,7 @@
 import { Component, ViewChild } from '@angular/core';
-// import { PokeCardComponent } from './components/poke-card/poke-card.component';
+import { PokemonService } from './services/pokemon.service';
+
+
 
 @Component({
   selector: 'app-root',
@@ -12,15 +14,15 @@ export class AppComponent {
   displayedImages: number[] = [];
   imagesPerPage: number = 12;
   currentPage: number = 0;
+  searchTerm: string = '';
 
-  // @ViewChild(PokeCardComponent) pokecardComponent!: PokeCardComponent;
 
-  constructor() {
-    this.loadMoreImages();
+  constructor(private pokemonService: PokemonService) {
+    // this.loadMoreImages();
   }
 
   ngOnInit(): void {
-    // this.loadMoreImages();
+    this.loadMoreImages();
   }
 
   get hasMoreImages(): boolean {
@@ -36,22 +38,33 @@ export class AppComponent {
     this.currentPage++;
   }
 
-  searchPokemon(n?: number): void {
-    if (n === undefined) {
-      this.resetLoadPokemon(); // Reseta caso não haja termo de pesquisa
+  // searchPokemon(n?: number): void {
+  //   if (n === undefined) {
+  //     this.resetLoadPokemon(); // Reseta caso não haja termo de pesquisa
+  //   } else {
+  //     this.numbers = [n]; // Aplica a pesquisa
+  //     this.displayedImages = [];
+  //     this.currentPage = 0;
+  //     this.loadMoreImages();
+  //   }
+
+
+
+
+  // }
+
+  searchPokemon() {
+    if (this.searchTerm) {
+      this.pokemonService.getPokemon(this.searchTerm.toLowerCase()).subscribe((pokemon) => {
+        console.log('Pokémon encontrado:', pokemon); // Logando o Pokémon encontrado
+        this.numbers = [pokemon.id]; // Exibe o Pokémon buscado
+        this.displayedImages = [];
+        this.currentPage = 0;
+        this.loadMoreImages();
+      });
     } else {
-      this.numbers = [n]; // Aplica a pesquisa
-      this.displayedImages = [];
-      this.currentPage = 0;
-      this.loadMoreImages();
+      this.loadMoreImages();; // Se não houver busca, carrega todos os Pokémons
     }
-    
-    // this.numbers = [n]
-    // this.displayedImages = []
-    // this.currentPage = 0;
-    // this.loadMoreImages();
-    
-   
   }
 
   resetLoadPokemon(): void {
@@ -60,16 +73,4 @@ export class AppComponent {
     this.currentPage = 0; // Reinicia a contagem de páginas
     this.loadMoreImages(); // Carrega as primeiras imagens novamente
   }
-  // searchPokemon(name: string) {
-  //   this.pokecardComponent.getPokemon(name);
-  //   console.log(this.pokecardComponent.getPokemon(name))
-  //   // this.numbers = []
-  //   this.displayedImages = []
-  //   this.currentPage = 0;
-  //   this.loadMoreImages();
-    
-  // }
-
-
-
 }

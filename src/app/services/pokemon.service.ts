@@ -29,7 +29,7 @@ export class PokemonService {
   }
 
   getPokemonList(): Observable<PokemonList> {
-    return this.http.get<PokemonList>(`${this.baseURL}pokemon?limit=1`);
+    return this.http.get<PokemonList>(`${this.baseURL}pokemon?limit=10`);
   }
 
   getType( typeName:string):Observable<TypeData>{
