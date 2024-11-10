@@ -1,21 +1,23 @@
 <h1>PokeDex</h1>
-
-<div>
-    <label for="filtro-pokemon">Nome: </label>
-    <input [(ngModel)]="searchTerm" (input)="searchPokemon()" placeholder="Pesquisar Pokémon">
-    <button (click)="resetLoadPokemon()">resetar</button>
-    <!-- <input 
-    type="text" 
-    #pokemonInput 
-    placeholder="Digite o nome do Pokémon"
->
-<button (click)="searchPokemon($any($event.target).pokemonInput.value)">Buscar</button> -->
-</div>
-
 <div class="container">
-    <div class="card" *ngFor="let number of displayedImages">
-        <app-poke-card index={{number}}></app-poke-card>
+    <div class="card__search__pokemon">
+        <label for="filtro-pokemon">Nome: </label>
+        <input [(ngModel)]="searchTerm" (input)="searchPokemon()" placeholder="Pesquisar Pokémon">
+        <!-- <button (click)="resetLoadPokemon()">resetar</button> -->
+        <!-- <input 
+            type="text" 
+            #pokemonInput 
+            placeholder="Digite o nome do Pokémon">
+            <button (click)="searchPokemon($any($event.target).pokemonInput.value)">Buscar</button> -->
+    </div>
+
+    <div class="card__container__pokemon">
+        <div class="card__pokemon" *ngFor="let number of displayedImages">
+            <app-poke-card index={{number}}></app-poke-card>
+        </div>
+    </div>
+    <div class="card__carregar__pokemon">
+        <button (click)="loadMoreImages()" *ngIf="hasMoreImages">Carregar mais</button>
     </div>
 </div>
-<button (click)="loadMoreImages()" *ngIf="hasMoreImages">Carregar mais</button>
 <router-outlet></router-outlet>

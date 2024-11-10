@@ -10,7 +10,8 @@ import { PokemonService } from './services/pokemon.service';
 })
 export class AppComponent {
   title = 'pokedex';
-  numbers: number[] = Array.from({ length: 1025 }, (_, i) => i + 1);
+  allnumbers: number[] = Array.from({ length: 1025 }, (_, i) => i + 1);
+  numbers: number[] = this.allnumbers
   displayedImages: number[] = [];
   imagesPerPage: number = 12;
   currentPage: number = 0;
@@ -63,14 +64,17 @@ export class AppComponent {
         this.loadMoreImages();
       });
     } else {
+      this.numbers = this.allnumbers
+      this.displayedImages = []; // Limpa as imagens exibidas
+      this.currentPage = 0; // Reinicia a contagem de páginas
       this.loadMoreImages();; // Se não houver busca, carrega todos os Pokémons
     }
   }
 
-  resetLoadPokemon(): void {
-    this.numbers = Array.from({ length: 1025 }, (_, i) => i + 1); // Restaura todos os números
-    this.displayedImages = []; // Limpa as imagens exibidas
-    this.currentPage = 0; // Reinicia a contagem de páginas
-    this.loadMoreImages(); // Carrega as primeiras imagens novamente
-  }
+  // resetLoadPokemon(): void {
+  //   this.numbers = this.allnumbers// Restaura todos os números
+  //   this.displayedImages = []; // Limpa as imagens exibidas
+  //   this.currentPage = 0; // Reinicia a contagem de páginas
+  //   this.loadMoreImages(); // Carrega as primeiras imagens novamente
+  // }
 }
