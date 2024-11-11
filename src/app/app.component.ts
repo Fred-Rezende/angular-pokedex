@@ -1,19 +1,19 @@
 import { Component, ViewChild } from '@angular/core';
 import { PokemonService } from './services/pokemon.service';
 
-
-
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
+
+
 export class AppComponent {
   title = 'pokedex';
-  allnumbers: number[] = Array.from({ length: 1025 }, (_, i) => i + 1);
-  numbers: number[] = this.allnumbers
-  displayedImages: number[] = [];
-  imagesPerPage: number = 12;
+  allPokemons: number[] = Array.from({ length: 1025 }, (_, i) => i + 1);
+  pokemons: number[] = this.allPokemons
+  displayedPokemons: number[] = [];
+  pokemonsPerPage: number = 12;
   currentPage: number = 0;
   searchTerm: string = '';
 
@@ -23,51 +23,36 @@ export class AppComponent {
   }
 
   ngOnInit(): void {
-    this.loadMoreImages();
+    this.loadMorePokemons();
   }
 
-  get hasMoreImages(): boolean {
-    return this.currentPage * this.imagesPerPage < this.numbers.length;
+  get hasMorePokemons(): boolean {
+    return this.currentPage * this.pokemonsPerPage < this.pokemons.length;
   }
 
-  loadMoreImages(): void {
-    const nextPageImages = this.numbers.slice(
-      this.currentPage * this.imagesPerPage,
-      (this.currentPage + 1) * this.imagesPerPage
+  loadMorePokemons(): void {
+    const nextPagePokemons = this.pokemons.slice(
+      this.currentPage * this.pokemonsPerPage,
+      (this.currentPage + 1) * this.pokemonsPerPage
     );
-    this.displayedImages = [...this.displayedImages, ...nextPageImages];
+    this.displayedPokemons = [...this.displayedPokemons, ...nextPagePokemons];
     this.currentPage++;
   }
-
-  // searchPokemon(n?: number): void {
-  //   if (n === undefined) {
-  //     this.resetLoadPokemon(); // Reseta caso não haja termo de pesquisa
-  //   } else {
-  //     this.numbers = [n]; // Aplica a pesquisa
-  //     this.displayedImages = [];
-  //     this.currentPage = 0;
-  //     this.loadMoreImages();
-  //   }
-
-
-
-
-  // }
 
   searchPokemon() {
     if (this.searchTerm) {
       this.pokemonService.getPokemon(this.searchTerm.toLowerCase()).subscribe((pokemon) => {
         console.log('Pokémon encontrado:', pokemon); // Logando o Pokémon encontrado
-        this.numbers = [pokemon.id]; // Exibe o Pokémon buscado
-        this.displayedImages = [];
+        this.pokemons = [pokemon.id]; // Exibe o Pokémon buscado
+        this.displayedPokemons = [];
         this.currentPage = 0;
-        this.loadMoreImages();
+        this.loadMorePokemons();
       });
     } else {
-      this.numbers = this.allnumbers
-      this.displayedImages = []; // Limpa as imagens exibidas
+      this.pokemons = this.allPokemons
+      this.displayedPokemons = []; // Limpa as imagens exibidas
       this.currentPage = 0; // Reinicia a contagem de páginas
-      this.loadMoreImages();; // Se não houver busca, carrega todos os Pokémons
+      this.loadMorePokemons();; // Se não houver busca, carrega todos os Pokémons
     }
   }
 

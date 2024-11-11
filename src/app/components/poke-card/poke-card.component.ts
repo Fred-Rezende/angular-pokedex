@@ -11,15 +11,13 @@ import { TypeData } from '../../models/typeData';
 export class PokeCardComponent {
 
   pokemon: PokemonData
-  types:TypeData[] = [];
-  
+  types: TypeData[] = [];
 
-  constructor(
-    private service: PokemonService
-  ) {
+
+  constructor(private service: PokemonService) {
     this.pokemon = {
       id: 0,
-      species:{ name: ''},
+      species: { name: '' },
       sprites: {
         front_default: '',
         other: {
@@ -32,17 +30,14 @@ export class PokeCardComponent {
     }
   }
 
- @Input() 
- index:string = ''
-  
+  @Input()
+  index: string = ''
 
-
-  ngOnInit(): void { 
+  ngOnInit(): void {
     this.getPokemon(this.index)
-
   }
 
-  getPokemon(searchName:string){
+  getPokemon(searchName: string) {
     this.service.getPokemon(searchName).subscribe(
       {
         next: (res) => {
@@ -83,7 +78,7 @@ export class PokeCardComponent {
 
   getTypeNames(): string[] {
     return this.pokemon.types.map(t => t.type.name);
-}
+  }
 
 
 

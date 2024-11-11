@@ -10,33 +10,29 @@ import { PokemonList } from '../models/pokemonList';
   providedIn: 'root'
 })
 export class PokemonService {
-  private baseURL:string = "" 
-  private pokeData:PokemonData | any
-  private typeData:TypeData | any
-  private pokeList:PokemonList | any
+  private baseURL: string = ""
+  private pokeData: PokemonData | any
+  private typeData: TypeData | any
+  private pokeList: PokemonList | any
 
- 
-  constructor(
-    private http:HttpClient
-  ) { 
+
+  constructor(private http: HttpClient) {
     this.baseURL = environment.pokeApi
   }
 
-  getPokemon( pokemonName:string):Observable<PokemonData>{
+  getPokemon(pokemonName: string): Observable<PokemonData> {
     this.pokeData = this.http.get<PokemonData>(`${this.baseURL}pokemon/${pokemonName}`)
 
-    return this.pokeData  
+    return this.pokeData
   }
 
   getPokemonList(): Observable<PokemonList> {
     return this.http.get<PokemonList>(`${this.baseURL}pokemon?limit=10`);
   }
 
-  getType( typeName:string):Observable<TypeData>{
+  getType(typeName: string): Observable<TypeData> {
     this.pokeData = this.http.get<TypeData>(`${this.baseURL}type/${typeName}`)
 
-    return this.pokeData  
+    return this.pokeData
   }
-
-  
 }
