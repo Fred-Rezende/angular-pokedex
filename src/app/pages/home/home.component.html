@@ -1,0 +1,19 @@
+<div class="menu-container">
+    
+</div>
+<div class="container">
+    <div class="card__search__pokemon">
+        <label for="filtro-pokemon">Nome: </label>
+        <input [(ngModel)]="searchTerm" (input)="pokemonService.searchPokemon(searchTerm,pokemons)" placeholder="Pesquisar Pokémon">
+    </div>
+
+    <div class="card__container__pokemon">
+        <div class="card__pokemon" *ngFor="let number of pokemonService.displayedPokemons">
+            <app-poke-card index={{number}}></app-poke-card>
+        </div>
+    </div>
+    <div class="card__carregar__pokemon">
+        <button (click)="pokemonService.loadMorePokemons(pokemons)" *ngIf="!pokemonService.isSearching && pokemonService.hasMorePokemons(pokemons)">Carregar mais</button>
+    </div>
+</div>
+<router-outlet></router-outlet>

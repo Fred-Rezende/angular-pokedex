@@ -1,0 +1,31 @@
+.menu-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.card__search__pokemon {
+    margin: 20px
+}
+
+.card__container__pokemon {
+    display: flex;
+    flex-wrap: wrap;
+    /* Permite que os elementos quebrem para a próxima linha, se necessário */
+    justify-content: center;
+    align-items: center;
+    max-width: 1260px;
+
+}
+
+.card__carregar__pokemon {
+    margin: 20px;
+}

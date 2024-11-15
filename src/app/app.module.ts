@@ -9,6 +9,12 @@ import { PokeCardComponent } from './components/poke-card/poke-card.component';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { provideHttpClient, withFetch } from '@angular/common/http';
+import { HomeComponent } from './pages/home/home.component';
+import { MovesComponent } from './pages/moves/moves.component';
+import { ItensComponent } from './pages/itens/itens.component';
+import { BerriesComponent } from './pages/berries/berries.component';
+import { LocationComponent } from './pages/location/location.component';
+import { PokemonDetailsComponent } from './pages/pokemon-details/pokemon-details.component';
 
 
 @NgModule({
@@ -16,7 +22,13 @@ import { provideHttpClient, withFetch } from '@angular/common/http';
     AppComponent,
     CardComponent,
     MenuBarComponent,
-    PokeCardComponent
+    PokeCardComponent,
+    HomeComponent,
+    MovesComponent,
+    ItensComponent,
+    BerriesComponent,
+    LocationComponent,
+    PokemonDetailsComponent
   ],
   imports: [
     BrowserModule,
