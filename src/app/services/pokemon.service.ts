@@ -61,26 +61,28 @@ export class PokemonService {
     this.currentPage++;
   }
 
-  searchPokemon(searchTerm: string, poke: number[], tipo:number) {
+  searchPokemon(searchTerm: string, poke: number[], tipo: number) {
     let pokemons: number[] = poke
     if (searchTerm) {
       this.isSearching = true;
-      if(tipo === 1){
-      this.getPokemon(searchTerm.toLowerCase()).subscribe((pokemon) => {
-        console.log('Pokémon encontrado:', pokemon); // Logando o Pokémon encontrado
-        pokemons = [pokemon.id]; // Exibe o Pokémon buscado
-        this.displayedPokemons = [];
-        this.currentPage = 0;
-        this.loadMorePokemons(pokemons);
-      });}
-      if(tipo === 2){
+      if (tipo === 1) {
+        this.getPokemon(searchTerm.toLowerCase()).subscribe((pokemon) => {
+          console.log('Pokémon encontrado:', pokemon); // Logando o Pokémon encontrado
+          pokemons = [pokemon.id]; // Exibe o Pokémon buscado
+          this.displayedPokemons = [];
+          this.currentPage = 0;
+          this.loadMorePokemons(pokemons);
+        });
+      }
+      if (tipo === 2) {
         this.getItem(searchTerm.toLowerCase()).subscribe((pokemon) => {
           console.log('Pokémon encontrado:', pokemon); // Logando o Pokémon encontrado
           pokemons = [pokemon.id]; // Exibe o Pokémon buscado
           this.displayedPokemons = [];
           this.currentPage = 0;
           this.loadMorePokemons(pokemons);
-        });}
+        });
+      }
 
     } else {
       this.isSearching = false;
@@ -89,6 +91,13 @@ export class PokemonService {
       this.currentPage = 0; // Reinicia a contagem de páginas
       this.loadMorePokemons(poke);; // Se não houver busca, carrega todos os Pokémons
     }
+  }
+
+  resetPages() {
+    this.displayedPokemons = [];
+    this.pokemonsPerPage = 12;
+    this.currentPage = 0;
+    this.isSearching = false;
   }
 
 }

@@ -21,11 +21,12 @@ export class ItensComponent {
   }
 
   ngOnInit(): void {
-   this.pokemonService.loadMorePokemons(this.itens);
+    this.pokemonService.resetPages();
+    this.pokemonService.loadMorePokemons(this.itens);
   }
 
   onSearch(): void {
-    this.pokemonService.searchPokemon(this.searchTerm,this.itens,2);
+    this.pokemonService.searchPokemon(this.searchTerm, this.itens, 2);
   }
 
   // hasMorePokemons(poke:number[] ): boolean {

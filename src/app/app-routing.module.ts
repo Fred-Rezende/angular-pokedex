@@ -12,6 +12,7 @@ const routes: Routes = [
   { path: 'itens', component: ItensComponent},
   { path: 'berries', component: BerriesComponent},
   { path: 'location', component: LocationComponent}
+  
 ];
 
 @NgModule({

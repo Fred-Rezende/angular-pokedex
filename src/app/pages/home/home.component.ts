@@ -1,4 +1,4 @@
-import { Component} from '@angular/core';
+import { Component } from '@angular/core';
 import { PokemonService } from '../../services/pokemon.service';
 
 @Component({
@@ -18,14 +18,16 @@ export class HomeComponent {
 
   constructor(public pokemonService: PokemonService) {
     // this.loadMoreImages();
+    this.pokemonService.resetPages();
   }
 
   ngOnInit(): void {
-     this.pokemonService.loadMorePokemons(this.pokemons);
+
+    this.pokemonService.loadMorePokemons(this.pokemons);
   }
 
   onSearch(): void {
-    this.pokemonService.searchPokemon(this.searchTerm,this.pokemons,1);
+    this.pokemonService.searchPokemon(this.searchTerm, this.pokemons, 1);
   }
 
   // hasMorePokemons(poke:number[] ): boolean {
