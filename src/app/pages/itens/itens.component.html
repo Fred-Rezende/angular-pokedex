@@ -1,1 +1,19 @@
-<p>itens works!</p>
+<div class="menu-container">
+    
+</div>
+<div class="container">
+    <div class="card__search__item">
+        <label for="filtro-item">Nome: </label>
+        <input [(ngModel)]="searchTerm" (input)="pokemonService.searchPokemon(searchTerm,itens,2)" placeholder="Pesquisar Pokémon">
+    </div>
+
+    <div class="card__container__item">
+        <div class="card__item" *ngFor="let number of pokemonService.displayedPokemons">
+            <app-item-card index={{number}}></app-item-card>
+        </div>
+    </div>
+    <div class="card__carregar__item">
+        <button (click)="pokemonService.loadMorePokemons(itens)" *ngIf="!pokemonService.isSearching && pokemonService.hasMorePokemons(itens)">Carregar mais</button>
+    </div>
+</div>
+<router-outlet></router-outlet>

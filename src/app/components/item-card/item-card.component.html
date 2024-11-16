@@ -1,0 +1,21 @@
+<div class="itemcard__container">
+    <div class="itemcard__info">
+        <div class="itemcard__info__title">
+            <h4>
+                Nº: {{item.id}}
+            </h4>
+            <h3>
+                {{item.name|uppercase}}
+            </h3>
+            <h4>
+                Cost: {{item.cost}}
+            </h4>
+        </div>
+        
+    </div>
+    <div class="itemcard__image">
+        <div class="itemcard__image__inner">
+            <img [src]="item.sprites.default" alt="item" srcset="">
+        </div>
+    </div>
+</div>

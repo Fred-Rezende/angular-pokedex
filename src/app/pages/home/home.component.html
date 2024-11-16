@@ -4,7 +4,7 @@
 <div class="container">
     <div class="card__search__pokemon">
         <label for="filtro-pokemon">Nome: </label>
-        <input [(ngModel)]="searchTerm" (input)="pokemonService.searchPokemon(searchTerm,pokemons)" placeholder="Pesquisar Pokémon">
+        <input [(ngModel)]="searchTerm" (input)="pokemonService.searchPokemon(searchTerm,pokemons,1)" placeholder="Pesquisar Pokémon">
     </div>
 
     <div class="card__container__pokemon">

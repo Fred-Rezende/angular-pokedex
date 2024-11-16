@@ -21,11 +21,11 @@ export class HomeComponent {
   }
 
   ngOnInit(): void {
-   this.pokemonService.loadMorePokemons(this.pokemons);
+     this.pokemonService.loadMorePokemons(this.pokemons);
   }
 
   onSearch(): void {
-    this.pokemonService.searchPokemon(this.searchTerm,this.pokemons);
+    this.pokemonService.searchPokemon(this.searchTerm,this.pokemons,1);
   }
 
   // hasMorePokemons(poke:number[] ): boolean {
