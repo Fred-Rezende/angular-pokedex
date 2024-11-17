@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { environment } from '../../environments/environment';
 import { HttpClient } from '@angular/common/http';
-import { catchError, filter, map, Observable } from 'rxjs';
+import { catchError, filter, forkJoin, map, Observable, of } from 'rxjs';
 import { PokemonData } from '../models/pokemonData'
 import { TypeData } from '../models/typeData';
 import { PokemonList } from '../models/pokemonList';
@@ -52,14 +52,44 @@ export class PokemonService {
     return this.currentPage * this.objectsPerPage < object.length;
   }
 
+  // loadMore(object: number[]) {
+  //   const nextPageObjects = object.slice(
+  //     this.currentPage * this.objectsPerPage,
+  //     (this.currentPage + 1) * this.objectsPerPage
+  //   );
+  //   this.displayed = [...this.displayed, ...nextPageObjects];
+  //   this.currentPage++;
+  // }
+
   loadMore(object: number[]) {
     const nextPageObjects = object.slice(
       this.currentPage * this.objectsPerPage,
       (this.currentPage + 1) * this.objectsPerPage
     );
-    this.displayed = [...this.displayed, ...nextPageObjects];
-    this.currentPage++;
+
+    const checkObservables = nextPageObjects.map(id => 
+      this.checkItemExistence(id).pipe(
+        map(exists => exists ? id : null) // Se existir, retorna o ID, senão retorna null
+      )
+    );
+  
+    // Usa forkJoin para aguardar todas as verificações de existência
+    forkJoin(checkObservables).subscribe(validItems => {
+      // Filtra os itens válidos (não nulos)
+      const validObjects = validItems.filter(id => id !== null);
+      this.displayed = [...this.displayed, ...validObjects];
+      this.currentPage++;
+    });
   }
+
+  checkItemExistence(id: number) {
+    // Retorna um Observable que verifica se o item existe
+    return this.http.get<ItemData>(`${this.baseURL}item/${id}`).pipe(
+      map(() => true), // Se a requisição for bem-sucedida, o item existe
+      catchError(() => of(false)) // Se der erro (ex.: 404), o item não existe
+    );
+  }
+
 
   search(searchTerm: string, object: number[], tipo: number) {
     let objects: number[] = object
