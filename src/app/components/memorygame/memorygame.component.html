@@ -1,0 +1,13 @@
+<div class="container">
+    <h2>JOGO DA MEMÓRIA</h2>
+    <div class="game">
+      <div *ngFor="let card of shuffledEmojis; let i = index" 
+           class="item" 
+           [class.boxOpen]="card.open"
+           [class.boxMatch]="card.matched" 
+           (click)="handleClick(card)">
+        {{ card.emoji }}
+      </div>
+    </div>
+    <button class="reset" (click)="resetGame()">RESET GAME</button>
+  </div>
