@@ -1,1 +1,19 @@
-<p>moves works!</p>
+<div class="menu-container">
+    
+</div>
+<div class="container">
+    <div class="card__search__move">
+        <label for="filtro-move">Nome: </label>
+        <input [(ngModel)]="searchTerm" (input)="pokemonService.search(searchTerm,moves,3)" placeholder="Pesquisar Move">
+    </div>
+
+    <div class="card__container__move">
+        <div class="card__move" *ngFor="let number of pokemonService.displayed">
+            <app-move-card index={{number}}></app-move-card>
+        </div>
+    </div>
+    <div class="card__carregar__move">
+        <button (click)="pokemonService.loadMore(moves)" *ngIf="!pokemonService.isSearching && pokemonService.hasMore(moves)">Carregar mais</button>
+    </div>
+</div>
+<router-outlet></router-outlet>

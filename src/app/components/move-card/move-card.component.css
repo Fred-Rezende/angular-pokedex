@@ -1,0 +1,75 @@
+.movecard__container {
+    width: 1200px;
+    height: 50px;
+    margin: 7px;
+    display: flex;
+    flex-direction: row;
+    /* background-color: rgb(192, 192, 192); */
+    border-radius: 10px;
+    box-shadow: 4px 4px 4px #707070;
+    border: 1px solid #000000;
+    background-image: radial-gradient(farthest-corner at 100px 120px,
+            #e4e4e4 57%,
+            #929292 58%,
+            #d4cece 59%);
+}
+
+.movecard__info {
+    display: flex;
+    flex-direction: column;
+    align-items: left;
+    justify-content: center;
+    width: 100%;
+  
+  }
+
+  .movecard__info__stats {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 30px;
+    margin-left: 15px;
+    
+    
+  }
+
+  .movecard__info__effect{
+    display: flex;
+    margin-left: 15px;
+ 
+  }
+
+  .movecard__info__stats>h3 {
+    color: #383838;
+    width: 350px;
+  
+}
+
+  .movecard__info__stats>h4 {
+    color: #383838;
+    width: 100px;
+   
+}
+
+.movecard__info__stats>h5 {
+    color: #383838;
+    width: 200px;
+  
+}
+
+.movecard__types {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.movecard__types__inner>img {
+    display: flex;
+    align-items: center;
+    width: 150px;
+    border-radius: 5px;
+    margin-right: 10px;
+    border: 1px solid black;
+}
+
+

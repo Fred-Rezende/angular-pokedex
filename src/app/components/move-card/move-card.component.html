@@ -1,0 +1,33 @@
+<div class="movecard__container">
+    <div class="movecard__info">
+        <div class="movecard__info__stats">
+            <h4>
+                Nº: {{move.id}}
+            </h4>
+            <h3>
+                {{move.name|uppercase}}
+            </h3>
+            <h4>
+                Power: {{move.power}}
+            </h4>
+            <h4>
+                PP: {{move.pp}}
+            </h4>
+            <h4>
+                Accur.: {{move.accuracy}}
+            </h4>
+
+        </div>
+        <div class="movecard__info__effect">
+            <h5>
+                Effect: {{move.effect_entries[0].short_effect}}
+            </h5>
+        </div>
+
+    </div>
+    <div class="movecard__types">
+        <div class="movecard__types__inner">
+            <img [src]="type.sprites['generation-viii']['sword-shield'].name_icon" alt="type" srcset="">
+        </div>
+    </div>
+</div>

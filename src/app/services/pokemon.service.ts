@@ -6,6 +6,7 @@ import { PokemonData } from '../models/pokemonData'
 import { TypeData } from '../models/typeData';
 import { PokemonList } from '../models/pokemonList';
 import { ItemData } from '../models/itemData';
+import { MoveData } from '../models/moveData';
 
 @Injectable({
   providedIn: 'root'
@@ -15,6 +16,7 @@ export class PokemonService {
   private pokeData: PokemonData | any
   private typeData: TypeData | any
   private itemData: ItemData | any
+  private moveData: MoveData | any
   private pokeList: PokemonList | any
   displayed: number[] = [];
   objectsPerPage: number = 12;
@@ -43,9 +45,15 @@ export class PokemonService {
   }
 
   getItem(itemName: string): Observable<ItemData> {
-    this.itemData = this.http.get<PokemonData>(`${this.baseURL}item/${itemName}`)
+    this.itemData = this.http.get<ItemData>(`${this.baseURL}item/${itemName}`)
 
     return this.itemData
+  }
+
+  getMove(moveName: string): Observable<MoveData> {
+    this.moveData = this.http.get<MoveData>(`${this.baseURL}move/${moveName}`)
+
+    return this.moveData
   }
    
   hasMore(object: number[]): boolean {
@@ -106,6 +114,14 @@ export class PokemonService {
       if (tipo === 2) {
         this.getItem(searchTerm.toLowerCase()).subscribe((item) => {
           objects = [item.id]; // Exibe o Pokémon buscado
+          this.displayed = [];
+          this.currentPage = 0;
+          this.loadMore(objects);
+        });
+      }
+      if (tipo === 3) {
+        this.getMove(searchTerm.toLowerCase()).subscribe((move) => {
+          objects = [move.id]; // Exibe o Pokémon buscado
           this.displayed = [];
           this.currentPage = 0;
           this.loadMore(objects);
