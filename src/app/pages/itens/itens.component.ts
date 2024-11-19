@@ -22,7 +22,7 @@ export class ItensComponent {
 
   ngOnInit(): void {
     this.pokemonService.resetPages();
-    this.pokemonService.loadMore(this.itens);
+    this.pokemonService.loadMore(this.itens,'item');
   }
 
   onSearch(): void {

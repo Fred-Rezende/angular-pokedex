@@ -23,7 +23,7 @@ export class MovesComponent {
 
   ngOnInit(): void {
     this.pokemonService.resetPages();
-    this.pokemonService.loadMore(this.moves);
+    this.pokemonService.loadMore(this.moves,'move');
     
   }
 

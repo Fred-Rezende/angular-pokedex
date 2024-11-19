@@ -13,7 +13,7 @@
         </div>
     </div>
     <div class="card__carregar__item">
-        <button (click)="pokemonService.loadMore(itens)" *ngIf="!pokemonService.isSearching && pokemonService.hasMore(itens)">Carregar mais</button>
+        <button (click)="pokemonService.loadMore(itens,'item')" *ngIf="!pokemonService.isSearching && pokemonService.hasMore(itens)">Carregar mais</button>
     </div>
 </div>
 <router-outlet></router-outlet>

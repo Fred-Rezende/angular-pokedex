@@ -23,7 +23,7 @@ export class HomeComponent {
 
   ngOnInit(): void {
 
-    this.pokemonService.loadMore(this.pokemons);
+    this.pokemonService.loadMore(this.pokemons,'pokemon');
   }
 
   onSearch(): void {

@@ -69,14 +69,14 @@ export class PokemonService {
   //   this.currentPage++;
   // }
 
-  loadMore(object: number[]) {
+  loadMore(object: number[], type: 'pokemon' | 'item' | 'move') {
     const nextPageObjects = object.slice(
       this.currentPage * this.objectsPerPage,
       (this.currentPage + 1) * this.objectsPerPage
     );
 
     const checkObservables = nextPageObjects.map(id => 
-      this.checkItemExistence(id).pipe(
+      this.checkObjectExistence(type, id).pipe(
         map(exists => exists ? id : null) // Se existir, retorna o ID, senão retorna null
       )
     );
@@ -90,13 +90,35 @@ export class PokemonService {
     });
   }
 
-  checkItemExistence(id: number) {
-    // Retorna um Observable que verifica se o item existe
-    return this.http.get<ItemData>(`${this.baseURL}item/${id}`).pipe(
-      map(() => true), // Se a requisição for bem-sucedida, o item existe
-      catchError(() => of(false)) // Se der erro (ex.: 404), o item não existe
+  checkObjectExistence(type: 'pokemon' | 'item' | 'move', id: number): Observable<boolean> {
+    let url: string;
+    
+    switch (type) {
+      case 'pokemon':
+        url = `${this.baseURL}pokemon/${id}`;
+        break;
+      case 'item':
+        url = `${this.baseURL}item/${id}`;
+        break;
+      case 'move':
+        url = `${this.baseURL}move/${id}`;
+        break;
+      default:
+        return of(false); // Caso não seja um tipo reconhecido
+    }
+
+    return this.http.get(url).pipe(
+      map(() => true), // Se a requisição for bem-sucedida, retorna true
+      catchError(() => of(false)) // Se der erro (ex.: 404), retorna false
     );
   }
+  // checkItemExistence(id: number) {
+  //   // Retorna um Observable que verifica se o item existe
+  //   return this.http.get<ItemData>(`${this.baseURL}item/${id}`).pipe(
+  //     map(() => true), // Se a requisição for bem-sucedida, o item existe
+  //     catchError(() => of(false)) // Se der erro (ex.: 404), o item não existe
+  //   );
+  // }
 
 
   search(searchTerm: string, object: number[], tipo: number) {
@@ -108,7 +130,7 @@ export class PokemonService {
           objects = [pokemon.id]; // Exibe o Pokémon buscado
           this.displayed = [];
           this.currentPage = 0;
-          this.loadMore(objects);
+          this.loadMore(objects, 'pokemon');
         });
       }
       if (tipo === 2) {
@@ -116,7 +138,7 @@ export class PokemonService {
           objects = [item.id]; // Exibe o Pokémon buscado
           this.displayed = [];
           this.currentPage = 0;
-          this.loadMore(objects);
+          this.loadMore(objects, 'item');
         });
       }
       if (tipo === 3) {
@@ -124,7 +146,7 @@ export class PokemonService {
           objects = [move.id]; // Exibe o Pokémon buscado
           this.displayed = [];
           this.currentPage = 0;
-          this.loadMore(objects);
+          this.loadMore(objects, 'move');
         });
       }
 
@@ -133,7 +155,7 @@ export class PokemonService {
       objects = object
       this.displayed = []; // Limpa as imagens exibidas
       this.currentPage = 0; // Reinicia a contagem de páginas
-      this.loadMore(object);; // Se não houver busca, carrega todos os Pokémons
+      this.loadMore(object, 'pokemon');; // Se não houver busca, carrega todos os Pokémons
     }
   }
 
