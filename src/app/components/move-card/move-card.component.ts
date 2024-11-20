@@ -16,34 +16,34 @@ export class MoveCardComponent {
   constructor(private service: PokemonService) {
     this.move = {
       id: 0,
-    name: '',
-    power: 0,
-    accuracy: 0,
-    pp: 0,
-    effect_entries: {
+      name: '',
+      power: 0,
+      accuracy: 0,
+      pp: 0,
+      effect_entries: {
         0: {
-            effect: '',
-            short_effect: ''
+          effect: '',
+          short_effect: ''
         }
-    },
-    type: {
+      },
+      type: {
         name: '',
         url: ''
-    }
+      }
     }
 
-    this.type = { 
-      id: 0, 
-      name: '', 
-      sprites: { 
-        'generation-viii': { 
-          'sword-shield': { name_icon: '' } 
-        } 
-      } 
+    this.type = {
+      id: 0,
+      name: '',
+      sprites: {
+        'generation-viii': {
+          'sword-shield': { name_icon: '' }
+        }
+      }
     };
 
-    
-    
+
+
   }
 
 
@@ -65,7 +65,7 @@ export class MoveCardComponent {
             power: res.power,
             accuracy: res.accuracy,
             pp: res.pp,
-            effect_entries: res.effect_entries,
+            effect_entries: res.effect_entries[0] ? res.effect_entries : [{ effect: 'No effect available', short_effect: 'No effect available' }],
             type: res.type
           }
           this.getType(this.getTypeName()); // Chama getType com os nomes dos tipos
@@ -73,7 +73,7 @@ export class MoveCardComponent {
         error: (err) => console.log('not found')
       }
     )
-   
+
   }
 
   getType(searchName: string): void {
@@ -93,7 +93,7 @@ export class MoveCardComponent {
   getTypeName(): string {
     return this.move.type.name; // Retorna o nome do único tipo
   }
-  
-  
+
+
 }
 
