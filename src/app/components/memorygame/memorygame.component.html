@@ -6,7 +6,8 @@
            [class.boxOpen]="card.open"
            [class.boxMatch]="card.matched" 
            (click)="handleClick(card)">
-        {{ card.emoji }}
+        <!-- {{ card.emoji }} -->
+        <img src="{{ card.emoji }}" alt="" srcset="">
       </div>
     </div>
     <button class="reset" (click)="resetGame()">RESET GAME</button>
