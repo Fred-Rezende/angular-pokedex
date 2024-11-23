@@ -51,10 +51,11 @@
    
 }
 
-.movecard__info__stats>h5 {
-    color: #383838;
-    width: 200px;
+.movecard__info__effect>h5 {
+  color: #383838;
+  width: 1000px;
   
+
 }
 
 .movecard__types {
