@@ -41,9 +41,6 @@ export class MoveCardComponent {
         }
       }
     };
-
-
-
   }
 
 
@@ -58,7 +55,6 @@ export class MoveCardComponent {
     this.service.getMove(searchName).subscribe(
       {
         next: (res) => {
-
           this.move = {
             id: res.id,
             name: res.name,
@@ -73,7 +69,6 @@ export class MoveCardComponent {
         error: (err) => console.log('not found')
       }
     )
-
   }
 
   getType(searchName: string): void {
@@ -93,7 +88,6 @@ export class MoveCardComponent {
   getTypeName(): string {
     return this.move.type.name; // Retorna o nome do único tipo
   }
-
 
 }
 

@@ -41,7 +41,6 @@ export class PokeCardComponent {
     this.service.getPokemon(searchName).subscribe(
       {
         next: (res) => {
-
           this.pokemon = {
             id: res.id,
             species: res.species,
@@ -79,7 +78,5 @@ export class PokeCardComponent {
   getTypeNames(): string[] {
     return this.pokemon.types.map(t => t.type.name);
   }
-
-
 
 }
