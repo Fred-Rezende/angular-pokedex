@@ -18,10 +18,15 @@
   }
   
   h2 {
-    font-size: 3em;
-    color: #383838;
+    font-family: 'Pokemon Solid', sans-serif;
+    font-size: 2em;
+    /* color: #383838; */
     text-transform: uppercase;
     letter-spacing: 0.1em;
+    color: #F6C206;
+    -webkit-text-stroke-width: 1px; /* largura da borda */
+    -webkit-text-stroke-color: #4161AD; /* cor da borda */
+   
   }
   
   .reset {
@@ -35,19 +40,20 @@
     text-transform: uppercase;
     cursor: pointer;
     font-weight: 600;
+    box-shadow: 4px 4px 4px #707070;
   }
   
   .reset:hover {
     color: #f1f1f1;
     background-color: #f10000;
   }
-  .reset:focus {
+  /* .reset:focus {
     color: #ec38bc;
     background-color: #262809;
-  }
+  } */
   
   .game {
-    width: 430px;
+    width: 650px;
     height: 430px;
     display: flex;
     flex-wrap: wrap;
@@ -67,13 +73,16 @@
     font-size: 3em;
     transform: rotateY(180deg);
     transition: 0.25s;
+    box-shadow: 4px 4px 4px #707070;
   }
   
   .item::after {
     content: "";
     position: absolute;
     inset: 0;
-    background: #404040;
+    /* background: #404040; */
+    background-image: url("../../../assets/images/Pokeball.PNG");
+    background-size: 100px;
     transition: 0.25s;
     transform: rotateY(0deg);
     backface-visibility: hidden;

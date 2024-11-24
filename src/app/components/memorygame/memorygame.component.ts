@@ -48,7 +48,7 @@ export class MemoryGameComponent implements OnInit {
   gerarPokemonsAleatorios() {
     const numerosAleatorios: number[] = [];
 
-    while (numerosAleatorios.length < 8) {
+    while (numerosAleatorios.length < 12) {
       const numero = Math.floor(Math.random() * 1025) + 1; // Gera número entre 1 e 1025
       if (!numerosAleatorios.includes(numero)) { // Verifica se o número já foi gerado
         numerosAleatorios.push(numero);
