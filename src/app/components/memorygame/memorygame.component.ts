@@ -24,6 +24,10 @@ export class MemoryGameComponent implements OnInit {
   shuffledEmojis: Card[] = [];
   openCards: Card[] = [];
 
+  timer: number = 60; // Tempo total do jogo em segundos
+  timerInterval: any; // Identificador do intervalo do timer
+  gameOver: boolean = false;
+
   constructor(private service: PokemonService) {
     this.pokemon = {
       id: 0,
@@ -83,7 +87,15 @@ export class MemoryGameComponent implements OnInit {
     this.openCards = [];
     this.emojis = [];
     this.shuffledEmojis = [];
-    this.gerarPokemonsAleatorios()
+
+    this.timer = 60; // Reinicia o timer
+    this.gameOver = false;
+
+    clearInterval(this.timerInterval); // Garante que o intervalo antigo seja limpo
+
+    this.gerarPokemonsAleatorios();
+
+    this.startTimer(); 
   }
 
   shuffleCards(): Card[] {
@@ -124,7 +136,22 @@ export class MemoryGameComponent implements OnInit {
     this.openCards = [];
 
     if (this.shuffledEmojis.every(card => card.matched)) {
-      alert('Você venceu!');
+      // alert('Você venceu!');
+      clearInterval(this.timerInterval); // Para o timer se vencer
+      alert('Parabéns! Você venceu!');
+      this.gameOver = true;
     }
+  }
+
+  startTimer() {
+    this.timerInterval = setInterval(() => {
+      this.timer--;
+
+      if (this.timer <= 0) {
+        clearInterval(this.timerInterval); // Para o timer ao final
+        this.gameOver = true;
+        alert('Game Over! O tempo acabou.');
+      }
+    }, 1000);
   }
 }

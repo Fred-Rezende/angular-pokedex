@@ -1,5 +1,8 @@
 <div class="container">
     <h2>JOGO DA MEMÓRIA</h2>
+    <div class="info">
+      <p>Tempo restante: {{ timer }} segundos</p>
+    </div>
     <div class="game">
       <div *ngFor="let card of shuffledEmojis; let i = index" 
            class="item" 
