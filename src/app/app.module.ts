@@ -17,8 +17,10 @@ import { LocationComponent } from './pages/location/location.component';
 import { PokemonDetailsComponent } from './pages/pokemon-details/pokemon-details.component';
 import { ItemCardComponent } from './components/item-card/item-card.component';
 import { MemoryGameComponent } from './components/memorygame/memorygame.component';
-import { MemorygameComponent } from './pages/memorygame/memorygame.component';
 import { MoveCardComponent } from './components/move-card/move-card.component';
+import { GameComponent } from './pages/game/game.component';
+import { MenuGameComponent } from './components/menu-game/menu-game.component';
+import { CatchgameComponent } from './components/catchgame/catchgame.component';
 
 
 @NgModule({
@@ -35,8 +37,10 @@ import { MoveCardComponent } from './components/move-card/move-card.component';
     PokemonDetailsComponent,
     ItemCardComponent,
     MemoryGameComponent,
-    MemorygameComponent,
-    MoveCardComponent
+    MoveCardComponent,
+    GameComponent,
+    MenuGameComponent,
+    CatchgameComponent
   ],
   imports: [
     BrowserModule,

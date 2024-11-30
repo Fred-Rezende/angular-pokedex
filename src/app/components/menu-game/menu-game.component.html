@@ -1,0 +1,35 @@
+<div class="container__info">
+    <h2>{{ titleGame }}</h2>
+    <div class="timer">
+      <p>Tempo</p>
+      <p class="timer__cor"> {{ timer }}</p>
+      <br>
+      <p>Pontos</p>
+      <p class="timer__cor"> {{ points }}</p>
+    </div>
+    <div class="combobox">
+      <label>
+        <input [disabled]="isPlaying" type="radio" name="difficulty" value="E" checked
+          (change)="onOptionSelected($event)" />
+        <p>Fácil</p>
+      </label>
+      <label>
+        <input [disabled]="isPlaying" type="radio" name="difficulty" value="N" (change)="onOptionSelected($event)" />
+        <p>Normal</p>
+      </label>
+      <label>
+        <input [disabled]="isPlaying" type="radio" name="difficulty" value="H" (change)="onOptionSelected($event)" />
+        <p>Difícil</p>
+      </label>
+    </div>
+    <div class="container__button">
+      <div class="container__button__position">
+        <button class="start" [disabled]="isPlaying" (click)="onStartGameSelected()"></button>
+        <p>START</p>
+      </div>
+      <div class="container__button__position">
+        <button class="reset" (click)="onResetGameSelected()"></button>
+        <p>RESET</p>
+      </div>
+    </div>
+  </div>

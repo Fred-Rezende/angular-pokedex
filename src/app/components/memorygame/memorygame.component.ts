@@ -14,7 +14,7 @@ interface Card {
   styleUrls: ['./memorygame.component.css']
 })
 export class MemoryGameComponent implements OnInit {
-  // emojis: string[] = [
+ // emojis: string[] = [
   //   "🍕", "🍕", "🍔", "🍔", "🌭", "🌭", "🍗", "🍗", 
   //   "🍩", "🍩", "🍰", "🍰", "🍟", "🍟", "🥪", "🥪"
   // ];
@@ -27,6 +27,10 @@ export class MemoryGameComponent implements OnInit {
   timer: number = 60; // Tempo total do jogo em segundos
   timerInterval: any; // Identificador do intervalo do timer
   gameOver: boolean = false;
+  isPlaying: boolean = false;
+  points: number = 0;
+  result: string = '';
+  selectedValue: number = 8;
 
   constructor(private service: PokemonService) {
     this.pokemon = {
@@ -48,11 +52,10 @@ export class MemoryGameComponent implements OnInit {
     this.resetGame();
   }
 
-
-  gerarPokemonsAleatorios() {
+  gerarPokemonsAleatorios(n: number) {
     const numerosAleatorios: number[] = [];
 
-    while (numerosAleatorios.length < 12) {
+    while (numerosAleatorios.length < n) {
       const numero = Math.floor(Math.random() * 1025) + 1; // Gera número entre 1 e 1025
       if (!numerosAleatorios.includes(numero)) { // Verifica se o número já foi gerado
         numerosAleatorios.push(numero);
@@ -91,11 +94,19 @@ export class MemoryGameComponent implements OnInit {
     this.timer = 60; // Reinicia o timer
     this.gameOver = false;
 
+    this.points = 0;
+
     clearInterval(this.timerInterval); // Garante que o intervalo antigo seja limpo
 
-    this.gerarPokemonsAleatorios();
+    this.isPlaying = false;
 
-    this.startTimer(); 
+    this.gerarPokemonsAleatorios(this.selectedValue);
+
+  }
+
+  startGame() {
+    this.isPlaying = true;
+    this.startTimer();
   }
 
   shuffleCards(): Card[] {
@@ -110,15 +121,17 @@ export class MemoryGameComponent implements OnInit {
   }
 
   handleClick(card: Card) {
-    if (card.open || this.openCards.length === 2 || card.matched) {
-      return;
-    }
+    if (this.isPlaying) {
+      if (card.open || this.openCards.length === 2 || card.matched) {
+        return;
+      }
 
-    card.open = true;
-    this.openCards.push(card);
+      card.open = true;
+      this.openCards.push(card);
 
-    if (this.openCards.length === 2) {
-      setTimeout(() => this.checkMatch(), 500);
+      if (this.openCards.length === 2) {
+        setTimeout(() => this.checkMatch(), 500);
+      }
     }
   }
 
@@ -128,6 +141,7 @@ export class MemoryGameComponent implements OnInit {
     if (card1.emoji === card2.emoji) {
       card1.matched = true;
       card2.matched = true;
+      this.points = this.points + 10;
     } else {
       card1.open = false;
       card2.open = false;
@@ -138,7 +152,8 @@ export class MemoryGameComponent implements OnInit {
     if (this.shuffledEmojis.every(card => card.matched)) {
       // alert('Você venceu!');
       clearInterval(this.timerInterval); // Para o timer se vencer
-      alert('Parabéns! Você venceu!');
+      this.points = this.points * this.timer;
+      this.result = 'Parabéns! Você venceu!';
       this.gameOver = true;
     }
   }
@@ -149,9 +164,21 @@ export class MemoryGameComponent implements OnInit {
 
       if (this.timer <= 0) {
         clearInterval(this.timerInterval); // Para o timer ao final
-        this.gameOver = true;
-        alert('Game Over! O tempo acabou.');
+        this.result = 'Game Over! O tempo acabou.';
+        this.gameOver = true
       }
     }, 1000);
+  }
+
+  onOptionSelected(event: Event): void {
+    const value = (event.target as HTMLInputElement).value; // Captura o valor como string
+    if(value == 'H')
+      this.selectedValue = 16;
+    else if(value == 'N')
+      this.selectedValue = 12;
+    else  
+      this.selectedValue = 8;
+    
+    this.resetGame();
   }
 }

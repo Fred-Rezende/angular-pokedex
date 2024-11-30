@@ -1,0 +1,246 @@
+
+.container__info {
+    width: 32%;
+    display: flex;
+    flex-direction: column;
+    width: max-content;
+    justify-content: flex-start;
+    align-items: center;
+    border: 5px solid #383838;
+    border-radius: 15px;
+    border-bottom-right-radius: 80px;
+    padding: 20px;
+    padding-bottom: 50px;
+    /* /* background-color: #d3d1d0; */
+    background: linear-gradient(149deg, #fafafa 0%, #ededed 3%, #dfdddc 20%, #939090 50%, #bfbfbf 80%, #b0b0b0 97%, #ededed 100%);
+  }
+  
+  .container__game {
+    width: 68%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  h2 {
+    font-family: 'Pokemon Solid', sans-serif;
+    font-size: 2em;
+    /* color: #383838; */
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: #F6C206;
+    -webkit-text-stroke-width: 1px;
+    /* largura da borda */
+    -webkit-text-stroke-color: #4161AD;
+    /* cor da borda */
+    margin-bottom: 30px;
+  
+  }
+  
+  .container__button {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 10px;
+  
+  
+    position: relative;
+    margin: 10px;
+  }
+  
+  .container__button>.container__button__position>button {
+    /* background-color:#b40c8a;
+    background: rgb(221,22,171); */
+    background: linear-gradient(149deg, #dd16ab 0%, #b11089 35%, #410732 50%, #5e0949 65%, #7c0c60 100%);
+    display: block;
+    position: relative;
+    width: 50px;
+    height: 50px;
+    margin-bottom: 10px;
+    border: 2px solid #7c0c60;
+    cursor: pointer;
+  
+    -webkit-box-shadow: inset 1.5px 2px 0 #ffdaf6, 0 5px 0 #310125;
+    -moz-box-shadow: inset 1.5px 2px 0 #ffdaf6, 0 5px 0 #310125;
+    box-shadow: inset 1.5px 2px 0 #ffdaf6, 0 5px 0 #310125;
+  
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    border-radius: 50%;
+  }
+  
+  .container__button>.container__button__position>.reset:active {
+    top: 5px;
+    /* background-color:#7c0c60; */
+    background: linear-gradient(149deg, #bb1391 0%, #8c0d6d 35%, #26041d 50%, #410633 65%, #540841 100%);
+  
+    -webkit-box-shadow: inset 1.5px 1px 0 #ffdaf6, inset 0 -3px 0 #310125;
+    -moz-box-shadow: inset 1.5px 1px 0 #ffdaf6, inset 0 -3px 0 #310125;
+    box-shadow: inset 1.5px 1px 0 #ffdaf6, inset 0 -3px 0 #310125;
+  }
+  
+  .container__button>.container__button__position>.start:disabled {
+    top: 5px;
+    /* background-color:#7c0c60; */
+    background: linear-gradient(149deg, #bb1391 0%, #8c0d6d 35%, #26041d 50%, #410633 65%, #540841 100%);
+  
+  
+    -webkit-box-shadow: inset 1.5px 1px 0 #ffdaf6, inset 0 -3px 0 #310125;
+    -moz-box-shadow: inset 1.5px 1px 0 #ffdaf6, inset 0 -3px 0 #310125;
+    box-shadow: inset 1.5px 1px 0 #ffdaf6, inset 0 -3px 0 #310125;
+  }
+  
+  .container__button>.container__button__position {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 10px 15px;
+  }
+
+  
+.timer {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    /* color: #383838; */
+    background-color: #6f8348;
+    border: 15px #b6b6b6;
+    border-style: inset;
+    width: 70%;
+    margin-bottom: 20px;
+    line-height: 1.3;
+    padding: 10px;
+  }
+  
+  .timer>p {
+    font-size: 1.3em;
+    text-transform: uppercase;
+    font-family: "Press Start 2P", cursive;
+  
+    color: #383838;
+  }
+  
+  .timer>.timer__cor {
+    font-size: 2em;
+  }
+  
+  .combobox {
+    display: flex;
+  }
+  
+  .combobox>label {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 6px;
+    width: 50px;
+  }
+  
+  .combobox>label>p {
+    font-size: small;
+  }
+  
+
+  label {
+    display: block;
+    text-align: center;
+    -webkit-tap-highlight-color: transparent;
+  }
+  
+  label:first-child input {
+    border-radius: 0.5em 0 0 0.5em;
+    box-shadow:
+      0.1em 0 0 #2726267f inset,
+      -0.1em 0 0 #27262600 inset,
+      0 0.1em 0 #afa490 inset,
+      0 -0.1em 0 #ffffff3f,
+      0 0.2em 0.5em #0000007f,
+      0 -0.1em 0 #926086 inset,
+      -0.1em -0.2em 0 #ffffff7f inset,
+      0.2em 0 0 #ffffff7f inset;
+  }
+  
+  label:last-child input {
+    border-radius: 0 0.5em 0.5em 0;
+    box-shadow:
+      0 -0.1em 0 #926086 inset,
+      0.1em 0 0 #2726267f inset,
+      -0.1em 0 0 #2726267f inset,
+      0 0.1em 0 #afa490 inset,
+      -0.1em 0 0 #afa490 inset,
+      0 -0.1em 0 #ffffff3f,
+      0 0.2em 0.5em #0000007f,
+      -0.1em -0.1em 0 0.1em #ffffff7f inset;
+  }
+  
+  label:first-child input:checked {
+    box-shadow:
+      0.1em 0 0 #272626af inset,
+      -0.1em 0 0 #272626 inset,
+      0 0.1em 0 #847a62 inset,
+      0 -0.1em 0 #ffffff3f,
+      0 0.1em 0 #ffffff7f,
+      0 -0.1em 0 #722257 inset,
+      -0.1em -0.2em 0 #ffffff7f inset,
+      0.2em 0 0 #ffffff7f inset;
+  }
+  
+  label:last-child input:checked {
+    box-shadow:
+      0.1em 0 0 #272626af inset,
+      -0.1em 0 0 #272626 inset,
+      0 -0.1em 0 #722257 inset,
+      0 0.1em 0 #847a62 inset,
+      -0.1em 0 0 #847a62 inset,
+      0 -0.1em 0 #ffffff3f,
+      0 0.1em 0 #ffffff7f,
+      -0.1em -0.1em 0 0.1em #ffffff7f inset;
+  }
+  
+  input {
+    background-image: linear-gradient(#ffffff 33%, #414751 58%, #837b52, #c5baa1, #c3adaa);
+    border-radius: 0;
+    box-shadow:
+      0.1em 0 0 #2726267f inset,
+      -0.1em 0 0 #27262600 inset,
+      0 0.1em 0 #afa490 inset,
+      0 -0.1em 0 #ffffff3f,
+      0 0.2em 0.5em #0000007f,
+      0 -0.1em 0 #926086 inset,
+      -0.1em -0.2em 0 #ffffff7f inset;
+    cursor: pointer;
+    display: block;
+    margin-bottom: 0.5em;
+    width: 100%;
+    height: 1em;
+    transition: box-shadow var(--transDur) ease-in-out;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+  }
+  
+  input:checked {
+    background-image: linear-gradient(#ffffff 33%, #415147 58%, #827a7b, #c0b6ac, #c3adaa);
+    box-shadow:
+      0.1em 0 0 #272626af inset,
+      -0.1em 0 0 #272626 inset,
+      0 0.1em 0 #847a62 inset,
+      0 -0.1em 0 #ffffff3f,
+      0 0.1em 0 #ffffff7f,
+      0 -0.1em 0 #722257 inset,
+      -0.1em -0.2em 0 #ffffff7f inset;
+  }
+  
+  input:checked+p {
+    opacity: 1;
+  }
+  
+  input:focus {
+    outline: transparent;
+  }
+  
+  input+p {
+    opacity: 0.65;
+    transition: opacity var(--transDur) ease-in-out;
+  }  

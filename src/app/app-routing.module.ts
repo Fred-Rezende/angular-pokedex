@@ -5,7 +5,7 @@ import { MovesComponent } from './pages/moves/moves.component';
 import { ItensComponent } from './pages/itens/itens.component';
 import { BerriesComponent } from './pages/berries/berries.component';
 import { LocationComponent } from './pages/location/location.component';
-import { MemoryGameComponent } from './components/memorygame/memorygame.component';
+import { GameComponent } from './pages/game/game.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent},
@@ -13,7 +13,7 @@ const routes: Routes = [
   { path: 'itens', component: ItensComponent},
   { path: 'berries', component: BerriesComponent},
   { path: 'location', component: LocationComponent},
-  { path: 'memorygame', component: MemoryGameComponent}
+  { path: 'game', component: GameComponent}
   
 ];
 

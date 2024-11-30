@@ -1,17 +1,52 @@
 <div class="container">
+  <!-- <div class="container__info">
     <h2>JOGO DA MEMÓRIA</h2>
-    <div class="info">
-      <p>Tempo restante: {{ timer }} segundos</p>
+    <div class="timer">
+      <p>Tempo</p>
+      <p class="timer__cor"> {{ timer }}</p>
+      <br>
+      <p>Pontos</p>
+      <p class="timer__cor"> {{ pontos }}</p>
     </div>
-    <div class="game">
-      <div *ngFor="let card of shuffledEmojis; let i = index" 
-           class="item" 
-           [class.boxOpen]="card.open"
-           [class.boxMatch]="card.matched" 
-           (click)="handleClick(card)">
+    <div class="combobox">
+      <label>
+        <input [disabled]="isPlaying" type="radio" name="difficulty" value="8" checked
+          (change)="onOptionSelected($event)" />
+        <p>Fácil</p>
+      </label>
+      <label>
+        <input [disabled]="isPlaying" type="radio" name="difficulty" value="12" (change)="onOptionSelected($event)" />
+        <p>Normal</p>
+      </label>
+      <label>
+        <input [disabled]="isPlaying" type="radio" name="difficulty" value="16" (change)="onOptionSelected($event)" />
+        <p>Difícil</p>
+      </label>
+    </div>
+    <div class="container__button">
+      <div class="container__button__position">
+        <button class="start" [disabled]="isPlaying" (click)="iniciarGame()"></button>
+        <p>START</p>
+      </div>
+      <div class="container__button__position">
+        <button class="reset" (click)="resetGame()"></button>
+        <p>RESET</p>
+      </div>
+    </div>
+  </div> -->
+  <app-menu-game titleGame="JOGO DA MEMÓRIA" [isPlaying]="isPlaying" [points]="points" [timer]="timer"
+    (onStartGame)="startGame()" (onResetGame)="resetGame()"
+    (onOptionClicked)="onOptionSelected($event)"></app-menu-game>
+  <div class="container__game">
+    <div class="game" *ngIf="!gameOver">
+      <div *ngFor="let card of shuffledEmojis; let i = index" class="item" [class.boxOpen]="card.open"
+        [class.boxMatch]="card.matched" (click)="handleClick(card)">
         <!-- {{ card.emoji }} -->
         <img src="{{ card.emoji }}" alt="" srcset="">
       </div>
     </div>
-    <button class="reset" (click)="resetGame()">RESET GAME</button>
+    <div class="resultado" *ngIf="gameOver">
+      <p>{{ result }}</p>
+    </div>
   </div>
+</div>
