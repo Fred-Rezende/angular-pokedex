@@ -1,4 +1,4 @@
-<div class="menu-container">
+<!-- <div class="menu-container">
     
 </div>
 <div class="container" (window:scroll)="pokemonService.onScroll(itens, 'item')">
@@ -12,8 +12,31 @@
             <app-item-card index={{number}}></app-item-card>
         </div>
     </div>
-    <!-- <div class="card__carregar__item">
-        <button (click)="pokemonService.loadMore(itens,'item')" *ngIf="!pokemonService.isSearching && pokemonService.hasMore(itens)">Carregar mais</button>
-    </div> -->
 </div>
-<router-outlet></router-outlet>
+<router-outlet></router-outlet> -->
+
+
+<div class="container" (window:scroll)="pokemonService.onScroll(itens, 'item')">
+    
+
+    <div class="card__search__item">
+        <label for="filtro-item">Nome: </label>
+        <input [(ngModel)]="searchTerm" (input)="pokemonService.search(searchTerm,itens,2)"
+            placeholder="Pesquisar Item">
+    </div>
+
+    <div class="category-filter">
+        <label for="category-filter">Categoria: </label>
+        <select id="category-filter" [(ngModel)]="selectedCategory" (change)="onCategoryChange(selectedCategory)">
+            <option value="all">Todos</option>
+            <option *ngFor="let category of categories" [value]="category.name">
+                {{ category.name | titlecase }}
+            </option>
+        </select>
+    </div>
+
+    <div class="card__container__item">
+        <div class="card__item" *ngFor="let number of pokemonService.displayed">
+            <app-item-card index={{number}}></app-item-card>
+        </div>
+    </div>
