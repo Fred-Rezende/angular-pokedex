@@ -1,37 +1,24 @@
 <div class="container">
-    <!-- <div class="menu">
-      <div class="menu-time">
-        <h2 style="color: red;">Time Left</h2>
-        <h2 id="time-left">{{ timer }}</h2>
-      </div>
-      <div class="menu-score">
-        <h2 style="color: red;">Your Score</h2>
-        <h2 id="score">{{ score }}</h2>
-      </div>
-      <div class="menu-lives">
-        <img src="../../../assets/images/ralph.png" alt="foto do jogador" height="60px" />
-        <h2>x3</h2>
-      </div>
-    </div> -->
-  
-    <app-menu-game
-    titleGame="JOGO DA MEMÓRIA"
-    [isPlaying]="isPlaying"
-    [points]="score"
-    [timer]="timer"
-    (onStartGame)="startGame()"
-    (onResetGame)="resetGame()"
-  ></app-menu-game>
+  <app-menu-game titleGame="Pegue o Pokemon" [isPlaying]="isPlaying" [points]="score" [timer]="timer"
+    (onStartGame)="startGame()" (onResetGame)="resetGame()"
+    (onOptionClicked)="onOptionSelected($event)"></app-menu-game>
 
-    <div class="panel">
-      <div class="panel-row" *ngFor="let row of rows">
-        <div
-          class="square"
-          [ngClass]="{ enemy: hitPosition == square.id }"
-          *ngFor="let square of row"
-          (mousedown)="checkHit(square.id)"
-        ></div>
+  <div class="panel">
+    <div class="panel-game" *ngIf="!gameOver">
+    <div class="panel-row" *ngFor="let row of rows">
+      <div class="square" [ngClass]="{ enemy: hitPosition == square.id }" *ngFor="let square of row"
+        (mousedown)="checkHit(square.id)"><img *ngIf="hitPosition === square.id" [src]="image">
       </div>
     </div>
   </div>
-  
+    <div class="resultado" *ngIf="gameOver">
+      <p>{{ resultado }}</p><br>
+      <div class="container__pokemon">
+        <div class="pokemon-capturado" *ngFor="let pokemon of pokemonCapturado ">
+          <img [src]="pokemon.image" alt="" srcset="">
+           <p>{{pokemon.name|uppercase}}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

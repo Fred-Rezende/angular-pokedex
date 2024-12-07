@@ -21,6 +21,11 @@ import { MoveCardComponent } from './components/move-card/move-card.component';
 import { GameComponent } from './pages/game/game.component';
 import { MenuGameComponent } from './components/menu-game/menu-game.component';
 import { CatchgameComponent } from './components/catchgame/catchgame.component';
+import { CardsgameComponent } from './components/cardsgame/cardsgame.component';
+import { GameCardComponent } from './components/game-card/game-card.component';
+import { GameCardsComponent } from './pages/game-cards/game-cards.component';
+import { GameCatchComponent } from './pages/game-catch/game-catch.component';
+import { GameMemoryComponent } from './pages/game-memory/game-memory.component';
 
 
 @NgModule({
@@ -40,7 +45,12 @@ import { CatchgameComponent } from './components/catchgame/catchgame.component';
     MoveCardComponent,
     GameComponent,
     MenuGameComponent,
-    CatchgameComponent
+    CatchgameComponent,
+    CardsgameComponent,
+    GameCardComponent,
+    GameCardsComponent,
+    GameCatchComponent,
+    GameMemoryComponent
   ],
   imports: [
     BrowserModule,

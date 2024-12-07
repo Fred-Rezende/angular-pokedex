@@ -3,7 +3,8 @@
     width: 32%;
     display: flex;
     flex-direction: column;
-    width: max-content;
+    width: 400px;
+    /* width: max-content; */
     justify-content: flex-start;
     align-items: center;
     border: 5px solid #383838;
