@@ -12,7 +12,7 @@ export class CatchgameComponent {
     Array.from({ length: 3 }, (_, colIndex) => ({ id: rowIndex * 3 + colIndex + 1 }))
   );
 
-  pokemon: PokemonData;
+  pokemon: PokemonData = new PokemonData;
   timer: number = 60;
   timerInterval: ReturnType<typeof setInterval> | null = null;
   gameInterval: ReturnType<typeof setInterval> | null = null;
@@ -31,24 +31,10 @@ export class CatchgameComponent {
    image : string;
   }> = []
 
-  constructor(private service: PokemonService) {
-    this.pokemon = this.createEmptyPokemon();
-  }
+  constructor(private service: PokemonService) {}
 
   ngOnInit() {
     this.resetGame();
-  }
-
-  createEmptyPokemon(): PokemonData {
-    return {
-      id: 0,
-      species: { name: '' },
-      sprites: {
-        front_default: '',
-        other: { 'official-artwork': { front_default: '' } },
-      },
-      types: [],
-    };
   }
 
   async carregarPokemonsAleatorios() {
@@ -150,7 +136,7 @@ export class CatchgameComponent {
 
   onOptionSelected(event: Event): void {
     const value = (event.target as HTMLInputElement).value; // Captura o valor como string
-    if(value == 'D')
+    if(value == 'H')
       this.selectedValue = 700;
     else if(value == 'N')
       this.selectedValue = 1000;

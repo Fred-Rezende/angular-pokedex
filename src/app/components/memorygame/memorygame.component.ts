@@ -19,7 +19,7 @@ export class MemoryGameComponent implements OnInit {
   //   "🍩", "🍩", "🍰", "🍰", "🍟", "🍟", "🥪", "🥪"
   // ];
 
-  pokemon: PokemonData;
+  pokemon: PokemonData = new PokemonData;
   emojis: string[] = [];
   shuffledEmojis: Card[] = [];
   openCards: Card[] = [];
@@ -32,21 +32,7 @@ export class MemoryGameComponent implements OnInit {
   result: string = '';
   selectedValue: number = 8;
 
-  constructor(private service: PokemonService) {
-    this.pokemon = {
-      id: 0,
-      species: { name: '' },
-      sprites: {
-        front_default: '',
-        other: {
-          "official-artwork": {
-            front_default: '',
-          }
-        }
-      }
-      , types: []
-    }
-  }
+  constructor(private service: PokemonService) {}
 
   ngOnInit() {
     this.resetGame();
@@ -68,12 +54,7 @@ export class MemoryGameComponent implements OnInit {
     this.service.getPokemon(searchName).subscribe(
       {
         next: (res) => {
-          this.pokemon = ({
-            id: res.id,
-            species: res.species,
-            sprites: res.sprites,
-            types: res.types
-          })
+          this.pokemon = Object.assign(new PokemonData(), res);
           this.emojis.push(res.sprites.front_default, res.sprites.front_default);
 
           this.shuffledEmojis = this.shuffleCards();
