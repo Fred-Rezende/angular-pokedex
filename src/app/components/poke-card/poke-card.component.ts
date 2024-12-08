@@ -10,73 +10,118 @@ import { TypeData } from '../../models/typeData';
 })
 export class PokeCardComponent {
 
-  pokemon: PokemonData
+  //   pokemon: PokemonData
+  //   types: TypeData[] = [];
+  
+  
+  //   constructor(private service: PokemonService) {
+  //     this.pokemon = {
+  //       id: 0,
+  //       species: { name: '' },
+  //       sprites: {
+  //         front_default: '',
+  //         other: {
+  //           "official-artwork": {
+  //             front_default: '',
+  //           }
+  //         }
+  //       }
+  //       , types: []
+  //     }
+  //   }
+  
+  //   @Input()
+  //   index: string = ''
+  
+  //   ngOnInit(): void {
+  //     this.getPokemon(this.index)
+  //   }
+  
+  //   getPokemon(searchName: string) {
+  //     this.service.getPokemon(searchName).subscribe(
+  //       {
+  //         next: (res) => {
+  
+  //           this.pokemon = {
+  //             id: res.id,
+  //             species: res.species,
+  //             sprites: res.sprites,
+  //             types: res.types
+  //           }
+  //           this.getType(this.getTypeNames()); // Chama getType com os nomes dos tipos
+  //         },
+  //         error: (err) => console.log('not found')
+  //       }
+  //     )
+  //   }
+  
+  //   getType(searchNames: string[]) {
+  //     // Inicializa ou limpa a lista de tipos
+  //     this.types = [];
+  
+  //     searchNames.forEach((searchName) => {
+  //       this.service.getType(searchName).subscribe(
+  //         {
+  //           next: (res) => {
+  //             const type: TypeData = {
+  //               id: res.id,
+  //               name: res.name,
+  //               sprites: res.sprites
+  //             };
+  //             this.types.push(type); // Adiciona cada tipo encontrado à lista
+  //           },
+  //           error: (err) => console.log(`${searchName} type not found`)
+  //         }
+  //       );
+  //     });
+  //   }
+  
+  //   getTypeNames(): string[] {
+  //     return this.pokemon.types.map(t => t.type.name);
+  //   }
+  
+  
+  
+  // }
+  
+  
+  pokemon: PokemonData = new PokemonData(); // Usa a classe para inicializar
   types: TypeData[] = [];
-
-
-  constructor(private service: PokemonService) {
-    this.pokemon = {
-      id: 0,
-      species: { name: '' },
-      sprites: {
-        front_default: '',
-        other: {
-          "official-artwork": {
-            front_default: '',
-          }
-        }
-      }
-      , types: []
-    }
-  }
-
+  
   @Input()
-  index: string = ''
-
+  index: string = '';
+  
+  constructor(private service: PokemonService) {}
+  
   ngOnInit(): void {
-    this.getPokemon(this.index)
+    this.getPokemon(this.index);
   }
-
+  
   getPokemon(searchName: string) {
-    this.service.getPokemon(searchName).subscribe(
-      {
-        next: (res) => {
-          this.pokemon = {
-            id: res.id,
-            species: res.species,
-            sprites: res.sprites,
-            types: res.types
-          }
-          this.getType(this.getTypeNames()); // Chama getType com os nomes dos tipos
-        },
-        error: (err) => console.log('not found')
-      }
-    )
-  }
-
-  getType(searchNames: string[]) {
-    // Inicializa ou limpa a lista de tipos
-    this.types = [];
-
-    searchNames.forEach((searchName) => {
-      this.service.getType(searchName).subscribe(
-        {
-          next: (res) => {
-            const type: TypeData = {
-              id: res.id,
-              name: res.name,
-              sprites: res.sprites
-            };
-            this.types.push(type); // Adiciona cada tipo encontrado à lista
-          },
-          error: (err) => console.log(`${searchName} type not found`)
-        }
-      );
+    this.service.getPokemon(searchName).subscribe({
+      next: (res) => {
+        this.pokemon = Object.assign(new PokemonData(), res); // Atribui e mantém o tipo da classe
+        this.getType(this.getTypeNames()); // Chama getType com os nomes dos tipos
+      },
+      error: (err) => console.log('not found'),
     });
   }
-
-  getTypeNames(): string[] {
-    return this.pokemon.types.map(t => t.type.name);
+  
+  getType(searchNames: string[]) {
+    this.types = []; // Inicializa ou limpa a lista de tipos
+  
+    searchNames.forEach((searchName) => {
+      this.service.getType(searchName).subscribe({
+        next: (res) => {
+          const type = Object.assign(new TypeData(), res); // Mapeia os dados para a classe TypeData
+            this.types.push(type); // Adiciona cada tipo encontrado à lista
+        },
+        error: (err) => console.log(`${searchName} type not found`),
+      });
+    });
   }
-
-}
+  
+  getTypeNames(): string[] {
+    return this.pokemon.types.map((t) => t.type.name);
+  }
+  }

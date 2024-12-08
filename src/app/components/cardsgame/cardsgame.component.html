@@ -1,1 +1,54 @@
-<p>cardsgame works!</p>
+<div class="card-box__container">
+    <!-- Lado esquerdo: Detalhes do duelo e placar -->
+    <div class="container__left">
+      <div class="scoreboard">
+        <h3>Score</h3>
+        <p>Player: {{ score.playerScore }}</p>
+        <p>Computer: {{ score.computerScore }}</p>
+      </div>
+  
+      <div class="card-details">
+        <h3>Player's Card</h3>
+        <img *ngIf="playerFieldCard" [src]="playerFieldCard.img" height="180px" width="125px" [alt]="playerFieldCard.name" />
+        <p *ngIf="playerFieldCard">{{ playerFieldCard.name }}</p>
+      </div>
+  
+      <!-- <div class="card-details">
+        <h3>Computer's Card</h3>
+        <img *ngIf="computerFieldCard" [src]="computerFieldCard.img" height="180px" width="125px" [alt]="computerFieldCard.name" />
+        <p *ngIf="computerFieldCard">{{ computerFieldCard.name }}</p>
+      </div> -->
+    </div>
+  
+    <div class="container__right">
+    <!-- Cartas do Computador -->
+    <div class="card-box framed" id="computer-cards">
+      <img *ngFor="let card of computerCards" [src]="card.img" class="card" [alt]="card.name" />
+    </div>
+  
+    <!-- Campo de duelo -->
+    <div class="card-versus__container">
+      <div class="versus-top">
+        <div class="card-infield">
+          <img *ngIf="playerFieldCard" [src]="playerFieldCard.img" height="180px" width="125px" alt="Player Field Card" />
+        </div>
+        <img height="100px" src="assets/icons/millenium2.png" alt="Versus Icon" />
+        <div class="card-infield">
+          <img *ngIf="computerFieldCard" [src]="computerFieldCard.img" height="180px" width="125px" alt="Computer Field Card" />
+        </div>
+      </div>
+      <div class="versus-bottom">
+        <button #nextDuelButton id="next-duel" class="rpgui-button" (click)="resetDuel()" style="display: none;">
+          {{ duelResult | uppercase }}
+        </button>
+      </div>
+    </div>
+  
+    <!-- Cartas do Jogador -->
+    <div class="card-box framed" id="player-cards">
+      <img *ngFor="let card of playerCards" [src]="card.img" class="card" 
+           (click)="selectCard(card)" alt="Card Back" />
+    </div>
+  </div>
+</div>
+  
