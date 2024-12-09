@@ -10,29 +10,12 @@ import { PokemonList } from '../../models/pokemonList';
   styleUrl: './card.component.css'
 })
 export class CardComponent {
-  pokemon:PokemonData
+  pokemon:PokemonData = new PokemonData();
   pokemonDetailsList: Array<{ details: PokemonData; types: TypeData[] }> = [];
   types:TypeData[] = [];
   pokemonList: PokemonList | null = null;
  
-  constructor(
-    private service:PokemonService
-  ){
-    this.pokemon = {
-      id:0,
-      species:{ name: ''},
-      sprites:{
-        front_default: '',
-        other: {
-          "official-artwork":{
-            front_default: '',
-          }
-        }
-
-        }
-      ,types:[]
-    }
-  }
+  constructor(private service:PokemonService){ }
 
   ngOnInit(): void {
      this.loadPokemonList();
@@ -80,12 +63,7 @@ export class CardComponent {
       {
         next: (res) => {
 
-          this.pokemon = {
-            id: res.id,
-            species: res.species,
-            sprites: res.sprites,
-            types: res.types
-          }
+          this.pokemon = Object.assign(new PokemonData(), res);
         },
         error: (err) => console.log('not found')
       }

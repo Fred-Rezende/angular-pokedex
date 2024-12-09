@@ -105,6 +105,7 @@ export class PokeCardComponent {
       },
       error: (err) => console.log('not found'),
     });
+    
   }
   
   getType(searchNames: string[]) {
