@@ -23,18 +23,18 @@
     <div class="container__right">
     <!-- Cartas do Computador -->
     <div class="card-box framed" id="computer-cards">
-      <img *ngFor="let card of computerCards" [src]="card.img" class="card" [alt]="card.name" />
+      <img *ngFor="let card of computerCardsP" [src]="card.sprites.front_default" class="card" [alt]="card.species.name" />
     </div>
   
     <!-- Campo de duelo -->
     <div class="card-versus__container">
       <div class="versus-top">
         <div class="card-infield">
-          <img *ngIf="playerFieldCard" [src]="playerFieldCard.img" height="180px" width="125px" alt="Player Field Card" />
+          <img *ngIf="playerFieldCard" [src]="playerFieldCard.sprites.front_default" height="180px" width="125px" alt="Player Field Card" />
         </div>
         <img height="100px" src="assets/icons/millenium2.png" alt="Versus Icon" />
         <div class="card-infield">
-          <img *ngIf="computerFieldCard" [src]="computerFieldCard.img" height="180px" width="125px" alt="Computer Field Card" />
+          <img *ngIf="computerFieldCard" [src]="computerFieldCard.sprites.front_default" height="180px" width="125px" alt="Computer Field Card" />
         </div>
       </div>
       <div class="versus-bottom">
@@ -46,7 +46,7 @@
   
     <!-- Cartas do Jogador -->
     <div class="card-box framed" id="player-cards">
-      <img *ngFor="let card of playerCards" [src]="card.img" class="card" 
+      <img *ngFor="let card of playerCardsP" [src]="card.sprites.front_default" class="card" 
            (click)="selectCard(card)" alt="Card Back" />
     </div>
   </div>

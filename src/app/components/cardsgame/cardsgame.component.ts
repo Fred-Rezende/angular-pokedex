@@ -1,4 +1,7 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { PokemonService } from '../../services/pokemon.service';
+import { PokemonData } from '../../models/pokemonData';
+import { forkJoin } from 'rxjs';
 
 @Component({
   selector: 'app-cardsgame',
@@ -10,6 +13,11 @@ export class CardsgameComponent implements OnInit {
   @ViewChild('nextDuelButton') nextDuelButton!: ElementRef<HTMLButtonElement>;
 
   // Dados do jogo
+
+  pokemon: PokemonData = new PokemonData;
+  playerCardsP: PokemonData[] = [];
+  computerCardsP: PokemonData[] = [];
+
   playerCards: any[] = [];
   computerCards: any[] = [];
   cardData: any[] = [
@@ -22,6 +30,8 @@ export class CardsgameComponent implements OnInit {
   score = { playerScore: 0, computerScore: 0 };
   duelResult: string = '';
 
+  constructor(private service: PokemonService) {}
+  
   ngOnInit() {
     this.init();
   }
@@ -30,8 +40,58 @@ export class CardsgameComponent implements OnInit {
   init() {
     this.playerCards = this.generateRandomCards(5);
     this.computerCards = this.generateRandomCards(5);
+    // this.playerCardsP = this.gerarPokemonsAleatorios();
+    // this.computerCardsP = this.gerarPokemonsAleatorios();
+    this.gerarPokemonsAleatorios(this.playerCardsP);
+    this.gerarPokemonsAleatorios(this.computerCardsP);
+   
     this.playBackgroundMusic();
   }
+
+  
+
+  gerarPokemonsAleatorios(pokeCards: PokemonData[]){
+    const requests = [];
+  
+    for (let i = 0; i < 5; i++) {
+      const numero = Math.floor(Math.random() * 1025) + 1;
+      requests.push(this.service.getPokemon(numero.toString()));
+    }
+  
+    forkJoin(requests).subscribe(
+      (responses: any[]) => {
+        const cards: PokemonData[] = responses.map(res => Object.assign(new PokemonData(), res));
+        pokeCards.push(...cards); // Preenche o array diretamente
+      },
+      (err) => console.error('Erro ao gerar pokémons:', err)
+    );
+  }
+
+  // gerarPokemonsAleatorios(): PokemonData[] {
+  //   const cards: PokemonData[] = [];;
+    
+  //   for (let i = 0; i < 5; i++) {
+  //     const numero = Math.floor(Math.random() * 1025) + 1; // Gera número entre 1 e 1025
+  //     this.getPokemon(numero.toString())
+      
+  //     cards.push(this.pokemon)
+  //   }
+   
+  //   return cards;
+    
+  // }
+
+  // getPokemon(searchName: string) {
+  //   this.service.getPokemon(searchName).subscribe(
+  //     {
+  //       next: (res) => {
+  //         this.pokemon = Object.assign(new PokemonData(), res);
+  //       },
+  //       error: (err) => console.log('not found')
+  //     }
+  //   )
+  // }
+
 
   /** Gera cartas aleatórias */
   generateRandomCards(count: number): any[] {
@@ -44,8 +104,10 @@ export class CardsgameComponent implements OnInit {
 
   /** Retorna uma carta aleatória */
   getRandomCard(): any {
-    const randomIndex = Math.floor(Math.random() * this.cardData.length);
-    return this.cardData[randomIndex];
+    // const randomIndex = Math.floor(Math.random() * this.cardData.length);
+    // return this.cardData[randomIndex];
+    const randomIndex = Math.floor(Math.random() * this.computerCardsP.length);
+    return this.computerCardsP[randomIndex];
   }
 
   /** Lógica ao selecionar uma carta */
