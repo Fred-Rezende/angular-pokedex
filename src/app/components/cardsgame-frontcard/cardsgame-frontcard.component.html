@@ -1,0 +1,15 @@
+<div class="container">
+    <div class="name">
+        <p class="namePokemon">{{infoCard.species.name | uppercase}}</p>
+        <p class="numberPokemon">Nº: {{infoCard.id}}</p>
+    </div>
+    <div class="image">
+        <img src="{{infoCard.sprites.other.home.front_default}}" alt="">
+    </div>
+    <div class="status">
+        <div class="status__info" *ngFor="let stats of infoCard.stats">
+            <p class="statsTitle">{{ getStatName(stats.stat.name)}}</p>
+            <p class="statsValue">{{ stats.base_stat }}</p>
+        </div>
+    </div>
+</div>

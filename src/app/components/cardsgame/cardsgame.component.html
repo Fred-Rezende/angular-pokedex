@@ -1,54 +1,99 @@
-<div class="card-box__container">
-    <!-- Lado esquerdo: Detalhes do duelo e placar -->
-    <div class="container__left">
-      <div class="scoreboard">
-        <h3>Score</h3>
-        <p>Player: {{ score.playerScore }}</p>
-        <p>Computer: {{ score.computerScore }}</p>
+<div class="container">
+
+  <!--INFO PLAYER-->
+  <div class="player__info">
+    <h2>Player</h2>
+    <p>HP: {{ score.playerScore }}/250</p>
+    <div class="life-bar">
+      <div class="life-atual" [style.width]="vidaPercentage.player +'px'" >
       </div>
-  
-      <div class="card-details">
-        <h3>Player's Card</h3>
-        <img *ngIf="playerFieldCard" [src]="playerFieldCard.img" height="180px" width="125px" [alt]="playerFieldCard.name" />
-        <p *ngIf="playerFieldCard">{{ playerFieldCard.name }}</p>
-      </div>
-  
-      <!-- <div class="card-details">
-        <h3>Computer's Card</h3>
-        <img *ngIf="computerFieldCard" [src]="computerFieldCard.img" height="180px" width="125px" [alt]="computerFieldCard.name" />
-        <p *ngIf="computerFieldCard">{{ computerFieldCard.name }}</p>
-      </div> -->
     </div>
-  
-    <div class="container__right">
-    <!-- Cartas do Computador -->
-    <div class="card-box framed" id="computer-cards">
-      <img *ngFor="let card of computerCardsP" [src]="card.sprites.front_default" class="card" [alt]="card.species.name" />
-    </div>
-  
-    <!-- Campo de duelo -->
-    <div class="card-versus__container">
-      <div class="versus-top">
-        <div class="card-infield">
-          <img *ngIf="playerFieldCard" [src]="playerFieldCard.sprites.front_default" height="180px" width="125px" alt="Player Field Card" />
-        </div>
-        <img height="100px" src="assets/icons/millenium2.png" alt="Versus Icon" />
-        <div class="card-infield">
-          <img *ngIf="computerFieldCard" [src]="computerFieldCard.sprites.front_default" height="180px" width="125px" alt="Computer Field Card" />
+    <div class="playedCards" *ngIf="playerCardsPlayed.length > 0">
+      <p>CARTAS JOGADAS</p>
+      <div class="group__playedCards">
+        <div class="pCcard" *ngFor="let card of playerCardsPlayed">
+          <app-cardsgame-frontcard [infoCard]="card"></app-cardsgame-frontcard>
         </div>
       </div>
-      <div class="versus-bottom">
-        <button #nextDuelButton id="next-duel" class="rpgui-button" (click)="resetDuel()" style="display: none;">
-          {{ duelResult | uppercase }}
-        </button>
+    </div>
+  </div>
+
+  <!--INFO GAME-->
+  <div class="game__info">
+    <div class="game__info__manual mensagem" *ngIf="!isPlaying">
+      <h1>Cards Game</h1>
+      <p>Instruções:<br><br>
+        1 - Escolha um atributo para comparação.<br>
+        2 - Escolha a carta a ser jogada.<br>
+        3 - Para ir ao próximo round, aperte no botão com o resultado da partida.<br><br>
+        * - Só é possível escolher o atributo apenas uma vez, escolha com sabedoria!
+      </p>
+      <button class="button" (click)="init()">INICIAR O GAME</button>
+    </div>
+    <div class="game__info__playing" *ngIf="!gameOver && isPlaying">
+
+      <!--CARTAS DO COMPUTER-->
+      <div class="card-box" id="computer-cards">
+        <img *ngFor="let card of computerCards" src="../../../assets/images/fundoCard.jpg" class="card"/>
+      </div>
+
+      <div class="duel__container">
+        <!--DUELO-->
+        <!--SELECIONAR STATUS-->
+        <div class="status__container" *ngIf="!chooseStatus">
+          <button class="button" (click)="checkStatus(0)" [disabled]="disabledButtons[0]">HP</button>
+          <button class="button" (click)="checkStatus(1)" [disabled]="disabledButtons[1]">ATTACK</button>
+          <button class="button" (click)="checkStatus(2)" [disabled]="disabledButtons[2]">DEFENSE</button>
+          <button class="button" (click)="checkStatus(3)" [disabled]="disabledButtons[3]">SPECIAL ATTACK</button>
+          <button class="button" (click)="checkStatus(4)" [disabled]="disabledButtons[4]">SPECIAL DEFENSE</button>
+          <button class="button" (click)="checkStatus(5)" [disabled]="disabledButtons[5]">SPEED</button>
+        </div>
+      
+        <!--BATALHA DAS CARTAS-->
+        <div class="card-versus__container" *ngIf="chooseStatus">
+          <div class="versus-top">
+            <div class="card-infield">
+              <app-cardsgame-frontcard *ngIf="playerFieldCard" [infoCard]="playerFieldCard"></app-cardsgame-frontcard>
+            </div>
+            <div class="versus-bottom">
+              <button #nextDuelButton id="next-duel" class="button" (click)="resetDuel()" style="display: none;">
+                {{ duelResult | uppercase }}
+              </button>
+            </div>
+            <div class="card-infield">
+              <app-cardsgame-frontcard *ngIf="computerFieldCard" [infoCard]="computerFieldCard"></app-cardsgame-frontcard>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!--CARTAS DO PLAYER-->
+      <div class="card-box" id="player-cards" [ngClass]="{ 'disabled-div': !nextRound }">
+        <div *ngFor="let card of playerCards" class="pcard">
+          <app-cardsgame-frontcard [infoCard]="card" (click)="selectCard(card)"></app-cardsgame-frontcard>
+        </div>
       </div>
     </div>
-  
-    <!-- Cartas do Jogador -->
-    <div class="card-box framed" id="player-cards">
-      <img *ngFor="let card of playerCardsP" [src]="card.sprites.front_default" class="card" 
-           (click)="selectCard(card)" alt="Card Back" />
+    <div class="resultado mensagem" *ngIf="gameOver">
+      <p>{{ resultado }}</p>
+      <button class="button" (click)="init()">REINICIAR O GAME</button>
+    </div>
+  </div>
+
+  <!--INFO COMPUTER-->
+  <div class="computer__info">
+    <h2>Computer</h2>
+    <p>HP: {{ score.computerScore }}/250</p>
+    <div class="life-bar">
+      <div class="life-atual" [style.width]="vidaPercentage.computer +'px'" >
+      </div>
+    </div>
+    <div class="playedCards" *ngIf="playerCardsPlayed.length > 0">
+      <p>CARTAS JOGADAS</p>
+      <div class="group__playedCards">
+        <div class="pCcard" *ngFor="let card of computerCardsPlayed">
+          <app-cardsgame-frontcard  [infoCard]="card"></app-cardsgame-frontcard>
+        </div>
+      </div>
     </div>
   </div>
 </div>
-  

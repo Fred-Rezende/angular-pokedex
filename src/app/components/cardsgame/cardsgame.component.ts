@@ -1,4 +1,4 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
 import { PokemonService } from '../../services/pokemon.service';
 import { PokemonData } from '../../models/pokemonData';
 import { forkJoin } from 'rxjs';
@@ -6,7 +6,8 @@ import { forkJoin } from 'rxjs';
 @Component({
   selector: 'app-cardsgame',
   templateUrl: './cardsgame.component.html',
-  styleUrl: './cardsgame.component.css'
+  styleUrl: './cardsgame.component.css',
+  encapsulation: ViewEncapsulation.None
 })
 export class CardsgameComponent implements OnInit {
   @ViewChild('bgm') bgmAudio!: ElementRef<HTMLAudioElement>;
@@ -15,41 +16,48 @@ export class CardsgameComponent implements OnInit {
   // Dados do jogo
 
   pokemon: PokemonData = new PokemonData;
-  playerCardsP: PokemonData[] = [];
-  computerCardsP: PokemonData[] = [];
-
-  playerCards: any[] = [];
-  computerCards: any[] = [];
-  cardData: any[] = [
-    { id: 0, name: 'Blue Eyes White Dragon', type: 'Paper', img: 'assets/icons/dragon.png', winOf: [1], loseOf: [2] },
-    { id: 1, name: 'Dark Magician', type: 'Rock', img: 'assets/icons/magician.png', winOf: [2], loseOf: [0] },
-    { id: 2, name: 'Exodia', type: 'Scissors', img: 'assets/icons/exodia.png', winOf: [0], loseOf: [1] }
-  ];
+  playerCards: PokemonData[] = [];
+  computerCards: PokemonData[] = [];
+  playerCardsPlayed: PokemonData[] = [];
+  computerCardsPlayed: PokemonData[] = [];
   playerFieldCard: any = null;
   computerFieldCard: any = null;
-  score = { playerScore: 0, computerScore: 0 };
+  score = { playerScore: 250, computerScore: 250 };
   duelResult: string = '';
+  selectedStatus: number = 0;
+  chooseStatus: boolean = false;
+  nextRound:boolean = false;
+  disabledButtons: boolean[] = [false, false, false, false, false, false];
+  gameOver: boolean = false;
+  vidaPercentage = { player: this.score.playerScore, computer: this.score.computerScore }; // Para a largura da barra de vida
+  resultado: string = '';
+  isPlaying: boolean = false;
+
+
 
   constructor(private service: PokemonService) {}
   
   ngOnInit() {
-    this.init();
+    // this.init();
   }
 
   /** Inicializa o jogo */
   init() {
-    this.playerCards = this.generateRandomCards(5);
-    this.computerCards = this.generateRandomCards(5);
-    // this.playerCardsP = this.gerarPokemonsAleatorios();
-    // this.computerCardsP = this.gerarPokemonsAleatorios();
-    this.gerarPokemonsAleatorios(this.playerCardsP);
-    this.gerarPokemonsAleatorios(this.computerCardsP);
-   
-    this.playBackgroundMusic();
-  }
+    this.gerarPokemonsAleatorios(this.playerCards);
+    this.gerarPokemonsAleatorios(this.computerCards);
+    
+    this.gameOver = false;
+    this.disabledButtons = [false, false, false, false, false, false];
+    this.playerCardsPlayed = [];
+    this.computerCardsPlayed = [];
+    this.score.playerScore = 250;
+    this.score.computerScore = 250;
+    this.vidaPercentage.player = this.score.playerScore;
+    this.vidaPercentage.computer = this.score.computerScore;
+    this.isPlaying = true;
+   }
 
   
-
   gerarPokemonsAleatorios(pokeCards: PokemonData[]){
     const requests = [];
   
@@ -67,64 +75,61 @@ export class CardsgameComponent implements OnInit {
     );
   }
 
-  // gerarPokemonsAleatorios(): PokemonData[] {
-  //   const cards: PokemonData[] = [];;
-    
-  //   for (let i = 0; i < 5; i++) {
-  //     const numero = Math.floor(Math.random() * 1025) + 1; // Gera número entre 1 e 1025
-  //     this.getPokemon(numero.toString())
-      
-  //     cards.push(this.pokemon)
-  //   }
-   
-  //   return cards;
-    
-  // }
-
-  // getPokemon(searchName: string) {
-  //   this.service.getPokemon(searchName).subscribe(
-  //     {
-  //       next: (res) => {
-  //         this.pokemon = Object.assign(new PokemonData(), res);
-  //       },
-  //       error: (err) => console.log('not found')
-  //     }
-  //   )
-  // }
-
-
-  /** Gera cartas aleatórias */
-  generateRandomCards(count: number): any[] {
-    const cards = [];
-    for (let i = 0; i < count; i++) {
-      cards.push(this.getRandomCard());
-    }
-    return cards;
-  }
-
   /** Retorna uma carta aleatória */
   getRandomCard(): any {
-    // const randomIndex = Math.floor(Math.random() * this.cardData.length);
-    // return this.cardData[randomIndex];
-    const randomIndex = Math.floor(Math.random() * this.computerCardsP.length);
-    return this.computerCardsP[randomIndex];
+    const randomIndex = Math.floor(Math.random() * this.computerCards.length);
+    return this.computerCards[randomIndex];
   }
 
   /** Lógica ao selecionar uma carta */
   selectCard(card: any) {
     this.playerFieldCard = card;
     this.computerFieldCard = this.getRandomCard();
-    this.duelResult = this.checkDuelResult(card, this.computerFieldCard);
+    this.duelResult = this.checkDuelResult(card.stats[this.selectedStatus].base_stat, this.computerFieldCard.stats[this.selectedStatus].base_stat);
     this.updateScore();
     this.drawButton(this.duelResult);
+    this.nextRound = false;
+    this.playerCardsPlayed.push(this.playerFieldCard);
+    this.computerCardsPlayed.push(this.computerFieldCard);
+    this.playerCards.splice(this.findIndex(this.playerFieldCard, 1), 1);
+    this.computerCards.splice(this.findIndex(this.computerFieldCard, 2), 1);
   }
 
   /** Atualiza o placar */
+  // updateScore() {
+  //   if (this.duelResult === 'win') {
+  //     this.score.computerScore-= 50;
+  //     this.vidaPercentage.computer = this.score.computerScore;
+  //   } else if (this.duelResult === 'lose') {
+  //     this.score.playerScore-=50;
+  //     this.vidaPercentage.player = this.score.playerScore;
+  //   }
+  // }
+
   updateScore() {
+    const decrementGradually = (currentScore: number, targetScore: number, updateCallback: (value: number) => void) => {
+      const interval = setInterval(() => {
+        if (currentScore > targetScore) {
+          currentScore -= 1;
+          updateCallback(currentScore);
+        } else {
+          clearInterval(interval);
+        }
+      }, 30); // Intervalo de 20ms para um efeito mais fluido
+    };
+  
     if (this.duelResult === 'win') {
-      this.score.playerScore++;
+      const targetScore = this.score.computerScore - 50;
+      decrementGradually(this.score.computerScore, targetScore, (newScore) => {
+        this.score.computerScore = newScore;
+        this.vidaPercentage.computer = newScore;
+      });
     } else if (this.duelResult === 'lose') {
-      this.score.computerScore++;
+      const targetScore = this.score.playerScore - 50;
+      decrementGradually(this.score.playerScore, targetScore, (newScore) => {
+        this.score.playerScore = newScore;
+        this.vidaPercentage.player = newScore;
+      });
     }
   }
 
@@ -140,38 +145,83 @@ export class CardsgameComponent implements OnInit {
     this.playerFieldCard = null;
     this.computerFieldCard = null;
     this.duelResult = '';
-
+    this.selectedStatus= 0;
+    this.chooseStatus = false;
     // Oculta o botão
     const button = this.nextDuelButton.nativeElement;
     button.style.display = 'none';
-    this.playerCards = this.generateRandomCards(5);
-    this.computerCards = this.generateRandomCards(5);
+    this.checkStatusGame();
   }
+
+  checkStatusGame(){
+    if(this.playerCards.length == 0){
+      this.gameOver = true
+
+      if(this.score.playerScore > this.score.computerScore)
+        this.resultado = 'Parabéns! Você venceu!';
+      else if(this.score.computerScore > this.score.playerScore)
+        this.resultado = 'Não foi dessa vez! Tente novamente!';
+      else
+        this.resultado = 'O jogo terminou empatado!';
+    }
+  }
+
 
   /** Verifica o resultado do duelo */
-  checkDuelResult(playerCard: any, computerCard: any): string {
-    if (playerCard.winOf.includes(computerCard.id)) {
-      this.playAudio('win');
-      return 'win';
-    } else if (playerCard.loseOf.includes(computerCard.id)) {
-      this.playAudio('lose');
+  checkDuelResult(playerCardStat: number, computerCardStat: number): string {
+    if (playerCardStat> computerCardStat) {
+       return 'win';
+    } else if (computerCardStat>playerCardStat) {
+      
       return 'lose';
     } else {
-      this.playAudio('draw');
-      return 'draw';
+           return 'draw';
     }
   }
-
-  /** Reproduz o áudio correspondente */
-  playAudio(status: string) {
-    const audio = new Audio(`assets/audios/${status}.wav`);
-    audio.play();
+  
+  checkStatus(status:number){
+    this.selectedStatus = status;
+    this.chooseStatus = true;
+    this.nextRound = true;
+    this.disabledButtons[status] = true;
   }
 
-  /** Reproduz a música de fundo */
-  playBackgroundMusic() {
-    if (this.bgmAudio) {
-      this.bgmAudio.nativeElement.play();
+  findIndex(index: any, n:number):number{
+    let indice:number;
+    
+    if(n == 1){
+      indice = this.playerCards.findIndex(obj => 
+        JSON.stringify(obj) === JSON.stringify(index)
+      );
     }
+    else{
+      indice = this.computerCards.findIndex(obj => 
+        JSON.stringify(obj) === JSON.stringify(index)
+      );
+    }
+    return indice;
   }
+
+
+
+  // onMouseMove(event: MouseEvent, card: HTMLElement): void {
+  //   const rect = card.getBoundingClientRect();
+  //   const x = event.clientX - rect.left;
+  //   const y = event.clientY - rect.top;
+  //   const centerX = rect.width / 2;
+  //   const centerY = rect.height / 2;
+
+  //   const rotateX = ((y - centerY) / centerY) * 10; // Rotação no eixo X
+  //   const rotateY = ((x - centerX) / centerX) * -10; // Rotação no eixo Y
+
+  //   card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+  //   card.style.setProperty('--mouse-x', `${x}px`);
+  //   card.style.setProperty('--mouse-y', `${y}px`);
+  // }
+
+  // onMouseLeave(card: HTMLElement): void {
+  //   card.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg)';
+  //   card.style.setProperty('--mouse-x', '50%');
+  //   card.style.setProperty('--mouse-y', '50%');
+  // }
 }

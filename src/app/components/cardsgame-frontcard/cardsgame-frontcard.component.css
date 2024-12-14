@@ -1,0 +1,64 @@
+.container{
+    width:200px;
+    height: 250px;
+    border: 10px solid rgb(211, 160, 66);
+    border-radius: 15px;
+    background-color: rgb(255, 209, 123);
+    display: flex;
+    flex-direction: column;
+    /* box-shadow: 4px 4px 4px rgb(112, 112, 112); */
+    font-size: 14px
+}
+
+.container > .name{
+    margin-bottom: 27px;
+    position: relative;
+}
+
+.container .name .namePokemon{
+    position: absolute;
+    left: 7px;
+}
+
+.container .name .numberPokemon{
+    position: absolute;
+    right: 7px;
+}
+
+.container > .image{
+    margin: 0 auto;
+    width:170px;
+    border-radius: 10px;
+    background-image: url('../../../assets/images/fundoPokemonCard.jpg');
+    background-size: cover;
+    background-position: center; 
+    background-repeat: no-repeat;
+    display: flex;
+    justify-content: center;
+}
+
+.container > .image > img{
+    height: 100px;
+}
+
+.container > .status{
+    width:170px;
+    border-radius: 10px;
+    margin: 0 auto;
+    margin-top: 14px;
+    padding: 5px;
+    display: grid;
+    grid-template-rows: repeat(3, 1fr);
+    grid-auto-flow: column;
+    gap: 5px;
+    justify-content: space-between;
+}
+
+.container > .status > .status__info{
+    width: 75px;
+    padding: 0px 5px;
+    display: flex;
+    justify-content: space-between;
+    background-color: white;
+    border-radius: 5px;
+}

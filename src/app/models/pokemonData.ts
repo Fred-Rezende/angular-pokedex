@@ -1,25 +1,3 @@
-// export type PokemonData = {
-//   id: number
-//   species: {
-//     name: string
-//   }
-//   sprites: {
-//     front_default: string
-//     other: {
-//       "official-artwork": {
-//         front_default: string
-//       }
-//     }
-//   }
-//   types: {
-//     slot: number
-//     type: {
-//       name: string
-//       url: string
-//     }
-//   }[]
-// }
-
 export class PokemonData {
   id: number;
   species: {
@@ -29,6 +7,9 @@ export class PokemonData {
     front_default: string;
     other: {
       "official-artwork": {
+        front_default: string;
+      };
+      home:{
         front_default: string;
       };
     };
@@ -56,6 +37,9 @@ export class PokemonData {
       front_default: '',
       other: {
         "official-artwork": {
+          front_default: '',
+        },
+        home:{
           front_default: '',
         },
       },
