@@ -27,6 +27,7 @@ import { GameCardsComponent } from './pages/game-cards/game-cards.component';
 import { GameCatchComponent } from './pages/game-catch/game-catch.component';
 import { GameMemoryComponent } from './pages/game-memory/game-memory.component';
 import { CardsgameFrontcardComponent } from './components/cardsgame-frontcard/cardsgame-frontcard.component';
+import { CardsgmComponent } from './components/cardsgm/cardsgm.component';
 
 
 @NgModule({
@@ -52,7 +53,8 @@ import { CardsgameFrontcardComponent } from './components/cardsgame-frontcard/ca
     GameCardsComponent,
     GameCatchComponent,
     GameMemoryComponent,
-    CardsgameFrontcardComponent
+    CardsgameFrontcardComponent,
+    CardsgmComponent
   ],
   imports: [
     BrowserModule,

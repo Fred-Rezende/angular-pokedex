@@ -52,6 +52,9 @@
         <!--BATALHA DAS CARTAS-->
         <div class="card-versus__container" *ngIf="chooseStatus">
           <div class="versus-top">
+            <!-- <div class="card-infield" [class.animated-card]="playerFieldCard">
+              <app-cardsgame-frontcard *ngIf="playerFieldCard" [infoCard]="playerFieldCard"></app-cardsgame-frontcard>
+            </div> -->
             <div class="card-infield" [class.animated-card]="playerFieldCard">
               <div class="card-3d-container" *ngIf="playerFieldCard">
                 <!-- Frente do card -->
@@ -65,25 +68,13 @@
                 </div>
               </div>
             </div>
-
             <div class="versus-bottom">
               <button #nextDuelButton id="next-duel" class="button" (click)="resetDuel()" style="display: none;">
                 {{ duelResult | uppercase }}
               </button>
             </div>
-           
-            <div class="card-infield" [class.animated-card]="computerFieldCard">
-              <div class="card-3d-container" *ngIf="computerFieldCard">
-                <!-- Frente do card -->
-                <div class="card-3d-front">
-                  <app-cardsgame-frontcard [infoCard]="computerFieldCard"></app-cardsgame-frontcard>
-                </div>
-            
-                <!-- Fundo do card -->
-                <div class="card-3d-back">
-                  <img src="../../../assets/images/fundoCard.jpg" alt="Fundo do Card" />
-                </div>
-              </div>
+            <div class="card-infield" [class.animated-card]="playerFieldCard">
+              <app-cardsgame-frontcard *ngIf="computerFieldCard" [infoCard]="computerFieldCard"></app-cardsgame-frontcard>
             </div>
           </div>
         </div>

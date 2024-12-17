@@ -307,7 +307,12 @@
     padding: 5px;
   }
 
-  /* Configuração básica do contêiner para o efeito 3D */
+  .card-infield{
+    border: 1px solid white;
+
+  }
+  
+/* Configuração básica do contêiner para o efeito 3D */
 .card-3d-container {
   position: relative;
   width: 200px; /* Ajuste conforme necessário */
@@ -320,20 +325,23 @@
 .card-3d-front,
 .card-3d-back {
   position: absolute;
+ 
   backface-visibility: hidden; /* Esconde a face de trás */
   border-radius: 8px; /* Arredondar bordas, se necessário */
 }
 
 /* Frente do card */
 .card-3d-front {
+  
   z-index: 2; /* Garante que a frente está sobre o verso */
 }
 
 /* Verso do card */
 .card-3d-back {
-   transform: rotateY(180deg); /* Posiciona o verso corretamente */
+ 
+  transform: rotateY(180deg); /* Posiciona o verso corretamente */
+ 
 }
-
 .card-3d-back>img {
   width: 200px;
   height: 250px;
@@ -346,24 +354,29 @@
 .animated-card {
   transform-origin: center;
   transform-style: preserve-3d; /* Garante a renderização 3D */
-  animation: flipCard 0.5s ease-in-out forwards; 
+  animation: flipCard 0.3s ease-in-out forwards; 
+  /* transform: rotateY(360deg); 
+  transition: transform 1s ease-in-out;  */
 }
 
 @keyframes flipCard {
   0% {
     transform: scale(0.1) rotateY(0deg) rotateX(0deg); /* Frente voltada para o usuário */
+    
   }
   25% {
     transform: scale(0.3) rotateY(90deg) rotateX(40deg); /* Meio do giro */
+  
   }
   50% {
     transform: scale(0.5)  rotateY(180deg) rotateX(0deg); /* Verso visível */
+   
   }
   75% {
     transform: scale(0.7) rotateY(270deg) rotateX(40deg); /* Verso visível */
+   
   }
   100% {
     transform: scale(1) rotateY(360deg) rotateX(0deg); /* Verso visível */
   }
 }
-  
