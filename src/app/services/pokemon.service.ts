@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { environment } from '../../environments/environment';
 import { HttpClient } from '@angular/common/http';
-import { catchError, filter, forkJoin, map, Observable, of } from 'rxjs';
+import { catchError, filter, forkJoin, map, Observable, of, switchMap } from 'rxjs';
 import { PokemonData } from '../models/pokemonData'
 import { TypeData } from '../models/typeData';
 import { PokemonList } from '../models/pokemonList';
@@ -37,6 +37,27 @@ export class PokemonService {
     return this.pokeData
   }
 
+  // getPokemon(pokemonName: string): Observable<PokemonData> {
+  //   return this.http.get<PokemonData>(`${this.baseURL}pokemon/${pokemonName}`).pipe(
+  //     switchMap((pokemon) =>
+  //       this.getEvolutionChain(pokemonName).pipe(
+  //         map((evolutionChain) => {
+  //           pokemon.evolutionChain = evolutionChain; // Associa a cadeia de evolução
+  //           return pokemon;
+  //         })
+  //       )
+  //     )
+  //   );
+  // }
+
+  // getEvolutionChain(pokemonName: string): Observable<any> {
+  //   return this.http.get<any>(`${this.baseURL}pokemon-species/${pokemonName}`).pipe(
+  //     map((speciesData) => speciesData.evolution_chain.url),
+  //     switchMap((evolutionUrl) => this.http.get<any>(evolutionUrl)),
+  //     catchError(() => of(null)) // Retorna null em caso de erro
+  //   );
+  // }
+
   getPokemonList(): Observable<PokemonList> {
     return this.http.get<PokemonList>(`${this.baseURL}pokemon?limit=1025`);
   }
@@ -46,6 +67,8 @@ export class PokemonService {
 
     return this.typeData
   }
+
+ 
 
   getItem(itemName: string): Observable<ItemData> {
     this.itemData = this.http.get<ItemData>(`${this.baseURL}item/${itemName}`)

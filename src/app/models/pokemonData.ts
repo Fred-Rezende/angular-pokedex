@@ -2,6 +2,7 @@ export class PokemonData {
   id: number;
   species: {
     name: string;
+    url: string;
   };
   sprites: {
     front_default: string;
@@ -9,7 +10,7 @@ export class PokemonData {
       "official-artwork": {
         front_default: string;
       };
-      home:{
+      home: {
         front_default: string;
       };
     };
@@ -29,22 +30,29 @@ export class PokemonData {
       url: string;
     };
   }[];
+  // evolvesFrom: string | null;
+  // evolutionChain: string | null;
 
   constructor() {
     this.id = 0;
-    this.species = { name: '' };
+    this.species = {
+      name: '',
+      url: ''
+    };
     this.sprites = {
       front_default: '',
       other: {
         "official-artwork": {
           front_default: '',
         },
-        home:{
+        home: {
           front_default: '',
         },
       },
     };
     this.stats = [];
     this.types = [];
+    // this.evolvesFrom = null;
+    // this.evolutionChain = null;
   }
 }

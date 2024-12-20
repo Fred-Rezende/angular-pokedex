@@ -28,6 +28,7 @@ import { GameCatchComponent } from './pages/game-catch/game-catch.component';
 import { GameMemoryComponent } from './pages/game-memory/game-memory.component';
 import { CardsgameFrontcardComponent } from './components/cardsgame-frontcard/cardsgame-frontcard.component';
 import { CardsgmComponent } from './components/cardsgm/cardsgm.component';
+import { PokeDetailsComponent } from './components/poke-details/poke-details.component';
 
 
 @NgModule({
@@ -54,7 +55,8 @@ import { CardsgmComponent } from './components/cardsgm/cardsgm.component';
     GameCatchComponent,
     GameMemoryComponent,
     CardsgameFrontcardComponent,
-    CardsgmComponent
+    CardsgmComponent,
+    PokeDetailsComponent
   ],
   imports: [
     BrowserModule,
