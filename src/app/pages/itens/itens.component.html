@@ -1,21 +1,4 @@
-<!-- <div class="menu-container">
-    
-</div>
-<div class="container" (window:scroll)="pokemonService.onScroll(itens, 'item')">
-    <div class="card__search__item">
-        <label for="filtro-item">Nome: </label>
-        <input [(ngModel)]="searchTerm" (input)="pokemonService.search(searchTerm,itens,2)" placeholder="Pesquisar Item">
-    </div>
-
-    <div class="card__container__item">
-        <div class="card__item" *ngFor="let number of pokemonService.displayed">
-            <app-item-card index={{number}}></app-item-card>
-        </div>
-    </div>
-</div>
-<router-outlet></router-outlet> -->
-
-
+<!-- Opção 1 -->
 <div class="container" (window:scroll)="pokemonService.onScroll(itens, 'item')">
     
 
@@ -40,3 +23,72 @@
             <app-item-card index={{number}}></app-item-card>
         </div>
     </div>
+
+
+ <!-- Opção 2 -->
+<!--<div class="container" (window:scroll)="pokemonService.onScroll(itens, 'item')">
+    <div class="card__search__item">
+        <label for="filtro-item">Nome: </label>
+        <input [(ngModel)]="searchTerm" (input)="pokemonService.search(searchTerm,itens,2)" placeholder="Pesquisar Item">
+    </div>
+
+    <div class="category-filter">
+        <label for="category-filter">Categoria: </label>
+        <select id="category-filter" [(ngModel)]="selectedCategory" (change)="onCategoryChange(selectedCategory)">
+            <option value="all">Todos</option>
+            <optgroup *ngFor="let pocket of groupedCategories | keyvalue" [label]="pocket.key | titlecase">
+                <option *ngFor="let category of pocket.value" [value]="category.name">
+                    {{ category.name | titlecase }}
+                </option>
+            </optgroup>
+        </select>
+    </div>
+
+    <div class="card__container__item">
+        <div class="card__item" *ngFor="let number of pokemonService.displayed">
+            <app-item-card index={{number}}></app-item-card>
+        </div>
+    </div>
+</div> -->
+
+
+ <!-- Opção 3 -->
+
+<!--<div class="container" (window:scroll)="pokemonService.onScroll(itens, 'item')">
+    
+
+    <div class="card__search__item">
+        <label for="filtro-item">Nome: </label>
+        <input [(ngModel)]="searchTerm" (input)="pokemonService.search(searchTerm,itens,2)"
+            placeholder="Pesquisar Item">
+    </div>
+
+      <div class="menu-container">
+        <label for="group-filter">Grupo:</label>
+        <select
+  id="group-filter"
+  (change)="onGroupChange($event)">
+  <option [ngValue]="null">Todos os Grupos</option>
+  <option *ngFor="let group of categoryGroups" [value]="group.name">
+    {{ group.name | titlecase }}
+  </option>
+</select>
+      </div>
+      
+      <div class="menu-container" *ngIf="filteredCategories && filteredCategories.length > 0">
+        <label for="category-filter">Categoria:</label>
+        <select
+  id="category-filter"
+  (change)="onCategoryChange($event)">
+  <option value="all">Todas</option>
+  <option *ngFor="let category of filteredCategories" [value]="category.name">
+    {{ category.name | titlecase }}
+  </option>
+</select>
+      </div>
+
+    <div class="card__container__item">
+        <div class="card__item" *ngFor="let number of pokemonService.displayed">
+            <app-item-card index={{number}}></app-item-card>
+        </div>
+    </div> -->
