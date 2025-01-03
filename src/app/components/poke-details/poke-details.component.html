@@ -1,11 +1,11 @@
-<!-- <div class="pokecard__container">
+<div class="pokecard__container">
     <div class="pokecard__info">
         <div class="pokecard__info__title">
             <h3>
                 Nº: {{pokemon.id}}
             </h3>
             <h2>
-                {{pokemon.species.name|uppercase}}
+                {{pokemon.species.name | uppercase}}
             </h2>
         </div>
         <div class="pokecard__types">
@@ -19,12 +19,25 @@
             <img [src]="pokemon.sprites.other['official-artwork'].front_default" alt="pokemon" srcset="">
         </div>
     </div>
-    <div *ngIf="evolutionChain.length">
-        <h3>Evolution Chain</h3>
-        <ul>
-          <li *ngFor="let evolution of evolutionChain">
-            {{ evolution.name }}
-          </li>
-        </ul>
-      </div>
-</div> -->
+
+    <!-- Adição da Cadeia de Evolução -->
+    <div class="pokecard__evolution">
+        <h3>Cadeia de Evolução</h3>
+        <div class="pokecard__evolution__list">
+            <div 
+                class="pokecard__evolution__item" 
+                *ngFor="let evolution of evolutions">
+                <div class="evolution__details" *ngIf="evolution.evolution_details.length > 0">
+                    <p>{{evolution.evolution_details[0].trigger.name}}</p>
+                    <p>{{evolution.evolution_details[0].min_level}}</p>
+                    <p>{{evolution.evolution_details[0].item?.name}}</p>
+                </div>
+                <h4>{{evolution.species.name | uppercase}}</h4>
+                <img 
+                    [src]="'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/' + getPokemonIdFromUrl(evolution.species.url) + '.png'" 
+                    alt="{{evolution.species.name}}" 
+                    srcset="">
+                
+        </div>
+    </div>
+</div>

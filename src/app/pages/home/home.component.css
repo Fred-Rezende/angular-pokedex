@@ -29,3 +29,7 @@
 .card__carregar__pokemon {
     margin: 20px;
 }
+
+a {
+    text-decoration: none;
+}

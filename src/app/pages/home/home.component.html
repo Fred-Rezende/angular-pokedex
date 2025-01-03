@@ -1,15 +1,18 @@
 <div class="menu-container">
-    
+
 </div>
 <div class="container" (window:scroll)="pokemonService.onScroll(pokemons, 'pokemon')">
     <div class="card__search__pokemon">
         <label for="filtro-pokemon">Nome: </label>
-        <input [(ngModel)]="searchTerm" (input)="pokemonService.search(searchTerm,pokemons,1)" placeholder="Pesquisar Pokémon">
+        <input [(ngModel)]="searchTerm" (input)="pokemonService.search(searchTerm,pokemons,1)"
+            placeholder="Pesquisar Pokémon">
     </div>
 
     <div class="card__container__pokemon">
         <div class="card__pokemon" *ngFor="let number of pokemonService.displayed">
-            <app-poke-card index={{number}}></app-poke-card>
+            <a routerLink="/pokemon-details" [queryParams]="{ number: number }">
+                <app-poke-card index={{number}}></app-poke-card>
+            </a>
         </div>
     </div>
     <!-- <div class="card__carregar__pokemon">

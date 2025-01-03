@@ -8,6 +8,7 @@ import { PokemonList } from '../models/pokemonList';
 import { ItemData } from '../models/itemData';
 import { MoveData } from '../models/moveData';
 import { ItemCategoryData } from '../models/itemCategoryData';
+import { EvolutionChainData } from '../models/evolutionChainData';
 
 @Injectable({
   providedIn: 'root'
@@ -19,6 +20,7 @@ export class PokemonService {
   private itemData: ItemData | any
   private moveData: MoveData | any
   private itemCategoryData: ItemCategoryData | any
+  private evolutionChainData: EvolutionChainData | any
   private pokeList: PokemonList | any
   displayed: number[] = [];
   objectsPerPage: number = 24;
@@ -35,6 +37,16 @@ export class PokemonService {
     this.pokeData = this.http.get<PokemonData>(`${this.baseURL}pokemon/${pokemonName}`)
 
     return this.pokeData
+  }
+
+  getSpecies(speciesName: string): Observable<any>{
+    return this.http.get<any>(`${this.baseURL}pokemon-species/${speciesName}`)
+  }
+  
+  getEvolutionChain(evolutionChainUrl: string): Observable<EvolutionChainData> {
+    this.evolutionChainData = this.http.get<EvolutionChainData>(evolutionChainUrl);
+
+    return this.evolutionChainData
   }
 
   // getPokemon(pokemonName: string): Observable<PokemonData> {
