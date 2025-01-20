@@ -4,6 +4,14 @@ export class PokemonData {
     name: string;
     url: string;
   };
+  abilities: {
+    ability: {
+      name: string;
+      url: string;
+    }
+    is_hidden: boolean;
+    slot: number;
+  }[];
   sprites: {
     front_default: string;
     other: {
@@ -39,6 +47,7 @@ export class PokemonData {
       name: '',
       url: ''
     };
+    this.abilities = [];
     this.sprites = {
       front_default: '',
       other: {

@@ -13,6 +13,23 @@
                 <img [src]="type.sprites['generation-viii']['sword-shield'].name_icon" alt="type" srcset="">
             </span>
         </div>
+        <div class="pokecard__abilities">
+            <div *ngFor="let abilite of pokemon.abilities">
+                <div *ngIf="abilite.is_hidden">
+                    <h5>{{abilite.ability.name}}</h5>
+                </div>
+                <div *ngIf="!abilite.is_hidden">
+                    <h4>{{abilite.ability.name}}</h4>
+                </div>
+            </div>
+        </div>
+        <div class="pokecard__stats">
+            <div *ngFor="let stat of pokemon.stats">
+                <p>{{stat.stat.name}}: </p>
+                <p>{{stat.base_stat}}</p>
+            </div>
+        </div>
+
     </div>
     <div class="pokecard__image">
         <div class="pokecard__image__inner">
