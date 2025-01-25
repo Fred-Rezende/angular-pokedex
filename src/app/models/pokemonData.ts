@@ -1,3 +1,5 @@
+import { MoveData } from './moveData';
+
 export class PokemonData {
   id: number;
   species: {
@@ -23,6 +25,25 @@ export class PokemonData {
       };
     };
   };
+  moves: {
+    move: {
+      name: string;
+      url: string;
+    };
+    version_group_details: {
+      level_learned_at: number;
+      move_learn_method: {
+        name: string;
+        url: string;
+      };
+      version_group: {
+        name: string;
+        url: string;
+      };
+    }[];
+    details?: MoveData; // Incluímos a instância de MoveData aqui
+  }[];
+
   stats: {
     base_stat: number;
     effort: number;
@@ -59,6 +80,7 @@ export class PokemonData {
         },
       },
     };
+    this.moves = [];
     this.stats = [];
     this.types = [];
     // this.evolvesFrom = null;

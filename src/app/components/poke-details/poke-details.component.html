@@ -57,4 +57,33 @@
                 
         </div>
     </div>
+
+    <div>
+        <h3>Moves:</h3>
+        <ul>
+          <li *ngFor="let move of pokemon.moves">
+            <strong>{{ move.move.name | titlecase }}</strong>
+            <div>
+              <p><strong>Power:</strong> {{ move.details?.power || 'N/A' }}</p>
+              <p><strong>Accuracy:</strong> {{ move.details?.accuracy || 'N/A' }}</p>
+              <p><strong>PP:</strong> {{ move.details?.pp || 'N/A' }}</p>
+              <p>
+                <strong>Type:</strong>
+                <span class="type-label" [ngClass]="move.details?.type?.name">
+                  {{ move.details?.type?.name | titlecase }}
+                </span>
+              </p>
+      
+              <p><strong>Como é aprendido:</strong></p>
+              <ul>
+                <li *ngFor="let detail of move.version_group_details">
+                  Método: {{ detail.move_learn_method.name | titlecase }}<br />
+                  Nível: {{ detail.level_learned_at }}<br />
+                  Jogos: {{ detail.version_group.name | titlecase }}
+                </li>
+              </ul>
+            </div>
+          </li>
+        </ul>
+      </div>
 </div>

@@ -4,6 +4,7 @@ import { TypeData } from '../../models/typeData';
 import { PokemonService } from '../../services/pokemon.service';
 import { EvolutionChainData } from '../../models/evolutionChainData';
 import { forkJoin, switchMap } from 'rxjs';
+import { MoveData } from '../../models/moveData';
 
 @Component({
   selector: 'app-poke-details',
@@ -33,6 +34,7 @@ export class PokeDetailsComponent {
         console.log('Dados do Pokémon:', this.pokemon); // Log para verificar os dados do Pokémon
         this.getType(this.getTypeNames());
         this.getSpecies();
+        this.getMovesDetails(); // Buscar detalhes dos movimentos
       },
       error: (err) => console.error('Pokemon not found:', err),
     });
@@ -58,6 +60,24 @@ export class PokeDetailsComponent {
           error: (err) => console.error('Error fetching species or chain:', err),
         });
     }
+  }
+
+  getMovesDetails() {
+    const moveRequests = this.pokemon.moves.map((m) =>
+      this.service.getMove(m.move.name)
+    );
+  
+    forkJoin(moveRequests).subscribe({
+      next: (moveDetails) => {
+        // Atualiza cada move com os detalhes retornados
+        this.pokemon.moves = this.pokemon.moves.map((m, index) => ({
+          ...m,
+          details: Object.assign(new MoveData(), moveDetails[index]) // Preenche o objeto MoveData
+        }));
+        console.log('Detalhes dos Moves:', this.pokemon.moves); // Verificar no console
+      },
+      error: (err) => console.error('Erro ao buscar detalhes dos moves:', err),
+    });
   }
 
   getEvolution(evolution: EvolutionChainData): EvolutionChainData[] {
