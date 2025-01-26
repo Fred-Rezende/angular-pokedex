@@ -72,7 +72,14 @@
                 <span class="type-label" [ngClass]="move.details?.type?.name">
                   {{ move.details?.type?.name | titlecase }}
                 </span>
+                
               </p>
+              <div class="movecard__types">
+                <div class="movecard__types__inner">
+                    <img [src]="move.details?.type?.typeImage?.sprites?.['generation-viii']?.['sword-shield']?.name_icon" alt="type" srcset="">
+                </div>
+            </div>
+            
       
               <p><strong>Como é aprendido:</strong></p>
               <ul>
@@ -86,4 +93,7 @@
           </li>
         </ul>
       </div>
+
+
+      
 </div>

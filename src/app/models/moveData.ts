@@ -1,3 +1,5 @@
+import { TypeData } from './typeData';
+
 export class MoveData {
     id: number
     name: string
@@ -13,7 +15,9 @@ export class MoveData {
     type: {
         name: string
         url: string
+        typeImage: TypeData
     }
+  
 
     constructor() {
         this.id = 0;
@@ -29,7 +33,8 @@ export class MoveData {
         };
         this.type = {
             name: '',
-            url: ''
+            url: '',
+            typeImage: new TypeData()
         };
     }
 }

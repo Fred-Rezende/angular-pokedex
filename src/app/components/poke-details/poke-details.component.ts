@@ -17,6 +17,7 @@ export class PokeDetailsComponent {
   evolutionChain: EvolutionChainData = new EvolutionChainData();
   evolutions: EvolutionChainData[] = [];
   evolutionChainURL: string = '';
+  type: TypeData = new TypeData;
 
   @Input()
   index: string = '';
@@ -69,16 +70,33 @@ export class PokeDetailsComponent {
   
     forkJoin(moveRequests).subscribe({
       next: (moveDetails) => {
-        // Atualiza cada move com os detalhes retornados
-        this.pokemon.moves = this.pokemon.moves.map((m, index) => ({
-          ...m,
-          details: Object.assign(new MoveData(), moveDetails[index]) // Preenche o objeto MoveData
-        }));
-        console.log('Detalhes dos Moves:', this.pokemon.moves); // Verificar no console
+        const typeRequests = moveDetails.map((move) =>
+          this.service.getType(move.type.name) // Busca os dados do tipo
+        );
+  
+        forkJoin(typeRequests).subscribe({
+          next: (typeDetails) => {
+            // Associa os dados do move e do tipo
+            this.pokemon.moves = this.pokemon.moves.map((m, index) => ({
+              ...m,
+              details: {
+                ...Object.assign(new MoveData(), moveDetails[index]),
+                type: {
+                  ...moveDetails[index].type,
+                  typeImage: Object.assign(new TypeData(), typeDetails[index]),
+                },
+              },
+            }));
+            console.log('Detalhes dos Moves com Tipo:', this.pokemon.moves); // Verificar no console
+          },
+          error: (err) =>
+            console.error('Erro ao buscar detalhes dos tipos:', err),
+        });
       },
       error: (err) => console.error('Erro ao buscar detalhes dos moves:', err),
     });
   }
+
 
   getEvolution(evolution: EvolutionChainData): EvolutionChainData[] {
     const evolutions: EvolutionChainData[] = [];
@@ -98,7 +116,7 @@ export class PokeDetailsComponent {
     return evolutions;
   }
 
-  getType(searchNames: string[]) {
+    getType(searchNames: string[]) {
     const typeRequests = searchNames.map((name) =>
       this.service.getType(name)
     );
@@ -115,6 +133,8 @@ export class PokeDetailsComponent {
   getTypeNames(): string[] {
     return this.pokemon.types.map((t) => t.type.name);
   }
+
+  
 
   getPokemonIdFromUrl(url: string): string {
     const parts = url.split('/');
