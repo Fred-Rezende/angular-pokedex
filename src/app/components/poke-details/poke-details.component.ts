@@ -140,65 +140,23 @@ export class PokeDetailsComponent {
     const parts = url.split('/');
     return parts[parts.length - 2]; // Obtém o penúltimo segmento da URL
   }
+  groupLearnMethods(details: any[]): { method: string; details: any[] }[] {
+    const grouped = details.reduce((acc, detail) => {
+      const method = detail.move_learn_method.name;
+      if (!acc[method]) {
+        acc[method] = [];
+      }
+      acc[method].push(detail);
+      return acc;
+    }, {} as { [method: string]: any[] });
+  
+    return Object.keys(grouped).map((method) => ({
+      method,
+      details: grouped[method],
+    }));
+  }
+
 }
 
-  // pokemon: PokemonData = new PokemonData(); // Usa a classe para inicializar
-  // types: TypeData[] = [];
-  // evolutionChain: any[] = [];
   
-  // @Input()
-  // index: string = '';
-  
-  // constructor(private service: PokemonService) {}
-  
-  // ngOnInit(): void {
-  //   this.getPokemon(this.index);
-  // }
-  
-  
-  // getPokemon(searchName: string) {
-  //   this.service.getPokemon(searchName).subscribe({
-  //     next: (res) => {
-  //       this.pokemon = Object.assign(new PokemonData(), res);
-  //       this.evolutionChain = this.mapEvolutionChain(res.evolutionChain); // Mapeia as evoluções
-  //       this.getType(this.getTypeNames());
-  //     },
-  //     error: (err) => console.log('not found'),
-  //   });
-  // }
-  
-  // mapEvolutionChain(evolutionChain: any): any[] {
-  //   const evolutions = [];
-  //   let current = evolutionChain.chain;
-  
-  //   while (current) {
-  //     evolutions.push({
-  //       name: current.species.name,
-  //       url: current.species.url,
-  //     });
-  //     current = current.evolves_to[0]; // Considera apenas a próxima evolução
-  //   }
-  
-  //   // console.log(this.pokemon.evolvesFrom);
-  //   // console.log(this.pokemon.evolutionChain);
-  //   return evolutions;
-  // }
-  
-  // getType(searchNames: string[]) {
-  //   this.types = []; // Inicializa ou limpa a lista de tipos
-  
-  //   searchNames.forEach((searchName) => {
-  //     this.service.getType(searchName).subscribe({
-  //       next: (res) => {
-  //         const type = Object.assign(new TypeData(), res); // Mapeia os dados para a classe TypeData
-  //           this.types.push(type); // Adiciona cada tipo encontrado à lista
-  //       },
-  //       error: (err) => console.log(`${searchName} type not found`),
-  //     });
-  //   });
-  // }
-  
-  // getTypeNames(): string[] {
-  //   return this.pokemon.types.map((t) => t.type.name);
-  // }
   

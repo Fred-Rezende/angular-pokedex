@@ -9,6 +9,7 @@ import { PokeCardComponent } from './components/poke-card/poke-card.component';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { provideHttpClient, withFetch } from '@angular/common/http';
+import { MatExpansionModule } from '@angular/material/expansion';
 import { HomeComponent } from './pages/home/home.component';
 import { MovesComponent } from './pages/moves/moves.component';
 import { ItensComponent } from './pages/itens/itens.component';
@@ -62,7 +63,8 @@ import { PokeDetailsComponent } from './components/poke-details/poke-details.com
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    MatExpansionModule
   ],
   providers: [
     provideClientHydration(),provideHttpClient(withFetch())

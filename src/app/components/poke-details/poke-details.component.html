@@ -81,14 +81,24 @@
             </div>
             
       
-              <p><strong>Como é aprendido:</strong></p>
+              <!-- <p><strong>Como é aprendido:</strong></p>
               <ul>
                 <li *ngFor="let detail of move.version_group_details">
                   Método: {{ detail.move_learn_method.name | titlecase }}<br />
                   Nível: {{ detail.level_learned_at }}<br />
                   Jogos: {{ detail.version_group.name | titlecase }}
                 </li>
-              </ul>
+              </ul> -->
+              <p><strong>Como é aprendido:</strong></p>
+      <ng-container *ngFor="let group of groupLearnMethods(move.version_group_details)">
+        <h4>{{ group.method | titlecase }}</h4>
+        <ul>
+          <li *ngFor="let detail of group.details">
+            Jogos: {{ detail.version_group.name | titlecase }} |
+            Nível: {{ detail.level_learned_at }}
+          </li>
+        </ul>
+      </ng-container>
             </div>
           </li>
         </ul>
