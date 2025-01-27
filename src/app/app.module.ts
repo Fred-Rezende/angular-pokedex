@@ -9,7 +9,6 @@ import { PokeCardComponent } from './components/poke-card/poke-card.component';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { provideHttpClient, withFetch } from '@angular/common/http';
-import { MatExpansionModule } from '@angular/material/expansion';
 import { HomeComponent } from './pages/home/home.component';
 import { MovesComponent } from './pages/moves/moves.component';
 import { ItensComponent } from './pages/itens/itens.component';
@@ -30,6 +29,9 @@ import { GameMemoryComponent } from './pages/game-memory/game-memory.component';
 import { CardsgameFrontcardComponent } from './components/cardsgame-frontcard/cardsgame-frontcard.component';
 import { CardsgmComponent } from './components/cardsgm/cardsgm.component';
 import { PokeDetailsComponent } from './components/poke-details/poke-details.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations'; // Import necessário
+import { MatExpansionModule } from '@angular/material/expansion'; // Para usar o Expansion Panel
+
 
 
 @NgModule({
@@ -64,7 +66,9 @@ import { PokeDetailsComponent } from './components/poke-details/poke-details.com
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
-    MatExpansionModule
+    BrowserModule,
+    BrowserAnimationsModule, // Adicione aqui
+    MatExpansionModule // Adicione aqui se estiver usando Angular Material
   ],
   providers: [
     provideClientHydration(),provideHttpClient(withFetch())

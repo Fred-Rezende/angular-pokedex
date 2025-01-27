@@ -58,6 +58,17 @@
         </div>
     </div>
 
+    <!-- <mat-accordion>
+      <mat-expansion-panel hideToggle>
+        <mat-expansion-panel-header>
+          <mat-panel-title> This is the expansion title </mat-panel-title>
+          <mat-panel-description> This is a summary of the content </mat-panel-description>
+        </mat-expansion-panel-header>
+        <p>This is the primary content of the panel.</p>
+      </mat-expansion-panel>
+      
+    </mat-accordion>
+
     <div>
         <h3>Moves:</h3>
         <ul>
@@ -89,7 +100,7 @@
                   Jogos: {{ detail.version_group.name | titlecase }}
                 </li>
               </ul> -->
-              <p><strong>Como é aprendido:</strong></p>
+              <!-- <p><strong>Como é aprendido:</strong></p>
       <ng-container *ngFor="let group of groupLearnMethods(move.version_group_details)">
         <h4>{{ group.method | titlecase }}</h4>
         <ul>
@@ -102,7 +113,51 @@
             </div>
           </li>
         </ul>
+      </div> -->
+
+      <h3>Moves:</h3>
+<mat-accordion>
+  <mat-expansion-panel *ngFor="let move of pokemon.moves">
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        {{ move.move.name | titlecase }} ({{ move.details?.type?.name | titlecase }})
+      </mat-panel-title>
+      <mat-panel-description>
+        Power: {{ move.details?.power || 'N/A' }} | 
+        Accuracy: {{ move.details?.accuracy || 'N/A' }} | 
+        PP: {{ move.details?.pp || 'N/A' }}
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+
+    <div class="move-details">
+      <p><strong>Power:</strong> {{ move.details?.power || 'N/A' }}</p>
+      <p><strong>Accuracy:</strong> {{ move.details?.accuracy || 'N/A' }}</p>
+      <p><strong>PP:</strong> {{ move.details?.pp || 'N/A' }}</p>
+      <p>
+        <strong>Type:</strong>
+        <span class="type-label" [ngClass]="move.details?.type?.name">
+          {{ move.details?.type?.name | titlecase }}
+        </span>
+      </p>
+      <div class="movecard__types">
+        <div class="movecard__types__inner">
+          <img [src]="move.details?.type?.typeImage?.sprites?.['generation-viii']?.['sword-shield']?.name_icon" alt="type" />
+        </div>
       </div>
+
+      <p><strong>Como é aprendido:</strong></p>
+      <ng-container *ngFor="let group of groupLearnMethods(move.version_group_details)">
+        <h4>{{ group.method | titlecase }}</h4>
+        <ul>
+          <li *ngFor="let detail of group.details">
+            Jogos: {{ detail.version_group.name | titlecase }} |
+            Nível: {{ detail.level_learned_at }}
+          </li>
+        </ul>
+      </ng-container>
+    </div>
+  </mat-expansion-panel>
+</mat-accordion>
 
 
       
