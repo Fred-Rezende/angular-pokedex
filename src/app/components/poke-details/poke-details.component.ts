@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, HostListener, Input } from '@angular/core';
 import { PokemonData } from '../../models/pokemonData';
 import { TypeData } from '../../models/typeData';
 import { PokemonService } from '../../services/pokemon.service';
@@ -18,6 +18,10 @@ export class PokeDetailsComponent {
   evolutions: EvolutionChainData[] = [];
   evolutionChainURL: string = '';
   type: TypeData = new TypeData;
+
+  currentMovePage: number = 0;
+movesPerPage: number = 10;
+displayedMoves: any[] = [];
 
   @Input()
   index: string = '';
@@ -63,6 +67,40 @@ export class PokeDetailsComponent {
     }
   }
 
+  // getMovesDetails() {
+  //   const moveRequests = this.pokemon.moves.map((m) =>
+  //     this.service.getMove(m.move.name)
+  //   );
+  
+  //   forkJoin(moveRequests).subscribe({
+  //     next: (moveDetails) => {
+  //       const typeRequests = moveDetails.map((move) =>
+  //         this.service.getType(move.type.name) // Busca os dados do tipo
+  //       );
+  
+  //       forkJoin(typeRequests).subscribe({
+  //         next: (typeDetails) => {
+  //           // Associa os dados do move e do tipo
+  //           this.pokemon.moves = this.pokemon.moves.map((m, index) => ({
+  //             ...m,
+  //             details: {
+  //               ...Object.assign(new MoveData(), moveDetails[index]),
+  //               type: {
+  //                 ...moveDetails[index].type,
+  //                 typeImage: Object.assign(new TypeData(), typeDetails[index]),
+  //               },
+  //             },
+  //           }));
+  //           console.log('Detalhes dos Moves com Tipo:', this.pokemon.moves); // Verificar no console
+  //         },
+  //         error: (err) =>
+  //           console.error('Erro ao buscar detalhes dos tipos:', err),
+  //       });
+  //     },
+  //     error: (err) => console.error('Erro ao buscar detalhes dos moves:', err),
+  //   });
+  // }
+
   getMovesDetails() {
     const moveRequests = this.pokemon.moves.map((m) =>
       this.service.getMove(m.move.name)
@@ -71,12 +109,11 @@ export class PokeDetailsComponent {
     forkJoin(moveRequests).subscribe({
       next: (moveDetails) => {
         const typeRequests = moveDetails.map((move) =>
-          this.service.getType(move.type.name) // Busca os dados do tipo
+          this.service.getType(move.type.name)
         );
   
         forkJoin(typeRequests).subscribe({
           next: (typeDetails) => {
-            // Associa os dados do move e do tipo
             this.pokemon.moves = this.pokemon.moves.map((m, index) => ({
               ...m,
               details: {
@@ -87,14 +124,34 @@ export class PokeDetailsComponent {
                 },
               },
             }));
-            console.log('Detalhes dos Moves com Tipo:', this.pokemon.moves); // Verificar no console
+  
+            this.loadMoreMoves(); // Carregar os primeiros 10 moves
           },
-          error: (err) =>
-            console.error('Erro ao buscar detalhes dos tipos:', err),
+          error: (err) => console.error('Erro ao buscar detalhes dos tipos:', err),
         });
       },
       error: (err) => console.error('Erro ao buscar detalhes dos moves:', err),
     });
+  }
+
+  loadMoreMoves() {
+    const startIndex = this.currentMovePage * this.movesPerPage;
+    const endIndex = startIndex + this.movesPerPage;
+  
+    const nextMoves = this.pokemon.moves.slice(startIndex, endIndex);
+    this.displayedMoves = [...this.displayedMoves, ...nextMoves];
+  
+    this.currentMovePage++; // Avança para a próxima página
+  }
+
+  @HostListener('window:scroll', [])
+  onScroll(): void {
+    if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight - 50) {
+      // Se o usuário estiver próximo ao final da página, carrega mais moves
+      if (this.displayedMoves.length < this.pokemon.moves.length) {
+        this.loadMoreMoves();
+      }
+    }
   }
 
 
@@ -140,6 +197,7 @@ export class PokeDetailsComponent {
     const parts = url.split('/');
     return parts[parts.length - 2]; // Obtém o penúltimo segmento da URL
   }
+  
   groupLearnMethods(details: any[]): { method: string; details: any[] }[] {
     const grouped = details.reduce((acc, detail) => {
       const method = detail.move_learn_method.name;
