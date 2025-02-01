@@ -30,7 +30,9 @@ import { CardsgameFrontcardComponent } from './components/cardsgame-frontcard/ca
 import { CardsgmComponent } from './components/cardsgm/cardsgm.component';
 import { PokeDetailsComponent } from './components/poke-details/poke-details.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'; // Import necessário
-import { MatExpansionModule } from '@angular/material/expansion'; // Para usar o Expansion Panel
+import { MatExpansionModule } from '@angular/material/expansion';
+import { ReplaceHyphenPipe } from './pipes/replaceHyphen/replace-hyphen.pipe';
+import { CapitalizePipe } from './pipes/capitalize/capitalize.pipe';
 
 
 
@@ -59,7 +61,9 @@ import { MatExpansionModule } from '@angular/material/expansion'; // Para usar o
     GameMemoryComponent,
     CardsgameFrontcardComponent,
     CardsgmComponent,
-    PokeDetailsComponent
+    PokeDetailsComponent,
+    ReplaceHyphenPipe,
+    CapitalizePipe
   ],
   imports: [
     BrowserModule,

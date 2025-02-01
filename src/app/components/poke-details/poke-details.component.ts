@@ -36,7 +36,7 @@ displayedMoves: any[] = [];
     this.service.getPokemon(searchName).subscribe({
       next: (res) => {
         this.pokemon = Object.assign(new PokemonData(), res);
-        console.log('Dados do Pokémon:', this.pokemon); // Log para verificar os dados do Pokémon
+        // console.log('Dados do Pokémon:', this.pokemon); // Log para verificar os dados do Pokémon
         this.getType(this.getTypeNames());
         this.getSpecies();
         this.getMovesDetails(); // Buscar detalhes dos movimentos
@@ -51,16 +51,16 @@ displayedMoves: any[] = [];
         .getSpecies(this.pokemon.species.name)
         .pipe(
           switchMap((data: any) =>{
-            console.log('Dados da espécie:', data); // Log para verificar os dados da espécie
+            // console.log('Dados da espécie:', data); // Log para verificar os dados da espécie
             return this.service.getEvolutionChain(data.evolution_chain.url);
           })
         )
         .subscribe({
           next: (data: any) => {
             this.evolutionChain = data.results;
-            console.log('Cadeia de Evolução:', this.evolutionChain); // Log para verificar a cadeia de evolução
+            // console.log('Cadeia de Evolução:', this.evolutionChain); // Log para verificar a cadeia de evolução
             this.evolutions = (this.getEvolution(data.chain));
-            console.log('Cadeia de Evolução:', this.evolutions);
+            // console.log('Cadeia de Evolução:', this.evolutions);
           },
           error: (err) => console.error('Error fetching species or chain:', err),
         });
@@ -160,7 +160,7 @@ displayedMoves: any[] = [];
 
     if (evolution && evolution.species?.name) {
       evolutions.push(evolution);
-      console.log('Adicionando evolução:', evolution); // Log para cada evolução adicionada
+      // console.log('Adicionando evolução:', evolution); // Log para cada evolução adicionada
     }
 
     if (Array.isArray(evolution.evolves_to) && evolution.evolves_to.length > 0) {
@@ -200,7 +200,13 @@ displayedMoves: any[] = [];
   
   groupLearnMethods(details: any[]): { method: string; details: any[] }[] {
     const grouped = details.reduce((acc, detail) => {
-      const method = detail.move_learn_method.name;
+      // const method = detail.move_learn_method.name;
+      let method = '';
+      if(detail.move_learn_method.name == "machine"){
+        method = "TM/HM";
+      }else{
+        method = detail.move_learn_method.name;
+      }
       if (!acc[method]) {
         acc[method] = [];
       }

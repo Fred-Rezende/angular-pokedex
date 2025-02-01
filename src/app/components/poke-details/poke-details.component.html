@@ -1,166 +1,99 @@
-<div class="pokecard__container">
-    <div class="pokecard__info">
-        <div class="pokecard__info__title">
-            <h3>
-                Nº: {{pokemon.id}}
-            </h3>
-            <h2>
-                {{pokemon.species.name | uppercase}}
-            </h2>
-        </div>
-        <div class="pokecard__types">
-            <span *ngFor="let type of types">
-                <img [src]="type.sprites['generation-viii']['sword-shield'].name_icon" alt="type" srcset="">
-            </span>
-        </div>
-        <div class="pokecard__abilities">
-            <div *ngFor="let abilite of pokemon.abilities">
-                <div *ngIf="abilite.is_hidden">
-                    <h5>{{abilite.ability.name}}</h5>
-                </div>
-                <div *ngIf="!abilite.is_hidden">
-                    <h4>{{abilite.ability.name}}</h4>
-                </div>
-            </div>
-        </div>
-        <div class="pokecard__stats">
-            <div *ngFor="let stat of pokemon.stats">
-                <p>{{stat.stat.name}}: </p>
-                <p>{{stat.base_stat}}</p>
-            </div>
-        </div>
-
+<div class="pokedetails__container">
+  <div class="pokedetails__info">
+    <div class="pokedetails__info__title">
+      <h3>
+        Nº: {{pokemon.id}}
+      </h3>
+      <h2>
+        {{pokemon.species.name | uppercase}}
+      </h2>
     </div>
-    <div class="pokecard__image">
-        <div class="pokecard__image__inner">
-            <img [src]="pokemon.sprites.other['official-artwork'].front_default" alt="pokemon" srcset="">
-        </div>
+    <div class="pokedetails__types">
+      <span *ngFor="let type of types">
+        <img [src]="type.sprites['generation-viii']['sword-shield'].name_icon" alt="type" srcset="">
+      </span>
     </div>
-
-    <!-- Adição da Cadeia de Evolução -->
-    <div class="pokecard__evolution">
-        <h3>Cadeia de Evolução</h3>
-        <div class="pokecard__evolution__list">
-            <div 
-                class="pokecard__evolution__item" 
-                *ngFor="let evolution of evolutions">
-                <div class="evolution__details" *ngIf="evolution.evolution_details.length > 0">
-                    <p>{{evolution.evolution_details[0].trigger.name}}</p>
-                    <p>{{evolution.evolution_details[0].min_level}}</p>
-                    <p>{{evolution.evolution_details[0].item?.name}}</p>
-                </div>
-                <h4>{{evolution.species.name | uppercase}}</h4>
-                <img 
-                    [src]="'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/' + getPokemonIdFromUrl(evolution.species.url) + '.png'" 
-                    alt="{{evolution.species.name}}" 
-                    srcset="">
-                
+    <div class="pokedetails__abilities">
+      <div *ngFor="let abilite of pokemon.abilities">
+        <div *ngIf="abilite.is_hidden">
+          <h5>{{abilite.ability.name}}</h5>
         </div>
-    </div>
-
-    <!-- <mat-accordion>
-      <mat-expansion-panel hideToggle>
-        <mat-expansion-panel-header>
-          <mat-panel-title> This is the expansion title </mat-panel-title>
-          <mat-panel-description> This is a summary of the content </mat-panel-description>
-        </mat-expansion-panel-header>
-        <p>This is the primary content of the panel.</p>
-      </mat-expansion-panel>
-      
-    </mat-accordion>
-
-    <div>
-        <h3>Moves:</h3>
-        <ul>
-          <li *ngFor="let move of pokemon.moves">
-            <strong>{{ move.move.name | titlecase }}</strong>
-            <div>
-              <p><strong>Power:</strong> {{ move.details?.power || 'N/A' }}</p>
-              <p><strong>Accuracy:</strong> {{ move.details?.accuracy || 'N/A' }}</p>
-              <p><strong>PP:</strong> {{ move.details?.pp || 'N/A' }}</p>
-              <p>
-                <strong>Type:</strong>
-                <span class="type-label" [ngClass]="move.details?.type?.name">
-                  {{ move.details?.type?.name | titlecase }}
-                </span>
-                
-              </p>
-              <div class="movecard__types">
-                <div class="movecard__types__inner">
-                    <img [src]="move.details?.type?.typeImage?.sprites?.['generation-viii']?.['sword-shield']?.name_icon" alt="type" srcset="">
-                </div>
-            </div>
-            
-      
-              <!-- <p><strong>Como é aprendido:</strong></p>
-              <ul>
-                <li *ngFor="let detail of move.version_group_details">
-                  Método: {{ detail.move_learn_method.name | titlecase }}<br />
-                  Nível: {{ detail.level_learned_at }}<br />
-                  Jogos: {{ detail.version_group.name | titlecase }}
-                </li>
-              </ul> -->
-              <!-- <p><strong>Como é aprendido:</strong></p>
-      <ng-container *ngFor="let group of groupLearnMethods(move.version_group_details)">
-        <h4>{{ group.method | titlecase }}</h4>
-        <ul>
-          <li *ngFor="let detail of group.details">
-            Jogos: {{ detail.version_group.name | titlecase }} |
-            Nível: {{ detail.level_learned_at }}
-          </li>
-        </ul>
-      </ng-container>
-            </div>
-          </li>
-        </ul>
-      </div> -->
-
-      <h3>Moves:</h3>
-<mat-accordion>
-  <mat-expansion-panel *ngFor="let move of displayedMoves">
-    <mat-expansion-panel-header>
-      <mat-panel-title>
-        {{ move.move.name | titlecase }} ({{ move.details?.type?.name | titlecase }})
-      </mat-panel-title>
-      <mat-panel-description>
-        Power: {{ move.details?.power || 'N/A' }} | 
-        Accuracy: {{ move.details?.accuracy || 'N/A' }} | 
-        PP: {{ move.details?.pp || 'N/A' }}
-      </mat-panel-description>
-    </mat-expansion-panel-header>
-
-    <div class="move-details">
-      <p><strong>Power:</strong> {{ move.details?.power || 'N/A' }}</p>
-      <p><strong>Accuracy:</strong> {{ move.details?.accuracy || 'N/A' }}</p>
-      <p><strong>PP:</strong> {{ move.details?.pp || 'N/A' }}</p>
-      <p>
-        <strong>Type:</strong>
-        <span class="type-label" [ngClass]="move.details?.type?.name">
-          {{ move.details?.type?.name | titlecase }}
-        </span>
-      </p>
-      <div class="movecard__types">
-        <div class="movecard__types__inner">
-          <img [src]="move.details?.type?.typeImage?.sprites?.['generation-viii']?.['sword-shield']?.name_icon" alt="type" />
+        <div *ngIf="!abilite.is_hidden">
+          <h4>{{abilite.ability.name}}</h4>
         </div>
       </div>
-
-      <p><strong>Como é aprendido:</strong></p>
-      <ng-container *ngFor="let group of groupLearnMethods(move.version_group_details)">
-        <h4>{{ group.method | titlecase }}</h4>
-        <ul>
-          <li *ngFor="let detail of group.details">
-            Jogos: {{ detail.version_group.name | titlecase }} |
-            Nível: {{ detail.level_learned_at }}
-          </li>
-        </ul>
-      </ng-container>
     </div>
-  </mat-expansion-panel>
-</mat-accordion>
-<div *ngIf="displayedMoves.length < pokemon.moves.length" class="loading">
-  
-</div>
+    <div class="pokedetails__stats">
+      <div *ngFor="let stat of pokemon.stats">
+        <p>{{stat.stat.name | replaceHyphen | capitalize}}: </p>
+        <p>{{stat.base_stat}}</p>
+      </div>
+    </div>
 
-      
-</div>
+  </div>
+  <div class="pokedetails__image">
+    <div class="pokedetails__image__inner">
+      <img [src]="pokemon.sprites.other['official-artwork'].front_default" alt="pokemon" srcset="">
+    </div>
+  </div>
+
+  <!-- Adição da Cadeia de Evolução -->
+  <div class="pokedetails__evolution">
+    <h3>Cadeia de Evolução</h3>
+    <div class="pokedetails__evolution__list">
+      <div class="pokedetails__evolution__item" *ngFor="let evolution of evolutions">
+        <div class="evolution__details" *ngIf="evolution.evolution_details.length > 0">
+          <p>{{evolution.evolution_details[0].trigger.name}}</p>
+          <p>{{evolution.evolution_details[0].min_level}}</p>
+          <p>{{evolution.evolution_details[0].item?.name}}</p>
+        </div>
+        <h4>{{evolution.species.name | uppercase}}</h4>
+        <img
+          [src]="'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/' + getPokemonIdFromUrl(evolution.species.url) + '.png'"
+          alt="{{evolution.species.name}}" srcset="">
+
+      </div>
+    </div>
+    <div class="pokedetails__moves">
+      <h3>Moves:</h3>
+      <mat-accordion>
+        <mat-expansion-panel *ngFor="let move of displayedMoves">
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              {{ move.move.name | titlecase | replaceHyphen}}
+            </mat-panel-title>
+            <mat-panel-description>
+              <div class="pokedetails__moves__move-details">
+              <p>Power: {{ move.details?.power || 'N/A' }}</p>
+              <p>Accuracy: {{ move.details?.accuracy || 'N/A' }}</p>
+              <p>PP: {{ move.details?.pp || 'N/A' }}</p>
+            </div>
+
+              <div class="pokedetails__moves__types">
+                <div class="pokedetails__moves__types__inner">
+                  <img [src]="move.details?.type?.typeImage?.sprites?.['generation-viii']?.['sword-shield']?.name_icon"
+                    alt="type" />
+                </div>
+              </div>
+            </mat-panel-description>
+          </mat-expansion-panel-header>
+
+          <div class="pokedetails__moves__learned">
+            <p><strong>Como é aprendido:</strong></p>
+            <ng-container *ngFor="let group of groupLearnMethods(move.version_group_details)">
+              <h4>{{ group.method | uppercase }}</h4>
+              <div *ngFor="let detail of group.details">
+                 <p> {{ detail.version_group.name | titlecase | replaceHyphen | capitalize}}</p>
+                  <p *ngIf="detail.level_learned_at!=0">Level: {{ detail.level_learned_at }}</p>
+                </div>
+                            
+            </ng-container>
+          </div>
+        </mat-expansion-panel>
+      </mat-accordion>
+      <div *ngIf="displayedMoves.length < pokemon.moves.length" class="loading">
+
+      </div>
+    </div>
+
+  </div>
