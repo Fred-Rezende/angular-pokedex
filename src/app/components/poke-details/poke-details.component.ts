@@ -83,6 +83,17 @@ export class PokeDetailsComponent {
   
     forkJoin(moveRequests).subscribe({
       next: (moveDetails) => {
+        moveDetails = moveDetails.map((move) => {
+          if (!move.effect_entries || !move.effect_entries[0]){
+            move.effect_entries = [
+              {
+                effect: 'No effect available',
+                short_effect: 'No effect available'
+              }
+            ];
+          }
+          return move;
+        });
         const typeRequests = moveDetails.map((move) =>
           this.service.getType(move.type.name)
         );
