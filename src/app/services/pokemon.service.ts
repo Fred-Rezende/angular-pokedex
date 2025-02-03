@@ -49,27 +49,7 @@ export class PokemonService {
     return this.evolutionChainData
   }
 
-  // getPokemon(pokemonName: string): Observable<PokemonData> {
-  //   return this.http.get<PokemonData>(`${this.baseURL}pokemon/${pokemonName}`).pipe(
-  //     switchMap((pokemon) =>
-  //       this.getEvolutionChain(pokemonName).pipe(
-  //         map((evolutionChain) => {
-  //           pokemon.evolutionChain = evolutionChain; // Associa a cadeia de evolução
-  //           return pokemon;
-  //         })
-  //       )
-  //     )
-  //   );
-  // }
-
-  // getEvolutionChain(pokemonName: string): Observable<any> {
-  //   return this.http.get<any>(`${this.baseURL}pokemon-species/${pokemonName}`).pipe(
-  //     map((speciesData) => speciesData.evolution_chain.url),
-  //     switchMap((evolutionUrl) => this.http.get<any>(evolutionUrl)),
-  //     catchError(() => of(null)) // Retorna null em caso de erro
-  //   );
-  // }
-
+  
   getPokemonList(): Observable<PokemonList> {
     return this.http.get<PokemonList>(`${this.baseURL}pokemon?limit=1025`);
   }
@@ -97,7 +77,6 @@ export class PokemonService {
   getItemCategory(itemCategoryID: number): Observable<ItemCategoryData> {
     this.itemCategoryData = this.http.get<ItemCategoryData>(`${this.baseURL}item-category/${itemCategoryID}`).pipe(
       catchError(err => {
-        // console.error(`Erro ao carregar a categoria com ID ${itemCategoryID}:`, err);
         return of(null); // Retorna null em caso de erro
       })
     );
@@ -108,15 +87,7 @@ export class PokemonService {
     return this.currentPage * this.objectsPerPage < object.length;
   }
 
-  // loadMore(object: number[]) {
-  //   const nextPageObjects = object.slice(
-  //     this.currentPage * this.objectsPerPage,
-  //     (this.currentPage + 1) * this.objectsPerPage
-  //   );
-  //   this.displayed = [...this.displayed, ...nextPageObjects];
-  //   this.currentPage++;
-  // }
-
+  
   loadMore(object: number[], type: 'pokemon' | 'item' | 'move') {
     if(this.isLoading) return
 
@@ -165,15 +136,7 @@ export class PokemonService {
       catchError(() => of(false)) // Se der erro (ex.: 404), retorna false
     );
   }
-  // checkItemExistence(id: number) {
-  //   // Retorna um Observable que verifica se o item existe
-  //   return this.http.get<ItemData>(`${this.baseURL}item/${id}`).pipe(
-  //     map(() => true), // Se a requisição for bem-sucedida, o item existe
-  //     catchError(() => of(false)) // Se der erro (ex.: 404), o item não existe
-  //   );
-  // }
-
-
+ 
   search(searchTerm: string, object: number[], tipo: number) {
     let objects: number[] = object
     if (searchTerm) {

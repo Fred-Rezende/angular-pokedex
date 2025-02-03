@@ -1,0 +1,76 @@
+.pokedetails__container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.pokedetails__info{
+    width: 1260px;
+    border: 2px solid red;
+}
+
+.pokedetails__info__title{
+    background-color: red;
+    margin-top: 30px;
+}
+
+.pokedetails__info__body{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 2px solid blue;
+}
+
+.pokedetails__evolution{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border: 2px solid green
+}
+
+.pokedetails__evolution__list{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 900px;
+   
+}
+
+.pokedetails__evolution__item{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 2px solid pink;
+    
+}
+
+.pokedetails__evolution__method{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 2px solid gray;
+}
+
+.pokedetails__evolution__pokemon{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.pokedetails__evolution__pokemon > img{
+    width: 150px;
+}
+
+.pokedetails__moves{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.pokedetails__moves__data{
+    display: flex;
+    width: 1260px;
+}

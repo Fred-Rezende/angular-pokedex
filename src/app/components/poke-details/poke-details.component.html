@@ -1,4 +1,6 @@
 <div class="pokedetails__container">
+
+  <!-- Detalhes Pokemon -->
   <div class="pokedetails__info">
     <div class="pokedetails__info__title">
       <h3>
@@ -8,10 +10,27 @@
         {{pokemon.species.name | uppercase}}
       </h2>
     </div>
+
+<div class="pokedetails__info__body">
+
+  <div class="pokedetails__info__body__image">
+    <div class="pokedetails__image">
+      <div class="pokedetails__image__inner">
+        <img [src]="pokemon.sprites.other['official-artwork'].front_default" alt="pokemon" srcset="">
+      </div>
+    </div>
+
+  </div>
+
+  <div class="pokedetails__info__body__data">
     <div class="pokedetails__types">
       <span *ngFor="let type of types">
         <img [src]="type.sprites['generation-viii']['sword-shield'].name_icon" alt="type" srcset="">
       </span>
+    </div>
+    <div class="pokedetails__size">
+      <p>Height: {{pokemon.height}} m</p>
+      <p>Weight: {{pokemon.weight}} kg</p>
     </div>
     <div class="pokedetails__abilities">
       <div *ngFor="let abilite of pokemon.abilities">
@@ -28,37 +47,75 @@
         <p>{{stat.stat.name | replaceHyphen | capitalize}}: </p>
         <p>{{stat.base_stat}}</p>
       </div>
-    </div>
-
-  </div>
-  <div class="pokedetails__image">
-    <div class="pokedetails__image__inner">
-      <img [src]="pokemon.sprites.other['official-artwork'].front_default" alt="pokemon" srcset="">
+        <p>Total : {{totalStats}}</p>
     </div>
   </div>
 
-  <!-- Adição da Cadeia de Evolução -->
-  <div class="pokedetails__evolution">
+    
+</div>
+  </div>
+  
+
+  <!-- Cadeia de Evolução -->
+  <!-- <div class="pokedetails__evolution" *ngIf="evolutions.length>1">
     <h3>Cadeia de Evolução</h3>
     <div class="pokedetails__evolution__list">
       <div class="pokedetails__evolution__item" *ngFor="let evolution of evolutions">
-        <div class="evolution__details" *ngIf="evolution.evolution_details.length > 0">
+        <div class="pokedetails__evolution__method" *ngIf="evolution.evolution_details.length > 0">
           <p>{{evolution.evolution_details[0].trigger.name}}</p>
           <p>{{evolution.evolution_details[0].min_level}}</p>
-          <p>{{evolution.evolution_details[0].item?.name}}</p>
+          <p>{{evolution?.evolution_details?.[0]?.item?.name}}</p>
         </div>
-        <h4>{{evolution.species.name | uppercase}}</h4>
+        <div class="pokedetails__evolution__pokemon">
+        
         <img
           [src]="'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/' + getPokemonIdFromUrl(evolution.species.url) + '.png'"
           alt="{{evolution.species.name}}" srcset="">
-
+          <h4>{{evolution.species.name | uppercase}}</h4>
+        </div>
       </div>
     </div>
+  </div> -->
+
+  <div class="pokedetails__evolution" *ngIf="evolutions.length > 1">
+    <h3>Cadeia de Evolução</h3>
+    <div class="pokedetails__evolution__list">
+      <div class="pokedetails__evolution__item" *ngFor="let evolution of evolutions">
+        
+        <!-- Detalhes da Evolução -->
+        <div class="pokedetails__evolution__method" *ngIf="evolution.details && evolution.details.length > 0">
+          <div *ngFor="let detail of evolution.details">
+            <p *ngIf="detail.trigger">Método: {{ detail.trigger.name | titlecase }}</p>
+            <p *ngIf="detail.min_level">Level {{ detail.min_level }}</p>
+            <p *ngIf="detail.happiness">Happiness {{ detail.happiness }}</p>
+            <p *ngIf="detail.affection">Affection {{ detail.affection }}</p>
+            <p *ngIf="detail.item">Use {{ detail.item.name | titlecase }}</p>
+            <p *ngIf="detail.held_item">Holding {{ detail.held_item | titlecase }}</p>
+            <p *ngIf="detail.known_move">After {{ detail.known_move | titlecase }} learned</p>
+            <p *ngIf="detail.known_move_type">After {{ detail.known_move_type | titlecase }} move learned</p>
+            <p *ngIf="detail.time_of_day">{{ detail.time_of_day | titlecase }}</p>
+          </div>
+        </div>
+  
+        <!-- Informações do Pokémon -->
+        <div class="pokedetails__evolution__pokemon">
+          <img
+            [src]="'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/' + getPokemonIdFromUrl(evolution.species.url) + '.png'"
+            [alt]="evolution.species.name"
+          />
+          <h4>{{ evolution.species.name | uppercase }}</h4>
+        </div>
+  
+      </div>
+    </div>
+  </div>
+
+  <!-- Pokemons Moves -->
     <div class="pokedetails__moves">
       <h3>Moves:</h3>
-      <mat-accordion>
-        <mat-expansion-panel *ngFor="let move of displayedMoves">
-          <mat-expansion-panel-header>
+      <mat-accordion >
+        <mat-expansion-panel  *ngFor="let move of displayedMoves">
+          <mat-expansion-panel-header class="pokedetails__moves__data">
             <mat-panel-title>
               {{ move.move.name | titlecase | replaceHyphen}}
             </mat-panel-title>

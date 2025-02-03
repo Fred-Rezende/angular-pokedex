@@ -2,6 +2,8 @@ import { MoveData } from './moveData';
 
 export class PokemonData {
   id: number;
+  height: number;
+  weight: number;
   species: {
     name: string;
     url: string;
@@ -59,11 +61,12 @@ export class PokemonData {
       url: string;
     };
   }[];
-  // evolvesFrom: string | null;
-  // evolutionChain: string | null;
+ 
 
   constructor() {
     this.id = 0;
+    this.height = 0;
+    this.weight = 0;
     this.species = {
       name: '',
       url: ''
@@ -83,7 +86,6 @@ export class PokemonData {
     this.moves = [];
     this.stats = [];
     this.types = [];
-    // this.evolvesFrom = null;
-    // this.evolutionChain = null;
+  
   }
 }
