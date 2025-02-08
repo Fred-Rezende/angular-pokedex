@@ -88,14 +88,14 @@
   </div> -->
 
   <div class="pokedetails__evolution" *ngIf="evolutions.length > 1">
-    <h3>Cadeia de Evolução</h3>
+    <!-- <h3>Cadeia de Evolução</h3> -->
     <div class="pokedetails__evolution__list">
       <div class="pokedetails__evolution__item" *ngFor="let evolution of evolutions">
         
         <!-- Detalhes da Evolução -->
         <div class="pokedetails__evolution__method" *ngIf="evolution.details && evolution.details.length > 0">
           <div *ngFor="let detail of evolution.details">
-            <p *ngIf="detail.trigger">Método: {{ detail.trigger.name | titlecase }}</p>
+            <p *ngIf="detail.trigger?.name === 'trade'">{{ detail.trigger.name | titlecase }}</p>
             <p *ngIf="detail.min_level">Level {{ detail.min_level }}</p>
             <p *ngIf="detail.happiness">Happiness {{ detail.happiness }}</p>
             <p *ngIf="detail.affection">Affection {{ detail.affection }}</p>
@@ -108,11 +108,17 @@
         </div>
   
         <!-- Informações do Pokémon -->
-        <div class="pokedetails__evolution__pokemon">
-          <img
-            [src]="'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/' + getPokemonIdFromUrl(evolution.species.url) + '.png'"
-            [alt]="evolution.species.name"
-          />
+
+       <div class="pokedetails__evolution__pokemon">
+          <div class="pokedetails__evolution__pokemon__image">
+            <div class="pokedetails__evolution__pokemon__image__inner">
+              <img
+              [src]="'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/' + getPokemonIdFromUrl(evolution.species.url) + '.png'"
+              [alt]="evolution.species.name"
+            />
+            </div>
+          </div>
+         
           <h4>{{ evolution.species.name | uppercase }}</h4>
         </div>
   
