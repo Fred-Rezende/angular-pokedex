@@ -60,6 +60,17 @@
     width: 550px;
 }
 
+.pokedetails__info__body__data p,
+.pokedetails__info__body__data h4{
+  font-size: 18px;
+  font-weight: normal;
+}
+
+.pokedetails__info__body__data h5 {
+    font-size: 12px;
+    font-weight: normal;
+}
+
 .pokedetails__types>span>img {
     width:170px;
     border-radius: 5px;

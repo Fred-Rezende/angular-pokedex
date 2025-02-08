@@ -37,11 +37,11 @@
     <fieldset class="pokedetails__abilities">
       <legend>Abilities</legend>
       <div *ngFor="let abilite of pokemon.abilities">
-        <div *ngIf="abilite.is_hidden">
-          <h5>{{abilite.ability.name | titlecase}}</h5>
-        </div>
         <div *ngIf="!abilite.is_hidden">
-          <h4>{{abilite.ability.name | titlecase}}</h4>
+          <h4>{{abilite.ability.name | titlecase}} </h4>
+        </div>
+        <div *ngIf="abilite.is_hidden">
+          <h5>{{abilite.ability.name | titlecase}} (Hidden ability)</h5>
         </div>
       </div>
     </fieldset>
@@ -86,13 +86,13 @@
       </div>
     </div>
   </div> -->
-
+<!--
   <div class="pokedetails__evolution" *ngIf="evolutions.length > 1">
-    <!-- <h3>Cadeia de Evolução</h3> -->
+    <h3>Cadeia de Evolução</h3>
     <div class="pokedetails__evolution__list">
       <div class="pokedetails__evolution__item" *ngFor="let evolution of evolutions">
         
-        <!-- Detalhes da Evolução -->
+        Detalhes da Evolução
         <div class="pokedetails__evolution__method" *ngIf="evolution.details && evolution.details.length > 0">
           <div *ngFor="let detail of evolution.details">
             <p *ngIf="detail.trigger?.name === 'trade'">{{ detail.trigger.name | titlecase }}</p>
@@ -107,7 +107,7 @@
           </div>
         </div>
   
-        <!-- Informações do Pokémon -->
+        Informações do Pokémon
 
        <div class="pokedetails__evolution__pokemon">
           <div class="pokedetails__evolution__pokemon__image">
@@ -124,7 +124,44 @@
   
       </div>
     </div>
+  </div>-->
+
+  <div class="pokedetails__evolution" *ngIf="evolutions.length > 1">
+    <div class="pokedetails__evolution__list">
+      <div class="pokedetails__evolution__stage" *ngFor="let stage of evolutions | groupByStage">
+        <div class="pokedetails__evolution__item" *ngFor="let evolution of stage">
+          
+          <div class="pokedetails__evolution__method" *ngIf="evolution.details && evolution.details.length > 0">
+            <div *ngFor="let detail of evolution.details">
+              <p *ngIf="detail.trigger?.name === 'trade'">{{ detail.trigger.name | titlecase }}</p>
+              <p *ngIf="detail.min_level">Level {{ detail.min_level }}</p>
+              <p *ngIf="detail.happiness">Happiness {{ detail.happiness }}</p>
+              <p *ngIf="detail.affection">Affection {{ detail.affection }}</p>
+              <p *ngIf="detail.item">Use {{ detail.item.name | titlecase }}</p>
+              <p *ngIf="detail.held_item">Holding {{ detail.held_item | titlecase }}</p>
+              <p *ngIf="detail.known_move">After {{ detail.known_move | titlecase }} learned</p>
+              <p *ngIf="detail.known_move_type">After {{ detail.known_move_type | titlecase }} move learned</p>
+              <p *ngIf="detail.time_of_day">{{ detail.time_of_day | titlecase }}</p>
+            </div>
+          </div>
+  
+          <div class="pokedetails__evolution__pokemon">
+            <div class="pokedetails__evolution__pokemon__image">
+              <div class="pokedetails__evolution__pokemon__image__inner">
+                <img
+                  [src]="'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/' + getPokemonIdFromUrl(evolution.species.url) + '.png'"
+                  [alt]="evolution.species.name"
+                />
+              </div>
+            </div>
+            <h4>{{ evolution.species.name | uppercase }}</h4>
+          </div>
+  
+        </div>
+      </div>
+    </div>
   </div>
+  
 
   <!-- Pokemons Moves -->
     <fieldset class="pokedetails__moves">

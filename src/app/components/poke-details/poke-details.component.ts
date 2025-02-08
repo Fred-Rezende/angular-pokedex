@@ -163,24 +163,49 @@ export class PokeDetailsComponent {
   //   return evolutions;
   // }
 
-  getEvolution(evolution: EvolutionChainData): any[] {
-    const evolutions: any[] = [];
+  // getEvolution(evolution: EvolutionChainData): any[] {
+  //   const evolutions: any[] = [];
 
+  //   if (evolution && evolution.species?.name) {
+  //     evolutions.push({
+  //       ...evolution,
+  //       details: Array.isArray(evolution.evolution_details)
+  //         ? this.parseEvolutionDetails(evolution.evolution_details)
+  //         : this.parseEvolutionDetails([evolution.evolution_details]) // Garante que seja um array
+  //     });
+  //   }
+
+  //   if (Array.isArray(evolution.evolves_to) && evolution.evolves_to.length > 0) {
+  //     evolution.evolves_to.forEach((evo) => {
+  //       evolutions.push(...this.getEvolution(evo));
+  //     });
+  //   }
+
+  //   console.log (evolutions)
+  //   return evolutions;
+  // }
+
+  getEvolution(evolution: EvolutionChainData, stage: number = 0, parent?: any): any[] {
+    const evolutions: any[] = [];
+  
     if (evolution && evolution.species?.name) {
-      evolutions.push({
-        ...evolution,
+      const evoData = {
+        species: evolution.species,
         details: Array.isArray(evolution.evolution_details)
           ? this.parseEvolutionDetails(evolution.evolution_details)
-          : this.parseEvolutionDetails([evolution.evolution_details]) // Garante que seja um array
-      });
+          : this.parseEvolutionDetails([evolution.evolution_details]),
+        stage,
+        parent
+      };
+      evolutions.push(evoData);
     }
-
+  
     if (Array.isArray(evolution.evolves_to) && evolution.evolves_to.length > 0) {
       evolution.evolves_to.forEach((evo) => {
-        evolutions.push(...this.getEvolution(evo));
+        evolutions.push(...this.getEvolution(evo, stage + 1, evolution.species.name));
       });
     }
-
+  
     return evolutions;
   }
 
