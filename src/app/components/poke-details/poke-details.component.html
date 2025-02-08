@@ -3,12 +3,12 @@
   <!-- Detalhes Pokemon -->
   <div class="pokedetails__info">
     <div class="pokedetails__info__title">
-      <h3>
+      <h4>
         Nº: {{pokemon.id}}
-      </h3>
-      <h2>
+      </h4>
+      <h1>
         {{pokemon.species.name | uppercase}}
-      </h2>
+      </h1>
     </div>
 
 <div class="pokedetails__info__body">
@@ -23,32 +23,42 @@
   </div>
 
   <div class="pokedetails__info__body__data">
-    <div class="pokedetails__types">
+    <fieldset class="pokedetails__types">
+      <legend>Type</legend>
       <span *ngFor="let type of types">
         <img [src]="type.sprites['generation-viii']['sword-shield'].name_icon" alt="type" srcset="">
       </span>
-    </div>
-    <div class="pokedetails__size">
+    </fieldset>
+    <fieldset class="pokedetails__size">
+      <legend>Size</legend>
       <p>Height: {{pokemon.height}} m</p>
       <p>Weight: {{pokemon.weight}} kg</p>
-    </div>
-    <div class="pokedetails__abilities">
+    </fieldset>
+    <fieldset class="pokedetails__abilities">
+      <legend>Abilities</legend>
       <div *ngFor="let abilite of pokemon.abilities">
         <div *ngIf="abilite.is_hidden">
-          <h5>{{abilite.ability.name}}</h5>
+          <h5>{{abilite.ability.name | titlecase}}</h5>
         </div>
         <div *ngIf="!abilite.is_hidden">
-          <h4>{{abilite.ability.name}}</h4>
+          <h4>{{abilite.ability.name | titlecase}}</h4>
         </div>
       </div>
-    </div>
-    <div class="pokedetails__stats">
+    </fieldset>
+    <fieldset class="pokedetails__stats">
+      <legend>Stats</legend>
       <div *ngFor="let stat of pokemon.stats">
-        <p>{{stat.stat.name | replaceHyphen | capitalize}}: </p>
-        <p>{{stat.base_stat}}</p>
+        <p>{{stat.stat.name | replaceHyphen | capitalize}}: {{stat.base_stat}} </p>
+        <!-- <p>{{stat.base_stat}}</p> -->
+
+        <div class="custom-progress-bar">
+          <div class="custom-progress" [ngStyle]="{ 'width': (stat.base_stat / 255) * 100 + '%' }">
+           </div>
+        </div>
+
       </div>
         <p>Total : {{totalStats}}</p>
-    </div>
+    </fieldset>
   </div>
 
     
@@ -111,8 +121,8 @@
   </div>
 
   <!-- Pokemons Moves -->
-    <div class="pokedetails__moves">
-      <h3>Moves:</h3>
+    <fieldset class="pokedetails__moves">
+      <legend>Moves:</legend>
       <mat-accordion >
         <mat-expansion-panel  *ngFor="let move of displayedMoves">
           <mat-expansion-panel-header class="pokedetails__moves__data">
@@ -120,7 +130,8 @@
               {{ move.move.name | titlecase | replaceHyphen}}
             </mat-panel-title>
             <mat-panel-description>
-              <div class="pokedetails__moves__move-details">
+              <div class="pokedetails__moves__stats">
+            <div class="pokedetails__moves__move-details">
               <p>Power: {{ move.details?.power || 'N/A' }}</p>
               <p>Accuracy: {{ move.details?.accuracy || 'N/A' }}</p>
               <p>PP: {{ move.details?.pp || 'N/A' }}</p>
@@ -132,6 +143,7 @@
                     alt="type" />
                 </div>
               </div>
+            </div>
             </mat-panel-description>
           </mat-expansion-panel-header>
 
@@ -139,10 +151,14 @@
             <p><strong>Como é aprendido:</strong></p>
             <ng-container *ngFor="let group of groupLearnMethods(move.version_group_details)">
               <h4>{{ group.method | uppercase }}</h4>
-              <div *ngFor="let detail of group.details">
+              <div class="pokedetails__moves__learned__games">
+
+              <div class="pokedetails__moves__learned__games__detail"  *ngFor="let detail of group.details">
                  <p> {{ detail.version_group.name | titlecase | replaceHyphen | capitalize}}</p>
                   <p *ngIf="detail.level_learned_at!=0">Level: {{ detail.level_learned_at }}</p>
                 </div>
+              
+              </div>
                             
             </ng-container>
           </div>
@@ -151,6 +167,6 @@
       <div *ngIf="displayedMoves.length < pokemon.moves.length" class="loading">
 
       </div>
-    </div>
+    </fieldset>
 
   </div>
