@@ -1,69 +1,59 @@
-.pokedetails__container{
+.pokedetails__container {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
 }
 
-.pokedetails__info{
+.pokedetails__info {
     width: 1260px;
     height: 750px;
-    /* border: 2px solid red; */
     margin-top: 40px;
-    /* background-color: #f1f1f1;
-    border-radius: 10px; */
-
 }
 
-.pokedetails__info__title{
+.pokedetails__info__title {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    /* background-color: red; */
-    background: rgb(241,0,0);
-    background: -moz-linear-gradient(180deg, rgba(241,0,0,1) 40%, rgba(223,0,0,1) 50%, rgba(210,0,0,1) 60%);
-    background: -webkit-linear-gradient(180deg, rgba(241,0,0,1) 40%, rgba(223,0,0,1) 50%, rgba(210,0,0,1) 60%);
-    background: linear-gradient(180deg, rgba(241,0,0,1) 40%, rgba(223,0,0,1) 50%, rgba(210,0,0,1) 60%);
-    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#f10000",endColorstr="#d20000",GradientType=1);
+    background: rgb(241, 0, 0);
+    background: -moz-linear-gradient(180deg, rgba(241, 0, 0, 1) 40%, rgba(223, 0, 0, 1) 50%, rgba(210, 0, 0, 1) 60%);
+    background: -webkit-linear-gradient(180deg, rgba(241, 0, 0, 1) 40%, rgba(223, 0, 0, 1) 50%, rgba(210, 0, 0, 1) 60%);
+    background: linear-gradient(180deg, rgba(241, 0, 0, 1) 40%, rgba(223, 0, 0, 1) 50%, rgba(210, 0, 0, 1) 60%);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#f10000", endColorstr="#d20000", GradientType=1);
     border-radius: 10px;
     height: 80px;
-   
-    
 }
 
-.pokedetails__info__title > h1, .pokedetails__info__title > h4{
+.pokedetails__info__title>h1,
+.pokedetails__info__title>h4 {
     color: #f5f3f1;
     margin-left: 20px;
 }
 
-.pokedetails__info__body{
+.pokedetails__info__body {
     display: flex;
     justify-content: center;
     align-items: center;
     margin-top: 30px;
-    /* border: 2px solid blue; */
 }
 
-.pokedetails__info__body__image{
+.pokedetails__info__body__image {
     display: flex;
     width: 630px;
     justify-content: center;
-    /* align-items: center; */
 }
 
-.pokedetails__info__body__data{
+.pokedetails__info__body__data {
     display: flex;
     flex-direction: column;
-    /* justify-content: center; */
     align-items: end;
-    /* border: 2px solid orangered; */
     width: 550px;
 }
 
 .pokedetails__info__body__data p,
-.pokedetails__info__body__data h4{
-  font-size: 18px;
-  font-weight: normal;
+.pokedetails__info__body__data h4 {
+    font-size: 18px;
+    font-weight: normal;
 }
 
 .pokedetails__info__body__data h5 {
@@ -72,83 +62,67 @@
 }
 
 .pokedetails__types>span>img {
-    width:170px;
+    width: 170px;
     border-radius: 5px;
     margin-right: 20px;
-
-
 }
 
-.pokedetails__evolution{
+.pokedetails__evolution {
     display: flex;
     flex-direction: column;
-    /* justify-content: center;
-    align-items: center; */
     border: 5px groove #a06c0a;
     background-image: url("../../../assets/images/fundo4.jpg");
     border-radius: 10px;
     margin-top: 100px;
-    /* height: 300px; */
 }
 
-.pokedetails__evolution__list{
+.pokedetails__evolution__list {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    /* width: 900px; */
-    /* border: 1px solid orange; */
-    margin:50px 100px;
-    gap:50px
-   
+    margin: 50px 100px;
+    gap: 50px
 }
 
-.pokedetails__evolution__item{
+.pokedetails__evolution__item {
     display: flex;
     justify-content: center;
     align-items: center;
-    /* border: 2px solid pink; */
-    gap:50px
-    
+    gap: 50px
 }
 
-.pokedetails__evolution__method{
+.pokedetails__evolution__method {
     display: flex;
     justify-content: center;
     align-items: center;
-    /* border: 2px solid gray; */
     color: #f5f3f1;
     font-weight: bold;
 }
 
-.pokedetails__evolution__pokemon{
+.pokedetails__evolution__pokemon {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    /* border: 1px solid blue; */
     margin: 20px 0;
 }
-.pokedetails__evolution__pokemon > img{
+
+.pokedetails__evolution__pokemon>img {
     width: 150px;
 }
 
-
-
 .pokedetails__evolution__pokemon__image {
-    /* background-color: antiquewhite; */
     background-color: #ffffff;
     width: 180px;
     height: 180px;
     margin: auto;
     margin-left: auto;
     margin-right: 15px;
-
     display: flex;
     justify-content: center;
     align-items: center;
     border-radius: 50%;
     border: 3px solid #333333;
-
     padding: 20px;
     /* Cria a "margem" entre as bordas interna e externa */
     box-sizing: border-box;
@@ -170,12 +144,12 @@
 }
 
 
-.pokedetails__evolution__pokemon > h4{
+.pokedetails__evolution__pokemon>h4 {
     margin-top: 20px;
     color: #f5f3f1;
 }
 
-.pokedetails__moves{
+.pokedetails__moves {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -183,31 +157,30 @@
     margin-top: 100px;
 }
 
-.pokedetails__moves__data{
+.pokedetails__moves__data {
     display: flex;
     width: 1220px;
 }
 
 
-mat-panel-title{
+mat-panel-title {
     font-size: 18px;
     border-radius: 10px;
 }
- mat-expansion-panel{
+
+mat-expansion-panel {
     border: 1px solid #a8a8a8;
     border-radius: 10px;
     margin-bottom: 10px;
 }
 
 
-
-.pokedetails__moves__stats{
+.pokedetails__moves__stats {
     display: flex;
-   
     width: 750px;
-
 }
-.pokedetails__moves__move-details{
+
+.pokedetails__moves__move-details {
     display: flex;
     align-items: center;
     justify-content: flex-start;
@@ -216,16 +189,14 @@ mat-panel-title{
     width: 70%;
 }
 
-.pokedetails__moves__move-details>p{
+.pokedetails__moves__move-details>p {
     width: 100px;
 }
 
-.pokedetails__moves__types{
+.pokedetails__moves__types {
     display: flex;
-    justify-content:flex-end;
+    justify-content: flex-end;
     align-items: end;
-    
-    
 }
 
 .pokedetails__moves__types__inner>img {
@@ -234,36 +205,32 @@ mat-panel-title{
     width: 150px;
     border-radius: 5px;
     margin-right: 10px;
-    border: 1px solid black;
+    border: 1px solid #000000;
 }
 
-.pokedetails__moves__learned{
+.pokedetails__moves__learned {
     display: flex;
     flex-direction: column;
     justify-content: center;
     background-color: #dadada;
     border-radius: 10px;
     padding: 15px;
-    /* border: 1px solid blue; */
 }
 
-.pokedetails__moves__learned>h4{
+.pokedetails__moves__learned>h4 {
     margin-top: 20px;
 }
 
-.pokedetails__moves__learned__games{
+.pokedetails__moves__learned__games {
     display: flex;
     align-items: center;
-    justify-content:left;
+    justify-content: left;
     max-width: 1200px;
     flex-wrap: wrap;
-    /* border: 1px solid red; */
     margin-top: 15px;
-    
-     
-  }
+}
 
-  .pokedetails__moves__learned__games__detail{
+.pokedetails__moves__learned__games__detail {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -272,14 +239,14 @@ mat-panel-title{
     border-radius: 5px;
     margin: 2px 17px;
     flex-direction: column;
-    background: rgb(202,229,230);
-background: -moz-linear-gradient(180deg, rgba(202,229,230,1) 40%, rgba(187,213,214,1) 50%, rgba(188,213,214,1) 60%);
-background: -webkit-linear-gradient(180deg, rgba(202,229,230,1) 40%, rgba(187,213,214,1) 50%, rgba(188,213,214,1) 60%);
-background: linear-gradient(180deg, rgba(202,229,230,1) 40%, rgba(187,213,214,1) 50%, rgba(188,213,214,1) 60%);
-filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#cae5e6",endColorstr="#bcd5d6",GradientType=1);
-  }
+    background: rgb(202, 229, 230);
+    background: -moz-linear-gradient(180deg, rgba(202, 229, 230, 1) 40%, rgba(187, 213, 214, 1) 50%, rgba(188, 213, 214, 1) 60%);
+    background: -webkit-linear-gradient(180deg, rgba(202, 229, 230, 1) 40%, rgba(187, 213, 214, 1) 50%, rgba(188, 213, 214, 1) 60%);
+    background: linear-gradient(180deg, rgba(202, 229, 230, 1) 40%, rgba(187, 213, 214, 1) 50%, rgba(188, 213, 214, 1) 60%);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#cae5e6", endColorstr="#bcd5d6", GradientType=1);
+}
 
-.pokedetails__moves__learned__games>p{
+.pokedetails__moves__learned__games>p {
     font-size: 12px;
 }
 
@@ -289,15 +256,14 @@ fieldset {
     border-radius: 8px;
     width: 500px;
     background-color: #f1f1f1
-  }
-  
-  fieldset legend {
+}
+
+fieldset legend {
     color: #a8a8a8;
     padding: 0 5px;
-  }
+}
 
-  .custom-progress-bar {
-    /* width: 90%; */
+.custom-progress-bar {
     height: 16px;
     background-color: #e0e0e0;
     border-radius: 4px;
@@ -305,11 +271,11 @@ fieldset {
     margin-top: 5px;
     margin-left: auto;
     margin-right: auto;
-  }
-  
-  .custom-progress {
+}
+
+.custom-progress {
     height: 100%;
     background-color: #4caf50;
     border-radius: 4px;
-    border-color: rgb(61, 61, 61);
-  }
+    border-color: #3d3d3d;
+}
