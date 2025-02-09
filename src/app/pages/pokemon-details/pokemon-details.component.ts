@@ -8,11 +8,21 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class PokemonDetailsComponent {
 
-  number: number = 0;
+  // number: number = 0;
 
-  constructor(private route: ActivatedRoute) {
+  // constructor(private route: ActivatedRoute) {
+  //   this.route.queryParams.subscribe(params => {
+  //     this.number = +params['number']; // O "+" converte para número
+  //   });
+  // }
+
+  number: string = '';
+
+  constructor(private route: ActivatedRoute) {}
+
+  ngOnInit() {
     this.route.queryParams.subscribe(params => {
-      this.number = +params['number']; // O "+" converte para número
+      this.number = params['number']; // Agora armazena o ID corretamente
     });
   }
 

@@ -1,4 +1,4 @@
-import { Component, HostListener, Input } from '@angular/core';
+import { Component, HostListener, Input, SimpleChanges } from '@angular/core';
 import { PokemonData } from '../../models/pokemonData';
 import { TypeData } from '../../models/typeData';
 import { PokemonService } from '../../services/pokemon.service';
@@ -24,14 +24,21 @@ export class PokeDetailsComponent {
   currentMovePage: number = 0;
   movesPerPage: number = 10;
   displayedMoves: any[] = [];
+  
 
   @Input()
   index: string = '';
 
   constructor(private service: PokemonService) { }
 
-  ngOnInit(): void {
-    this.getPokemon(this.index);
+  // ngOnInit(): void {
+  //   this.getPokemon(this.index);
+  // }
+
+  ngOnChanges(changes: SimpleChanges) {
+    if (changes['index'] && changes['index'].currentValue) {
+      this.getPokemon(this.index);
+    }
   }
 
   getPokemon(searchName: string) {
