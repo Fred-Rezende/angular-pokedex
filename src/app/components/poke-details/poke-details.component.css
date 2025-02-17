@@ -1,3 +1,5 @@
+
+
 .pokedetails__container {
     display: flex;
     flex-direction: column;
@@ -280,3 +282,28 @@ fieldset legend {
     border-radius: 4px;
     border-color: #3d3d3d;
 }
+
+
+.red-blue { background: linear-gradient(0deg, rgba(218,57,20,1)  0%, rgba(46,80,216,1) 100%); }
+.yellow { background: linear-gradient(0deg, rgba(255,229,122,1) 0%, rgba(255,215,51,1) 100%); }
+.gold-silver { background: linear-gradient(0deg, rgba(218,165,32,1) 0%, rgba(192,192,192,1) 100%); }
+.crystal { background: linear-gradient(0deg, rgba(140,230,255,1) 0%, rgba(79,217,255,1) 100%); }
+.ruby-sapphire { background: linear-gradient(0deg, rgba(205,34,54,1) 0%, rgba(61,81,167,1) 100%); }
+.emerald { background: linear-gradient(0deg, rgba(89,187,143,1) 0%, rgba(0,150,82,1) 100%); }
+.firered-leafgreen { background: linear-gradient(0deg, rgba(241,92,1,1) 0%, rgba(159,220,0,1) 100%);}
+.diamond-pearl { background: linear-gradient(0deg, rgba(144,190,237,1) 0%, rgba(221,124,177,1) 100%); }
+.platinum { background: linear-gradient(0deg, rgba(193,193,181,1) 0%, rgba(160,160,141,1) 100%); }
+.heartgold-soulsilver { background: linear-gradient(0deg, rgba(232,181,2,1) 0%, rgba(170,185,207,1) 100%); }
+.black-white { background: linear-gradient(0deg, rgba(68,68,68,1) 0%, rgba(225,225,225,1) 100%); }
+.black-2-white-2 { background: linear-gradient(0deg, rgba(48,62,81,1) 0%, rgba(235,197,195,1) 100%); }
+.x-y { background: linear-gradient(0deg, rgba(2,93,166,1) 0%, rgba(234,26,62,1) 100%); }
+.omega-ruby-alpha-sapphire { background: linear-gradient(0deg, rgba(171,40,19,1) 0%, rgba(38,100,156,1) 100%); }
+.sun-moon {background: linear-gradient(0deg, rgba(241,145,43,1) 0%, rgba(85,153,202,1) 100%); }
+.ultra-sun-ultra-moon { background: linear-gradient(0deg, rgba(233,91,43,1) 0%, rgba(34,109,181,1) 100%); }
+.sword-shield { background: linear-gradient(0deg, rgba(0,161,233,1) 0%, rgba(191,0,79,1) 100%); }
+.legends-arceus { background: linear-gradient(0deg, rgba(124,147,169,1) 0%, rgba(54,89,123,1) 100%); }
+.scarlet-violet { background: linear-gradient(0deg, rgba(243,65,52,1) 0%, rgba(131,52,183,1) 100%); }
+.brilliant-diamond-and-shining-pearl { background: linear-gradient(0deg, rgba(68,186,229,1) 0%, rgba(218,125,153,1) 100%); }
+.colosseum { background: linear-gradient(0deg, rgba(208,221,237,1) 0%, rgba(182,202,228,1) 100%);}
+.xd { background: linear-gradient(0deg, rgba(152,140,174,1) 0%, rgba(96,78,130,1) 100%);}
+.lets-go-pikachu-lets-go-eevee { background: linear-gradient(0deg, rgba(245,218,38,1) 0%, rgba(212,146,75,1) 100%);}

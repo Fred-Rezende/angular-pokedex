@@ -278,6 +278,9 @@ export class PokeDetailsComponent {
     }));
   }
 
+  getGameClass(versionName: string): string {
+    return versionName;
+  }
 }
 
 

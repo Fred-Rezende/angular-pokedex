@@ -138,7 +138,9 @@
             <h4>{{ group.method | uppercase }}</h4>
             <div class="pokedetails__moves__learned__games">
 
-              <div class="pokedetails__moves__learned__games__detail" *ngFor="let detail of group.details">
+              <div class="pokedetails__moves__learned__games__detail" *ngFor="let detail of group.details" >
+              <!-- [ngClass]="getGameClass(detail.version_group.name)" -->
+              
                 <p> {{ detail.version_group.name | titlecase | replaceHyphen | capitalize}}</p>
                 <p *ngIf="detail.level_learned_at!=0">Level: {{ detail.level_learned_at }}</p>
               </div>
