@@ -14,7 +14,7 @@
         
     </div>
     <div class="itemcard__image">
-        <div class="itemcard__image__inner">
+        <div class="itemcard__image__inner" *ngIf="item.sprites.default">
             <img [src]="item.sprites.default" alt="item" srcset="">
         </div>
     </div>

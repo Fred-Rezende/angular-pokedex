@@ -97,9 +97,14 @@
 .pokedetails__evolution__method {
     display: flex;
     justify-content: center;
+    flex-direction: column;
     align-items: center;
     color: #f5f3f1;
     font-weight: bold;
+}
+
+.pokedetails__evolution__method img{
+    width: 40px;
 }
 
 .pokedetails__evolution__pokemon {

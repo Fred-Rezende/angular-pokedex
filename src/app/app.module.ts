@@ -34,6 +34,7 @@ import { MatExpansionModule } from '@angular/material/expansion';
 import { ReplaceHyphenPipe } from './pipes/replaceHyphen/replace-hyphen.pipe';
 import { CapitalizePipe } from './pipes/capitalize/capitalize.pipe';
 import { GroupByStagePipe } from './pipes/groupByStage/group-by-stage.pipe';
+import { MatCardModule } from '@angular/material/card';
 
 
 
@@ -74,7 +75,8 @@ import { GroupByStagePipe } from './pipes/groupByStage/group-by-stage.pipe';
     FormsModule,
     BrowserModule,
     BrowserAnimationsModule, // Adicione aqui
-    MatExpansionModule // Adicione aqui se estiver usando Angular Material
+    MatExpansionModule, // Adicione aqui se estiver usando Angular Material
+    MatCardModule
   ],
   providers: [
     provideClientHydration(),provideHttpClient(withFetch())

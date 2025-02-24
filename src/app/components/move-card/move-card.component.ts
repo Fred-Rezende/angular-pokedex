@@ -37,7 +37,6 @@ export class MoveCardComponent {
             }
           ];
         }
-
         // Atualiza o `typeImage` no objeto `move` com as informações do tipo
         this.getType(this.move.type.name);
       },
@@ -53,6 +52,11 @@ export class MoveCardComponent {
       },
       error: (err) => console.error('Type not found', err)
     });
+  }
+
+  getPokemonIdFromUrl(url: string): string {
+    const parts = url.split('/');
+    return parts[parts.length - 2]; // Obtém o penúltimo segmento da URL
   }
 
 

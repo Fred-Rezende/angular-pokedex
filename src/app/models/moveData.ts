@@ -17,6 +17,10 @@ export class MoveData {
         url: string
         typeImage: TypeData
     }
+    learned_by_pokemon: {
+            name: string
+            url: string
+    }[]
   
 
     constructor() {
@@ -36,5 +40,6 @@ export class MoveData {
             url: '',
             typeImage: new TypeData()
         };
+        this.learned_by_pokemon = [];
     }
 }
