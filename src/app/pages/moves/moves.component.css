@@ -1,4 +1,4 @@
-.menu-container{
+.menu-container {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -28,4 +28,26 @@
 
 .card__carregar__move {
     margin: 20px;
+}
+
+.card__search__move {
+    background-color: #b6b6b6;
+    padding-left: 10px;
+    border: 2px solid #b6b6b6;
+    border-radius: 15px;
+}
+
+.card__search__move>label {
+    color: #383838;
+    font-size: 20px;
+
+}
+
+.card__search__move>input {
+    padding: 15px;
+    border: none;
+    margin-left: 10px;
+    width: 350px;
+    border-radius: 15px;
+    outline: none;
 }

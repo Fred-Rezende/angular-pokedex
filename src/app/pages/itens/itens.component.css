@@ -1,4 +1,4 @@
-.menu-container{
+.menu-container {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -28,4 +28,51 @@
 
 .card__carregar__item {
     margin: 20px;
+}
+
+.card__search__item {
+    background-color: #7da0ff;
+    padding-left: 10px;
+    border: 2px solid #7da0ff;
+    border-radius: 15px;
+}
+
+.card__search__item>label {
+    color: #383838;
+    font-size: 20px;
+
+}
+
+.card__search__item>input {
+    padding: 15px;
+    border: none;
+    margin-left: 10px;
+    width: 350px;
+    border-radius: 15px;
+    outline: none;
+}
+
+
+
+.category-filter {
+    background-color: #7da0ff;
+    padding-left: 10px;
+    border: 2px solid #7da0ff;
+    border-radius: 15px;
+    margin-bottom: 15px;
+}
+
+.category-filter>label {
+    color: #383838;
+    font-size: 20px;
+
+}
+
+.category-filter>select {
+    padding: 15px;
+    border: none;
+    margin-left: 10px;
+    width: 320px;
+    border-radius: 15px;
+    outline: none;
 }
