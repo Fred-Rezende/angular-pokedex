@@ -73,7 +73,7 @@
           <!-- Detalhes da Evolução -->
           <div class="pokedetails__evolution__method" *ngIf="evolution.details && evolution.details.length > 0">
             <div>
-              <img src="../../../assets/images/seta-direita.png" alt="seta-direita" />
+              <img src="assets/images/seta-direita.png" alt="seta-direita" />
             </div>
             <div *ngFor="let detail of evolution.details">
               <p *ngIf="detail.trigger?.name === 'trade'">{{ detail.trigger.name | titlecase }}</p>
