@@ -7,20 +7,16 @@ export class MoveData {
     accuracy: number
     pp: number
     effect_entries: {
-        0: {
+        
             effect: string
             short_effect: string
-        }
-    }
+        
+    }[];
     type: {
         name: string
         url: string
         typeImage: TypeData
     }
-    learned_by_pokemon: {
-            name: string
-            url: string
-    }[]
   
 
     constructor() {
@@ -29,17 +25,11 @@ export class MoveData {
         this.power = 0;
         this.accuracy = 0;
         this.pp = 0;
-        this.effect_entries = {
-            0: {
-                effect: '',
-                short_effect: ''
-            }
-        };
+        this.effect_entries = [];
         this.type = {
             name: '',
             url: '',
             typeImage: new TypeData()
         };
-        this.learned_by_pokemon = [];
     }
 }

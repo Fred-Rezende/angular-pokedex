@@ -13,7 +13,7 @@ export class MoveCardComponent {
   // type: TypeData = new TypeData;
 
 
-  constructor(private service: PokemonService) {}
+  constructor(private service: PokemonService) { }
 
 
   @Input()
@@ -23,7 +23,7 @@ export class MoveCardComponent {
     this.getMove(this.index)
   }
 
-  getMove(searchName: string): void {
+  /*getMove(searchName: string): void {
     this.service.getMove(searchName).subscribe({
       next: (res) => {
         this.move = Object.assign(new MoveData(), res);
@@ -37,7 +37,34 @@ export class MoveCardComponent {
             }
           ];
         }
+       
+        
         // Atualiza o `typeImage` no objeto `move` com as informações do tipo
+        this.getType(this.move.type.name);
+      },
+      error: (err) => console.error('Move not found', err)
+    });
+  }*/
+
+  getMove(searchName: string): void {
+    this.service.getMove(searchName).subscribe({
+      next: (res) => {
+        this.move = Object.assign(new MoveData(), res);
+
+        // Filtra apenas efeito em inglês
+        const englishEffect = this.move.effect_entries.find(
+          entry => (entry as any).language?.name === 'en'
+        );
+
+        if (englishEffect) {
+          this.move.effect_entries = [englishEffect];
+        } else {
+          this.move.effect_entries = [{
+            effect: 'No effect available',
+            short_effect: 'No effect available'
+          }];
+        }
+
         this.getType(this.move.type.name);
       },
       error: (err) => console.error('Move not found', err)
